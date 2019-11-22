@@ -1,0 +1,1740 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+C. TABLES
+
+	1. The Grid
+		a. Rows
+		b. Columns
+
+	2. Table Elements
+		a. The <table> Element
+			i. Default Style
+			ii. Tag Profile
+		b. The <tr> Element
+			i. Default Style
+			ii. Tag Profile
+		c. Table Data
+			i. Default Style
+			ii. Tag Profile
+		d. The border Attribute
+		e. The cellspacing Attribute
+		f. The cellpadding Attribute
+		g. The Complete Grid
+
+	3. Empty CellS
+
+	4. Grid Size Determination
+		a. Cell Width
+		b. Cell Height
+		c. Column Width
+		d. Column Height
+		e. Row Width
+		f. Row Height
+		g. Grid Width
+		h. Grid Height
+
+	5. Columns
+		a. The <colgroup> Element
+			i. Default Style
+			ii. Tag Profile
+		b. The col Element
+			i. Default Style
+			ii. Tag Profile
+		c. The width Attribute
+		d. The hidden Attribute
+		e. The span Attribute
+
+	6. Table Headings
+		a. Column Heads
+			i. The abbr Attribute
+			ii. Default Style
+			iii. Tag Profile
+		b. Spanner Heads
+			i. The colspan Attribute
+			ii. The headers Attribute
+			iii. The scope Attribute
+			iv. Cut-In Heads
+
+	7. Stub Headings
+		a. Adding a Stub Column
+		b. Spanner Stubs
+			i. The rowspan Attribute
+		c. Table With Headers & Stubs
+
+	7. Table Captions
+
+	8. Row Groups
+		a. tbody
+		b. thead
+		c. tfoot
+
+
+
+TABLES
+#######
+
+In composition a table is style for displaying content in a document that 
+consists of individual cells of information arranged into rows and columns, 
+forming a grid pattern.
+
+
+The Grid
+========
+Here is a simple 4 row x 4 column table:
+
+            .------.------.------.------.
+            |  A1  |  A2  |  A3  |  A4  |
+            |------+------+------+------|
+            |  B1  |  B2  |  B3  |  B4  |
+            |------+------+------+------|
+            |  C1  |  C2  |  C3  |  C4  |
+            |------+------+------+------|
+            |  D1  |  D2  |  D3  |  D4  |
+            '------'------'------'------'
+
+Rows
+----
+Grids are systematically divided in two different ways, by row or by column.
+Using our 4x4 grid from above can be divided horizontally into 4 rows: A, B, C, 
+and D.
+
+            .=======================.
+    row A:  |  1  |  2  |  3  |  4  |
+            |=======================|
+    row B:  |  1  |  2  |  3  |  4  |
+            |=======================|
+    row C:  |  1  |  2  |  3  |  4  |
+            |=======================|
+    row D:  |  1  |  2  |  3  |  4  |
+            '======================='
+
+Once the grid is divided into rows it is now a set of individual cells.  From 
+above, an arbitrary row is a set of 4 cells: 1, 2, 3, and 4.
+
+            .=======================.
+    row m:  |  1  |  2  |  3  |  4  |
+            '======================='
+
+
+Columns
+-------
+Let's roll back to our one whole grid, this time we divide the grid vertically 
+into columns.  Our 4x4 grid is now divided into 4 columns:  1, 2, 3, and 4.
+
+             col 1 col 2 col 3 col 4
+            .-----.-----.-----.-----.
+            #  A  #  A  #  A  #  A  #
+            #-----#-----#-----#-----#
+            #  B  #  B  #  B  #  B  #
+            #-----#-----#-----#-----#
+            #  C  #  C  #  C  #  C  #
+            #-----#-----#-----#-----#
+            #  D  #  D  #  D  #  D  #
+            *-----*-----*-----*-----*
+
+We still have a set of cells, this time in a column.  An arbitrary column 
+from above is a set of 4 cells: A, B, C, and D.
+
+                     col n 
+                    .-----.
+                    #  A  #
+                    #-----#
+                    #  B  #
+                    #-----#
+                    #  C  #
+                    #-----#
+                    #  D  #
+                    *-----*
+
+Here is a point of interest.  Let's recall dividing a grid into rows.  Dividing 
+a grid into rows creates rows of cells.  Notice the sense of columns is lost or 
+at least greatly diminished.
+
+            .=======================.
+    row m:  |  1  |  2  |  3  |  4  |
+            '======================='
+
+Likewise when dividing a grid by columns; the sense of columns is lost or at 
+least greatly diminished.
+
+Let's return to html and its nesting semantic tags.  In order to be able to 
+describe tables need to be either a division by columns or rows; it can't be 
+both.  For html, tables are division by columns or rows, therefore explioting 
+semantic columns leaves much to be desired.  We will elaborate on this concept 
+as needed throughout the chapter.
+
+
+Table Elements
+==============
+We only need three element types to construct a grid.  Those elements are:
+ 
+ - <table> block type container element
+ - <tr> block type row element
+ - <td> inline type element
+ 
+Let's attempt to build a grid using the <table>, <tr>, and <td> elements.
+Our ongoing example is as good as any to set as a goal for replicating:
+
+    .------.------.------.------.
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |  B1  |  B2  |  B3  |  B4  |
+    |------+------+------+------|
+    |  C1  |  C2  |  C3  |  C4  |
+    |------+------+------+------|
+    |  D1  |  D2  |  D3  |  D4  |
+    '------'------'------'------'
+
+We will, in turn, examine the <table>, <tr>, and <td> elements and how they 
+relate. In the process will end up with a semantically described grid.
+
+In this chapter we build some complex tables.  In order to do so, we are going 
+to use three <table> attributes which we normally would not use, two of which 
+are obsolete in html5.  Our initial grid to emulate will be:
+
+    .-----.
+    |  A  |
+    |-----|
+    |  B  |
+    |-----|
+    |  C  |
+    |-----|
+    |  D  |
+    '-----'
+
+In order to examine the <table> attributes we will begin with a simplier grid 
+which we will flesh out to the grid above after covering the attributes.
+
+
+The <table> Element
+-------------------
+Recall from the chapter on lists, all the list follwed a pattern.  The pattern
+is some root list element that represents a list as a whole and acts as a 
+container for nesting list items.  Tables are no different, the <table> element 
+is a root table element representing a table as a whole and acts as a container 
+to nest table related elements.
+
+So we begin building our grid with a <table> element.
+ 
+    <table></table>
+
+
+Default Style
+`````````````
+The <table> element is a block type element, if empty, will be hidden on the 
+web page.  
+
+
+Tag Profile
+```````````
+block; block; *Content; gloabal + border
+
+*Content:
+   In this order:
+    1. <caption> (optional),
+    2. zero or more <colgroup>,
+    3. <thead> (optional),
+    4. zero or more <tbody> or one or more <tr>
+    5. <tfoot> (optional)
+
+
+The <tr> Element
+----------------
+As we've discussed semantic table model divides a table into rows as opposed to 
+dividing the table by columns.  The <tr> element represents table rows, so we 
+will need four <tr> elements to make reproduce the four rows of our grid.
+
+    <table>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+    
+    .--------.
+    |.------.|
+    ||  tr  ||
+    |:------:|
+    ||  tr  ||
+    |:------:|    4 <tr> elements : 4 rows  
+    ||  tr  ||
+    |:------:|
+    ||  tr  ||
+    |'------'|
+    '--------'
+
+Default Style
+`````````````
+The <tr> element is a special type, a table row, which restricts which elements
+can be parents and which children elements are allow.  For our concern it is a 
+block type element, if empty, it will be hidden on the web page.  
+
+
+Tag Profile
+```````````
+Context:
+  - child of <thead>|<tbody>|<tfoot>|<table> 
+  - if there are no <tbody>
+    => after <caption>|<colgroup>|<thead> 
+
+Content:  Zero or more:  <td>|<th>|<template>|<script>.
+
+Attributes:  Global
+
+
+Table Data
+~~~~~~~~~~ 
+The <td> element represents a table data cell.  Inside the <td> elements is 
+where content is nested.  For our requirements we have four cells of text: A, 
+B, C, and D.
+
+    .-----.
+    |  A  |
+    |-----|
+    |  B  |
+    |-----|
+    |  C  |
+    |-----|
+    |  D  |
+    '-----' 
+
+The html mark up for the first cell on its own would be:
+
+    <td>A</td>
+
+We have an <td> element with a single character of text nested inside. 
+
+Let's now insert our <td> element in our partially contructed grid.  The first 
+cell appears in the first row of the table, so we should nest our <td> element 
+in the first row, represented by the first <tr> elementnested in the <table> 
+element.
+
+
+    <table>
+        <tr><td>A</td></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+    </table>
+
+Let's add the remaining cells; the second, third, and fourth text cells; B, C, 
+and D.  All three text cells are nested in <td> elements then nested in the 
+second, third and fourth <tr> elements, respectively, that are nested in the 
+<table> element.
+ 
+    <table>
+      <tr><td>A</td></tr>
+      <tr><td>B</td></tr>
+      <tr><td>C</td></tr>
+      <tr><td>D</td></tr>
+    </table>
+
+We have reached our goal of constructing a single column grid using the 
+<table>, <tr>, and <td> element.
+
+	
+    .---------.            .---------.            .---------.
+    |         |            |.-------.|            |.-------.|
+    |         |            ||       ||            ||.-----.||
+    |         |            ||  row  ||            |||  A  |||
+    |         |            ||       ||            ||'-----'||
+    |         |            |:-------:|            |:-------:|
+    |         |            ||       ||            ||.-----.||
+    |         |            ||  row  ||            |||  B  |||
+    |         |            ||       ||            ||'-----'||
+    |  table  |    ===>    |:-------:|    ===>    |:-------:|
+    |         |            ||       ||            ||.-----.||
+    |         |            ||  row  ||            |||  C  |||
+    |         |            ||       ||            ||'-----'||
+    |         |            |:-------:|            |:-------:|
+    |         |            ||       ||            ||.-----.||
+    |         |            ||  row  ||            |||  D  |||
+    |         |            ||       ||            ||'-----'||
+    |         |            |'-------'|            |'-------'|
+    '---------'	           '---------'	          '---------'
+	
+
+
+Let's look at the results of our labor; ere is how our grid will appear in a 
+browser.
+
+    A
+    B
+    C
+    D
+
+By default a table has no border making any serious investigation impossible; 
+we will need to change this.  Desire sometimes leads one into unpleasant 
+territory.  Our desire to understand the html table model will now lead us to 
+examine three attributes for the <table> element, the first being the border 
+attribute.  The other two attributes, cellpadding and cellspacing, are obsolete
+and are no longer part of html5.
+
+We are going to use these attributes for two reasons.  Firstly, the default 
+layout makes for an unattractive table, in order to construct more complex 
+tables that don't look a mess, and without css, we will need these attributes 
+to clean up after the default display.  Secondly, the mechanics behind the 
+attributes are the same, just cruder, as css style properties.
+
+
+Default Style
+`````````````
+- td {display:table-cell; padding:1px;}
+- table[border] > tr > td { border-width:1px; border-style:inset; border-color:gray;} 
+
+
+Tag Profile
+```````````
+table-cell; tr; text-inline-block; Global + {colspan, rowspan, headers}
+
+
+The border Attribute
+--------------------
+One of the <table> element attributes is border.  The data type for the border 
+attribute is a non-negative integer.  The integer sets the pixel width of the 
+border around the table.  The general syntax is:
+
+    <table border='n'>    where n is an non-negative integer
+
+Here are three ilustrations using a border value of 1, 15, and 50.
+
+    <table border='1'>            <table border='15'>            <table border='50'>
+        <tr><td>A</td></tr>          <tr><td>A</td></tr>          <tr><td>A</td></tr>
+        <tr><td>B</td></tr>    ==>   <tr><td>B</td></tr>    ==>   <tr><td>B</td></tr>
+        <tr><td>C</td></tr>          <tr><td>C</td></tr>          <tr><td>C</td></tr>
+        <tr><td>D</td></tr>          <tr><td>D</td></tr>          <tr><td>D</td></tr>
+    </table>                    </table>                        </table>
+
+This is the html table will be displayed in a browser:
+
+    border='1' .---.       border='15' .-----.       border='50' .-----------.
+               |.-.|                   |  - /|                   |          /|
+               ||A||                   | |A|/|                   |         //|
+               |'='|                   |  = /|                   |        ///|
+               ||B||                   | |B|/|                   |    .-.////|
+               |'='|      ======>      |  = /|      ======>      |    |A|////|
+               ||C||                   | |C|/|                   |     = ////|
+               |'='|                   |  = /|                   |    |B|////|
+               ||D||                   | |D|/|                   |     = ////|
+               |'-'|                   |/////|                   |    |C|////|
+               '---'                   '-----'                   |     = ////|
+                                                                 |    |D|////|
+                                                                 |   /'-'////|
+                                                                 |  /////////|
+                                                                 | //////////|
+                                                                 |///////////|
+                                                                 '-----------'
+
+
+There are a few points of interest related to adjusting the attribute value.  
+Firstly, the width of the border on all four sides, top, right, bottom, and 
+left, are uniformly set to the value of the attribute; all four sides are the 
+same width.  Secondly, the width of the borders between the cells does not 
+change width, it stays the same regardless of what the attribute value is.  
+Thirdly, the table border is oddly shaded.  The border shading is the default 
+style referred to as outset.  More noticable at higher width values, it is
+intended to appear as rising out of the page (welcome to the frontier of late
+eighties graphic technology).
+
+- table {border-spacing:2px; 
+         border-collapse:separate; 
+         border-color:gray;
+         border-style:outset;
+        }
+
+
+The cellspacing Attribute
+-------------------------
+The cellspacing attribute data type is a non-negative integer.  The cellspacing 
+attribute sets the width between cells and between cells and the table border. 
+Let's begin our examination with our single column grid that has its border 
+attribute set to 1 and without the cellspacing attribute.  We will then add the 
+cellspacing attribute and set it to 2 and compare this table to the table we 
+constructed without the cellspacing attribute.
+
+    <table border='1'>                <table cellspacing='2' border='1'>
+        <tr><td>A</td></tr>               <tr><td>A</td></tr>
+        <tr><td>B</td></tr>      ==>      <tr><td>B</td></tr>
+        <tr><td>C</td></tr>               <tr><td>C</td></tr>
+        <tr><td>D</td></tr>               <tr><td>D</td></tr>
+    </table>                          </table>
+
+Having the cellspacing attribute set to 2 doesn't change the width between 
+cells opposed to not having the cellspacing attribute appear at all.  What can 
+we conclude from this?  The default value for the cellspacing attribute is 2.  
+Try setting the cellspacing attribute to 1 and see if the table is condensed. 
+
+Now let's set the cellspacing attribute to a higher value, such as 15, then 
+examine the results.  We will set the border to 1 for all three illustrations.
+
+                                           .-------.
+    <table cellspacing='15' border='1'>    |       |
+        <tr><td>A</td></tr>                |  .-.  |
+        <tr><td>B</td></tr>                |  |A|  |
+        <tr><td>C</td></tr>  ===========>  |  '-'  |
+        <tr><td>D</td></tr>                |       |
+    </table>                               |  .-.  |
+                                           |  |B|  |
+                                           |  '-'  |
+                                           |       |
+                                           |  .-.  |
+                                           |  |C|  |
+                                           |  '-'  |
+                                           |       |
+                                           |  .-.  |
+                                           |  |D|  |
+                                           |  '-'  |
+                                           |       |
+                                           '-------'
+
+So setting cellspacing to be 15 places a 15px space above, to the right, below, 
+and to the left of the element.  Recall the collapsing margin concept we 
+developed during our examination of the <p> element; we bring it up because 
+cellspacing behaves identically.  Recall that the width of the margin betwwen 
+two paragraphs is set to the higher margin value of the two paragraphs.  The 
+two margin values are not added together, they are in a sense collpsed. 
+
+There is one more interesting point to to recognize.  Let's return to our 
+single column grid and set the cellspacing attribute to 0.
+
+    <table cellspacing='0' border='1'>
+        <tr><td>A</td></tr>            
+        <tr><td>B</td></tr>            
+        <tr><td>C</td></tr>            
+        <tr><td>D</td></tr>            
+    </table>                           
+
+Increase the view size of the web page and notice that the space between the 
+cells is 0px as we should expect.  But notice that the borders themselves do 
+not collapse like cellspacing.  In other words cells do not share borders.
+
+   collapsed     vs      separate
+     .---.                .---.
+     | A |                | A |
+     |---|                :===:
+     | B |                | B |
+     |---|                :===:
+     | C |                | C |
+     |---|                :===:
+     | D |                | D |
+     '---'                '---'
+
+
+The cellpadding Attribute
+-------------------------
+The cellpadding attribute data type is a non-negative integer.  The cellpadding 
+attribute sets the width in pixels around the content within the cell.  
+Cellspacing adds space around the cell, cellpadding adds space within the cell 
+around the content.  Let's begin our investigation with a table that has it's 
+cellspacing set to 0 and it's border set to 1.
+
+    <table cellspacing='0' border='1'>      <table cellspacing='0' border='1' cellpadding='1'>
+        <tr><td>A</td></tr>                     <tr><td>A</td></tr>
+        <tr><td>B</td></tr>         ==>         <tr><td>B</td></tr>
+        <tr><td>C</td></tr>                     <tr><td>C</td></tr>
+        <tr><td>D</td></tr>                     <tr><td>D</td></tr>
+    </table>                                </table>
+
+Setting cellpadding to 1 has no effect, so we will conclude that the default 
+setting for cellpadding is 1.  Let's set cellpadding to higher values, such as 
+5 and 50.
+
+    <table cellspacing='0' border='1' cellpadding='50'>    .---------.
+        <tr><td>A</td></tr>                                |         |
+        <tr><td>B</td></tr>                                |    A    |
+        <tr><td>C</td></tr>                   ======>      |         |
+        <tr><td>D</td></tr>                                |---------|
+    </table>                                               |         |
+                                                           |    B    |
+                                                           |         |
+                                                           |---------|
+                                                           |         |
+                                                           |    C    |
+                                                           |         |
+                                                           |---------|
+                                                           |         |
+                                                           |    D    |
+                                                           |         |
+                                                           '---------'
+
+So as we can see a 50px space has been added above, to the right, below, and to 
+the left of the content, A, B, C, and D, within the cell.  A important point is 
+that cellpadding does not collapse like cellspacing does.  Let's compare a 
+table with a cellspacing set to 20 to a table with it's cellpadding set to 20.
+
+    <table cellspacing='20' border='1' cellpadding='0'>      <table cellspacing='0' border='1' cellpadding='20'>
+        <tr><td>A</td></tr>                                      <tr><td>A</td></tr>
+        <tr><td>B</td></tr>                  ===>                <tr><td>B</td></tr>
+        <tr><td>C</td></tr>                                      <tr><td>C</td></tr>
+        <tr><td>D</td></tr>                                      <tr><td>D</td></tr>
+    </table>                                                 </table>
+
+    .-------.                .-------.
+    |       |                |       |
+    |   A   |                |   A   |
+    |       |                |       |
+    |   B   |                |       |
+    |       |                |   B   |
+    |   C   |                |       |
+    |       |                |       |
+    |   D   |                |   C   |
+    |       |                |       |
+    '-------'                |       |
+                             |   D   |
+                             |       |
+                             '-------'
+
+At first sight it's obvious that padding adds more height to a table than 
+spacing with the same value.  After closer examination padding is adding twice 
+the length in between A and B, B and C, and C and D. Notice the space between 
+the top of the table and A, also the space between D and the bottom of the 
+table are the same for spacing and padding. 
+
+
+The Complete Grid
+-----------------
+So let's fill out our grid to have 4 rows X 4 columns. As of now we have 4 rows 
+X 1 column.  Let's attch a 1 character to each cell content.
+
+    <table>
+        <tr><td>A1</td></tr>            
+        <tr><td>B1</td></tr>            
+        <tr><td>C1</td></tr>            
+        <tr><td>D1</td></tr>            
+    </table>
+
+Recall our discussion of tables divided into rows earlier in this chapter.  
+Rows of a table divided by rows is a set of cells. The semantic table model 
+mirrors this concept. To add a column to our table we will need to add a 
+cell to each row.  Translated to html, adding a second column requires nesting 
+an addition <td> element each <tr> elelment.
+
+
+    <table>        
+         <tr> <td>A1</td> <td>A2</td> </tr>
+         <tr> <td>B1</td> <td>B2</td> </tr>
+         <tr> <td>C1</td> <td>C2</td> </tr>
+         <tr> <td>D1</td> <td>D2</td> </tr>
+    </table>	
+	
+We follow this procedure for our final two columns.  With the addition of 
+setting the <table> element's border, cellspacing, and cellpadding attributes,  
+our original goal is realized.
+
+    <table border='1' cellspacing='0' cellpadding='10'>        
+         <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+         <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+         <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+         <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+
+Empty Cells
+===========
+How do you handle a situation where one of a table's cells has no data to put 
+in it? Do you still have a td element for an empty cell?  Will a browser render 
+an empty td element?
+
+The answer is yes, there will still be a td element for empty cells, these 
+elements will have no nested text.
+
+    .------.------.------.------.
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |      |  B2  |  B3  |      |
+    |------+------+------+------|
+    |  C1  |  C2  |      |  C4  |
+    |------+------+------+------|
+    |  D1  |  D2  |  D3  |  D4  |
+    '------'------'------'------'
+
+    <table border='1' colspan='0' cellspacing='0'>
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td></td>   <td>B2</td> <td>B3</td> <td></td>   </tr>
+        <tr> <td>C1</td> <td>C2</td> <td></td>   <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+ASIDE: Empty cells in most cases are considered poor composition styling.  
+A common practice is to use two hyphens, --, to fill empty cells.  
+
+
+Grid Size Determination
+=======================
+The area that a table occupies on a web page is a common concern for developers 
+and also a major challenge.  The overall size of the table depends height and 
+width of all its cells, therefore the slightest change cause chain reactions 
+that offset the table dimension in unforseen ways.
+
+
+Cell Width
+----------
+Let's create a one row grid with four cells.  Each cell 
+has one more character than the one to its left, creating different text size 
+in each cell.  We also remove any default contnent padding by setting 
+cellpadding to 0.
+
+    <table border='1' cellspacing='0' cellpadding='0'>
+        <tr> <td>A</td> <td>BC</td> <td>DEF</td> <td>GHIJ</td> </tr>
+    </table>
+
+    .-------------.
+    |A|BC|DEF|GHIJ|
+    '-------------'     
+     1  2  3   4
+
+By looking at the table rendered in a browser it appears cell 2 is twice the of 
+cell 1 and half the size of cell 4; corresponding to the fact that cell 2 has 
+twice as many characters as cell 1 and only half as many characters as cell 4. 
+It should be obvious that the width of a cell is determined by the width of 
+it's nested content.
+    
+
+Cell Height
+-----------
+Let's take our previous illustration and place each of the four cells and nest
+them each in there own row.  Another alteration we make is placing a line break 
+after each character.  We keep cellpadding set to 0 to eliminate any default 
+padding.
+
+    <table>
+    <tr> <td>A</td>                   </tr>
+
+    <tr> <td>B<br/>C</td>             </tr>
+
+    <tr> <td>D<br/>E<br/>F</td>       </tr>
+
+    <tr> <td>G<br/>H<br/>I<br/>J</td> </tr>
+    </table>
+
+    .-.
+    |A|  (1)
+    |-|
+    |B|  (2)
+    |C|
+    |-|
+    |D|
+    |E|  (3)
+    |F|
+    |-|
+    |G|
+    |H|  (4)
+    |I|
+    |J|
+    '-'
+
+Simple inspection shows cell 2 appears to have twice the height of cell 1, and 
+half the height of cell 4; corresponding to the fact that cell 2 has twice as 
+many characters as cell 1 and only half as many characters as cell 4.  Just 
+like cell length, cell height is determined by the height of its nested 
+content.
+
+
+Column Width
+------------
+So we have established that grid cells height and width are determined by the 
+height and width of it's content.  With that in mind how should we expect the 
+html table to be displayed?
+
+    <table border='1' cellspacing='0' cellpadding='0'>
+        <tr><td>A</td></tr>    
+        <tr><td>BC</td></tr>
+        <tr><td>DEF</td></tr>
+        <tr><td>GHIJ</td></tr>
+    </table>
+
+Using the rules for setting width so far is the cell width is determined by 
+it's content width. so the html table above should look like this:
+
+    .-.
+    |A|
+    |--.
+    |BC|
+    |---.
+    |DEF|
+    |----.
+    |GHIJ|
+    '----'
+
+From experience we know this is wrong, therefore our rules for determining cell 
+width is incorrect or incomplete.  In this case our rules are incomplete and 
+need to be adjusted.
+
+As we know here is how the html table should look:
+
+    .----.
+    |A   |
+    |----|
+    |BC  |
+    |----|
+    |DEF |
+    |----|
+    |GHIJ|
+    '----'
+
+What's different is the column shape.  A proper column is a rectangle, it's two 
+sides are straight, without any additional protruding sides like our current 
+rules for width constructs.  In order to get a rectangluar shape, all the cells 
+in the column must be the same width; the column uses that width as it's own.  
+Setting the width of a column is a three step process, the first step, apply our 
+current rule for setting cell width; this will give us the improper shape we 
+saw before.  The second step is to find highest width value (the widest cell).
+The third step to to sett the width value of all the cells in that column the 
+highest width value found in step 2.
+
+    1) .-.      2) .-.                      3) .-.   
+       |A|         |A|                         |A|    <= set width to highest value 
+       |--.        |--.                        |--.
+       |BC|        |BC|                        |BC|   <= set width to highest value
+       |---.       |---.                       |---.
+       |DEF|       |DEF|                       |DEF|  <= set width to highest value
+       |----.      |----.                      |----.
+       |GHIJ|      |GHIJ|  <= highest width    |GHIJ|
+       '----'      '----'     value            '----'
+
+So the proper determinate for a cell's width is indirectly the widest cell in 
+the column the cell is in.
+
+
+Column Height
+------------- 
+The height of a column is more straight forward.  Column height is determined 
+by the sum of the hieght of each cell nested in it.
+    
+     .-.
+     |A| h1
+     |-| +
+     |B| h2
+     |C|     
+     |-| +
+     |D|
+     |E| h3
+     |F|
+     |-| +
+     |G|
+     |H| h4
+     |I|    
+     |J|
+     '-'     
+
+NOTE: Saying the table height is the sum of the hieght of each row and that 
+table width is the sum of the width of each column is a bit oversimplified and 
+slightly incorrect. Table height also includes the spacing between the rows 
+and the widths of each horizontal rule and the width includes the spacing 
+between the columns and the widths of each vertical rule.
+
+
+Row Width
+---------
+
+NOTE: Saying the table height is the sum of the hieght of each row and that 
+table width is the sum of the width of each column is a bit oversimplified and 
+slightly incorrect. Table height also includes the spacing between the rows 
+and the widths of each horizontal rule and the width includes the spacing 
+between the columns and the widths of each vertical rule.
+
+
+Row Height
+----------
+Just like column width our current rule is currently only a part of the correct 
+rule.  Currently height is determined by the height of it's nested content.  
+Let's investigate the table below:
+
+     <table border=1>
+     <tr><td>A</td> <td>B<br/>C</td> <td>D<br/>E<br/>F</td> <td>G<br/>H<br/>I<br/>J</td></tr>
+     </table>
+
+If the content height sets the height of the parent cell we should expect the 
+table above to appear as below:
+
+     .-------.
+     |A|B|D|G|
+     '-|C|E|H|
+       '-|F|I|
+         '-|J|
+           '-'
+
+We know this is incorrect; we expect rows to be rectangular.  
+
+    .-------.
+    |A|B|D|G|
+    | |C|E|H|
+    | | |F|I|
+    | | | |J|
+    '-------'
+
+In order for a row to be rectangular, all the cells in the row need to be the 
+same height.  It is a three step process to have all the cells in a row be the 
+same height.  The first step is to apply our current rule and set the height 
+of each cell in a row to the height of it's nested content.  The second step is 
+to find the height value of the tallest cell in the row.  The third step is to 
+set the height of each cell in the row to the height value of the tallest cell.
+
+     1) .-------.      2) .-------.                  .-------.
+        |A|B|D|G|         |A|B|D|G|                  |A|B|D|G|
+        '-|C|E|H|         '-|C|E|H|                  | |C|E|H|
+          '-|F|I|           '-|F|I|                  | | |F|I|
+            '-|J|             '-|J|                  | | | |J|
+              '-'               '-'                  '-------'
+                                 '- highest value     '-'-'-------- set to highest value
+
+
+Grid Width
+----------
+A table width is simply determined by adding the width value for each cloumn 
+width.  Earlier we saw that column width is determined by the widest cell that 
+share a position in the order of cells in a row for all the rows nested in the 
+table.
+
+    .-.   .-.   .-.   .-.
+    | |   | |   | |   | |
+    | |   | |   | |   | |
+    | | + | | + | | + | |
+    | |   | |   | |   | |
+    | |   | |   | |   | |
+    '-'   '-'   '-'   '-'
+
+Find this explanation a bit clunky?  This is due to html tables being divided 
+by rows instead of columns.  Hopefully we clear this up in the Cloumns section.
+
+
+Grid Height
+-----------
+The height of a table is the height of all the rows added together.  We saw 
+that row height is determined by the tallest cell nested in that row.
+
+    .-----------------------.
+    '-----------------------'
+                +            
+    .-----------------------.
+    '-----------------------'
+                +            
+    .-----------------------.
+    '-----------------------'
+                +            
+    .-----------------------.
+    '-----------------------'
+
+
+Columns
+=======
+At the start of this chapter we began our discussion of viewing a table as 
+columns of cells or rows of cells.  We also claimed that a semantic model can 
+be either of those views, but not both.  We know by the fact we use the <tr> 
+element to divide a table into rows of cells that the html table model views 
+tables as rows os cells.  Let's look at our 4X4 grid:
+
+    <table>
+         <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+         <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+         <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+         <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+By examining this markup we see 4 rows, each with 4 nested cells.  We plainly 
+see the model of rows of cells, not columns of cells, naturally form through 
+the normal use of html semantic element nesting; we see no representation of 
+columns.  Let's change the html table model to be a column-centric one:
+
+    <table>
+         <tc>
+             <td>A1</td>
+             <td>B1</td>
+             <td>C1</td>
+             <td>D1</td>
+        </tc>
+
+         <tc>
+             <td>A2</td>
+             <td>B2</td>
+             <td>C2</td>
+             <td>D2</td>
+        </tc>
+
+         <tc>
+             <td>A3</td>
+             <td>B3</td>
+             <td>C3</td>
+             <td>D3</td>
+        </tc>
+
+         <tc>
+             <td>A4</td>
+             <td>B4</td>
+             <td>C4</td>
+             <td>D4</td>
+        </tc>
+    </table>
+
+In this hypothitical table model, tables are viewed as columns of cells.  By 
+switching to this point of view we have lost any representation of rows.  
+Couldn't we combine the two models?  Sadly, no.  Take a close look at which 
+cells are nested in each row opposed to what cells are nested in each column.  
+Notice that the cells had to be grouped into different sets to create the 
+column-centric model.  This shows that the <tr> and the hypothetical <tc> 
+elements could be used simultaneously within a <table> element.
+
+The html table model does have column representation.  As we will see column 
+representation is somewhat bolted on, external of the organic model created 
+using <tr> elements.  With that in mind html columns are useful, arguably 
+necessary, but lack having a range utility.  In fact beyond setting column 
+width, background color, and border style they serve no purpose, this holds 
+true even when css is considered.
+
+There are two html elements involved in setting table cell widths, the col and 
+colgroup elements. Col elements are the empty element type and can only appear 
+nested in colgroup elements, and then only under certain circumstances.
+
+
+The <colgroup> Element
+----------------------
+Simimlar to the <ul> or <ol> elements, the <colgroup> element is a container 
+that represents a set of <col/> elements.  The <colgroup> element is restricted 
+to where it may appear nested in a <table> element.  A <colgroup> element must 
+appear before the first nested <tr> elements.  So if we were to add a 
+<colgroup> element to our 4x4 grid it must appear before the first row:
+
+    <table>
+        <colgroup> ... </colgroup>
+
+         <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+         <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+         <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+         <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+A <table> element may have more than one <colgroup> element.
+
+Even thoug there is more to be said about the <colgroup> element, we are going 
+to take our fosu off of it for the time bieng and turn our focus to it's only 
+allowable nested element, the <col> element.
+
+
+Default Style
+`````````````
+[hidden]
+
+
+Tag Profile
+```````````
+Allowed Context:
+child of table elements only
+ - after caption elements
+ - before thead, tbody, tfoot, or tr elements
+
+Content Model:
+ - If the span attribute is present -- Nothing.
+ - If the span attribute is absent -- Zero or more <col> or <template> elements
+
+Attributes:
+ - Global + [span]
+
+
+The col Element
+---------------
+As we established earlier, the <col/> empty type element is the only element 
+allowed to be nested inside a <colgroup> element; making the general syntax:
+
+    <table>
+       <colgroup> <col/> <col/> <col/> <col/> </colgroup>
+      
+       <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+       <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+       <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+       <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>      
+    </table>
+
+In the illustration above there are 4 <row> elements and there so happens to 
+4 <col/> elements.  The way to interpret the <colgroup> element and it's <col/> 
+children is associate the first <col/> element with the first <td> element that 
+is nested in each <tr> element. For the first <col/> element the <td> elements 
+<td>A1</td>, <td>B1</td>, <td>C1</td>, and <td>D1</td>. The second <col/> 
+element will be associated with the second <td> elements nested in the <tr> 
+rows; in this case the <td>A2</td>, <td>B2</td>, <td>C2</td>, and <td>D2</td>.
+The pattern for the third and fourth <col/> elements.  In our illustration it 
+worked out nicely, one <col/> element to represent each of the four columns in 
+our 4x4 grid.  The number of <col/> elements is not required to be the same as 
+the number of columns in a grid.  The number of <col/> can match the number of 
+columns or be less, but cannot exceed, the number of columns in the grid it is 
+nested in.
+
+Let's look at a sample where there are fewer <col/> elements:
+
+    <table>
+       <colgroup> <col/> <col/> </colgroup>
+      
+       <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+       <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+       <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+       <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>      
+    </table>
+
+In this illustratation only the first and second column; <td>A1</td>, 
+<td>B1</td>, <td>C1</td>, and <td>D1</td>; and <td>A2</td>, <td>B2</td>, 
+<td>C2</td>, and <td>D2</td>.  The third and fourth column have no column 
+representation.
+
+So far any addition or alteration of the <colgroup> and <col/> elements has no
+effect on how the grid is being displayed. As mentioned earlier, <colgroup> and 
+<col/> elements can set width, background color, and border style for the <td> 
+elements it represents.  It should be no suprise that the few styling settings 
+that <col/> elements have are done through css.  In order to avoid being 
+sidetracked by css we are going to once again introduce an attribute that is 
+obsolete.  We justify our violation with our insatiable desire to uncover all 
+the mysteries; outside of this its use is inexcusable.
+
+Default Style
+`````````````
+ - col { display:table-column; }
+ - col[hidden] { display:table-column; visibility:collapse; }
+
+
+Tag Profile
+``````````` 
+Context:
+ - child of colgroup elements that don’t have a span attribute
+
+Content:
+ - Empty tag
+
+Attributes:
+ - Global  + [span]
+
+
+The width Attribute
+-------------------
+At one time, the <td>, <col/>, and <colgroup> elements had a width attribute 
+which is now obsolete in html5.  The current practice is setting the width of 
+columns is accomplished in css.  The data type of the width attribute is a 
+non-negative integer, that can express width as either a absolute or relative 
+value. The general syntax for expressing absolute or relative values is:
+
+    absolute:    width = '#'        where # is positive number        
+    relative:    width = '#%'       where # is a positive number
+
+A keen eye will notice that a value is relative when appended by a percent, %,
+character and absolute when the character is absent.
+
+When a value is an absolute expression, the value is treated as a length in 
+pixels, setting the width of the <td> elements that the <col/> represents  
+to the value of pixels. 
+
+A relative value takes into consideration the width of the entire grid and 
+sets the column width to a percentage of the entire grid width. The value of 
+the attribute determines the percentage.
+
+
+Below is an illustration for setting column widths as 100px, 200px, 300px and 
+400px respectively.  Notice we set cellpadding and cellspacing to default 
+alteration to cell width.
+
+    <table border='1' cellpadding='0' cellspacing='0'>
+        <colgroup> <col width='100'/> <col width='200'/> <col width='300'/> <col width='400'/> </colgroup>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+   </table>
+
+The width attribute values in the above illustration are absolute values.  In 
+order to duplicate how the table is displayed above using relative values we 
+will need to use the <table> width attribute too, and set it to a absolute value.
+
+    <table border='1' cellpadding='0' cellspacing='0' width='1000'>
+        <colgroup> <col width='10%'/> <col width='20%'/> <col width='30%'/> <col width='40%'/> </colgroup>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+   </table>
+
+Notice all the percentage values add up to 100%.  Any value below 100% will 
+shrink the table width. If the values are over 100%, the browser will use the 
+width settings until it reaches 100% and ignore are width values after going 
+over 100%.
+
+
+The hidden Attribute
+--------------------
+Recall that hidden is a global attribute that all html elements share.  Try 
+adding the hidden attribute to one of the <col/> elements.  What you see 
+when viewed in a browser is how the hidden attribute should act, maybe not how 
+would expect.
+
+    <table border='1' cellpadding='0' cellspacing='0'>
+        <colgroup> <col width='100'/> <col width='200' hidden/> <col width='300'/> <col width='400'/> </colgroup>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+   </table>
+
+What happens is the <col/> is hidden as if removing the second <col/> element.  
+You may of expected the column to be hidden, because <td> elements are not 
+nested in the <col/> element.
+
+
+The span Attribute
+------------------
+Let's add five more columns to our 4x4 grid to make it a 4x9 grid.  Let's set 
+the first three columns to 100px, the next three columns to 200px, and the next 
+three to 300px.
+
+Here is how we could represent the specifications:
+
+    <table>
+        <colgroup>
+            <col width='100'/><col width='100'/><col width='100'/>
+            <col width='200'/><col width='200'/><col width='200'/>
+            <col width='300'/><col width='300'/><col width='300'/>
+        </colgroup>
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> <td>A5</td> <td>A6</td> <td>A7</td> <td>A8</td> <td>A9</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> <td>B5</td> <td>B6</td> <td>B7</td> <td>B8</td> <td>B9</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> <td>C5</td> <td>C6</td> <td>C7</td> <td>C8</td> <td>C9</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> <td>D5</td> <td>D6</td> <td>D7</td> <td>D8</td> <td>D9</td> </tr>
+    </table>
+
+There is unnecessary repetition of <col/> elements.  Let's focus on the first 
+three <col/> elements:
+
+    <col width='100'/><col width='100'/><col width='100'/>
+
+We have three adjacent columns with the same width value.  In the special case 
+when adjacent columns share attribute (or css style properties) values the 
+<col/> elements can be condensed into one <col/> element that includes the span 
+attribute.
+
+The span attribute value data type is an integer 1 or greater.  The value of a 
+span attribute represents the number of columns that <col/> element is 
+representing.  So we can edit the html segment above to be one <col/> element.
+
+    <col width='100'/><col width='100'/><col width='100'/>  
+
+        =>  <col span='3'/>
+
+There are three <col/> elements being represented by one <col/> element, 
+therefore the value of the span attribute is 3.
+
+If the html segment had been:
+
+	<col width='100'/><col width='138'/><col width='100'/>
+
+We would not have been able to condense the <col/> elements because there is no 
+set of adjacent columns with the same attribute values (or css style 
+properties).
+
+Let's edit the <colgroup> element by incorporating the span element:
+
+    <colgroup>
+        <col width='100' span='3'/>
+        <col width='200' span='3'/>
+        <col width='300' span='3'/>
+    </colgroup>
+
+Both the <col/> and <colgroup> elements have a span attribute.  A <colgroup> 
+span attribute operates roughly the same as a <col/> element.  If a <colgroup> 
+cannot have any nested <col/> elements if it has the span attribute appearing.  
+As mentioned earlier, a <table> element can have more than one <colgroup> 
+elements.  We could edit our html fragment again and not use any <col/> 
+elements.
+
+    <colgroup width='100' span='3'></colgroup>
+    <colgroup width='200' span='3'></colgroup>
+    <colgroup width='300' span='3'></colgroup>
+
+
+Table Headings
+==============
+Up to this point we have been building grids a simple set of rows and columns.  
+With grids we examined table rows and table data cells and the space around the 
+content and the space between the cells.  We examined how height and width is 
+determined and how we can set column width values.
+
+Let's now introduce tables.  Tables our grids in which rows or columns are 
+designated as headings.  Table headings define the contents of the column or 
+row for which it is a heading for.
+
+
+Column Heads
+------------
+Let's insert a row of table heads before the first row of or 4x4 grid.
+
+    +++++++++++++++++++++++++++++
+    +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |  B1  |  B2  |  B3  |  B4  |
+    |------+------+------+------|
+    |  C1  |  C2  |  C3  |  C4  |
+    |------+------+------+------|
+    |  D1  |  D2  |  D3  |  D4  |
+    '------'------'------'------'
+
+In order to semantically differentiate between table data cells and table head 
+cell we will introduce a new table head cell element, the <th> element.  
+Inserting a row of table head cells is similar inserting a row of table data 
+cells.  The only difference is using the <th> element instead of using the <td> 
+element for table cell elements.
+
+    <table>
+        <tr> <th>H1</th> <th>H2</th> <th>H3</th> <th>H4</th> </tr>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+The <th> element advances our table model by representing the cells that conain 
+head content as opposed to data content.  Displayed in a browser, the head  
+cells are distinguished as boldfaced content.
+
+
+The abbr Attribute
+``````````````````
+* * * * * * *
+
+
+Default Style
+`````````````
+- th {display:table-cell; padding:1px; font-weight:bold; }
+- table[border] > tr > th { border-width:1px; border-style:inset;} ( iff [border!=0] ) 
+
+
+Tag Profile
+```````````
+table-cell; tr; text-inline-block*; Global + {colspan, rowspan, headers, scope, abbr}
+
+  * no article; aside; footer; h1; h2; h3; h4; h5; h6; header; nav; or section; descendants
+
+
+Spanner Heads
+-------------
+Column heads can have multiple levels, the higher level headings are more 
+general and span more than one column.  In the following example The heading I 
+spans column 1 and 2, and heading II spans column 3 and 4. While the lower 
+level headings H1, H2, H3, & H4 span one column.
+
+    +++++++++++++++++++++++++++++
+    +       I     +     II      +
+    +++++++++++++++++++++++++++++
+    +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |  B1  |  B2  |  B3  |  B4  |
+    |------+------+------+------|
+    |  C1  |  C2  |  C3  |  C4  |
+    |------+------+------+------|
+    |  D1  |  D2  |  D3  |  D4  |
+    '------'------'------'------'
+
+Let's start by inserting an additional row on top:
+
+    <table>
+        <tr> <th>I</th> <th>II</th> </tr>
+        <tr> <th>H1</th> <th>H2</th> <th>H3</th> <th>H4</th> </tr>
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+Now let's display in a browser to see what kind of table we get:
+
+    +++++++++++++++++++++++++++++
+    +   I  +  II  +\\\\\\\\\\\\\+
+    +++++++++++++++++++++++++++++
+    +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |  B1  |  B2  |  B3  |  B4  |
+    |------+------+------+------|
+    |  C1  |  C2  |  C3  |  C4  |
+    |------+------+------+------|
+    |  D1  |  D2  |  D3  |  D4  |
+    '------'------'------'------'
+
+The result as we should have expected is not quite what we want.  In order to 
+create the proper table we need to be able to convey that the nwe heading cells 
+span more than one column.
+
+
+The colspan Attribute
+`````````````````````
+The th & td elements both have a colspan attribute.  The colspan attribute 
+value is an integer data type, where the value must be one or greater.  The 
+value of the colspan determines how msny columns the cell will span.
+
+By default all td & th element's colspan attribute is set to 1, meaning the 
+cell will only span across one column, the column it's in. If colspan was 
+set to 2, then the cell would stretch across 2 columns, the column it's in 
+and the next coresponding column.
+
+    <tr>                                      <tr>                                  
+        <th colspan='2'>I</th> <th>II</th>        <th colspan='3'>I</th> <th>II</th>
+    </tr>                                     </tr>                                 
+        ...                                          ...                            
+
+    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
+    +       I     +  II  + \\\\\+              +           I        +  II  +        
+    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
+    +  H1  +  H2  +  H3  +  H4  +              +  H1  +  H2  +  H3  +  H4  +        
+    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
+    |  A1  |  A2  +  A3  |  A4  |              |  A1  |  A2  +  A3  |  A4  |        
+
+To get the table layout we want we would set the colspan value for both cells 
+to two.
+
+    <tr>
+        <th colspan='2'>I</th> <th colspan='2'>II</th>
+    </tr>
+       ...
+
+   +++++++++++++++++++++++++++++
+   +       I     +     II      +
+   +++++++++++++++++++++++++++++
+   +  H1  +  H2  +  H3  +  H4  +
+   +++++++++++++++++++++++++++++
+   |  A1  |  A2  +  A3  |  A4  |
+
+
+
+The headers Attribute
+`````````````````````
+Let us not forget html is a semantic language, describing elements of content
+and their relationships.         
+
+
+The scope Attribute
+```````````````````
+
+
+Cut-In Heads
+````````````
+Another style of column heads are cut-in heads.
+
+    +++++++++++++++++++++++++++++
+    +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++
+    +          GROUP 1          + 
+    +++++++++++++++++++++++++++++
+    |  A1  |  A2  +  A3  |  A4  |
+    |------ ------+------ ------|
+    |  B1  |  B2  +  B3  |  B4  |
+    +++++++++++++++++++++++++++++
+    +          GROUP 2          +
+    +++++++++++++++++++++++++++++
+    |  C1  |  C2  +  C3  |  C4  |
+    |------ ------+------ ------|
+    |  D1  |  D2  +  D3  |  D4  |
+    |------ ------+------ ------|
+
+    <table>
+        <tr> <th>H1</th> <th>H2</th> <th>H3</th> <th>H4</th> </tr>
+
+        <tr> <th colspan='4'>GROUP 1</th> </tr>
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+
+        <tr> <th colspan='4'>GROUP 2</th> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+
+Stub Headings
+=============
+The left most column of a table is called a stub.  So heading in the left most 
+column are called stub headings. Stud headings allow an author to have headings 
+for each row.  Here is an example:
+
+    ++++++++ ----------------------------
+    +  AH  +   A1  |  A2  |  A3  |  A4  |
+    ++++++++ ------ ------ ------ ------|
+    +  BH  +   B1  |  B2  |  B3  |  B4  |
+    ++++++++ ------ ------ ------ ------|
+    +  CH  +   C1  |  C2  |  C3  |  C4  |
+    ++++++++ ------ ------ ------ ------|
+    +  DH  +   D1  |  D2  |  D3  |  D4  |
+    ++++++++ ----------------------------
+
+
+Adding a Stub Column
+--------------------
+In order to construct stub headings, a th element is added to the front of each row:
+
+    <table>
+        <tr> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+
+Spanner Stubs
+-------------
+Spanner stubs are the equivalent to spanner heads.
+
+    +++++++++++++++----------------------------
+    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
+    +   I  ++++++++------ ------ ------ ------|
+    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
+    ++++++++++++++++++++++++++++++++++++++++++|
+    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
+    +  II  ++++++++------ ------ ------ ------|
+    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
+    +++++++++++++++----------------------------
+ 
+ Let's add two th elements:
+ 
+    <table>
+        <tr> <th>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr><th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr><th>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+   +++++++++++++++----------------------------
+   +   I  +  AH  +  A1  |  A2  |  A3  |  A4  |
+   +++++++++++++++------ ------ ------ ------|
+   +  II  +  BH  +  B1  |  B2  |  B3  |  B4  |
+   ++++++++++++++++++++++++++++++++++++++++++|
+   +  CH  +  C1  |  C2  |  C3  |  C4  |\\\\\\|
+   ++++++++------ ------ ------ ------|\\\\\\|
+   +  DH  +  D1  |  D2  |  D3  |  D4  |\\\\\\|
+   ++++++++----------------------------------|
+
+    
+The rowspan Attribute
+`````````````````````    
+  <table>        
+    <tr>    <th rowspan=2>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
+
+      <tr>                         <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
+
+      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
+
+      <tr>                         <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
+   </table>
+
+    +++++++++++++++----------------------------
+    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
+    +   I  ++++++++------ ------ ------ ------|
+    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
+    ++++++++++++++++++++++++++++++++++++++++++|
+    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
+    +  II  ++++++++------ ------ ------ ------|
+    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
+    +++++++++++++++----------------------------
+
+
+
+Table With Headers & Stubs
+--------------------------
+More likely than not tables will have both headers and stubs.  It should be no 
+suprise from our previous work that html can produce tables that have deaders 
+and stubs.
+
+    +++++++++++++++++++++++++++++++++++++++++++
+    +   A  +   B  +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++++++++++++++++
+    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
+    +   I  ++++++++------ ------ ------ ------|
+    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
+    ++++++++++++++++++++++++++++++++++++++++++|
+    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
+    +  II  ++++++++------ ------ ------ ------|
+    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
+    +++++++++++++++----------------------------
+
+
+  <table>
+    <tr>    <th>I</th>                <th>II</th> <th>H1</th> <th>H2</th> <th>H3</th> <th>H3</th>    </tr>
+    
+    <tr>    <th rowspan=2>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
+
+      <tr>                          <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
+
+      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
+
+      <tr>                          <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
+   </table>
+  
+  
+Often times stubs don't have headers in tables with headers and stubs; use 
+empty cells to achieve that.  Our previous example requires a slightly more 
+complex:
+
+    +++++++++++++++++++++++++++++++++++++++++++
+    +             +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++++++++++++++++
+    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
+    +   I  ++++++++------ ------ ------ ------|
+    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
+    ++++++++++++++++++++++++++++++++++++++++++|
+    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
+    +  II  ++++++++------ ------ ------ ------|
+    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
+    +++++++++++++++----------------------------
+
+
+  <table>
+    <tr>    <th colspan=2></th>                <th>H1</th> <th>H2</th> <th>H3</th> <th>H3</th>    </tr>
+    
+    <tr>    <th rowspan=2>I</th>  <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
+
+      <tr>                          <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
+
+      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
+
+      <tr>                          <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
+   </table>
+
+
+
+Table Captions
+==============
+Tables typically have a title displayed above that describes what the table is 
+showing.  For a table this title is call a table caption.  Captions can be part 
+of html tables using the caption element. The caption element, like all the 
+other talbe elements, can only appear nested in table elements.  Like the 
+colgroup element, the caption element is restrict to where it appears nested in 
+a table element. The caption element MUST be the first element to appear nest 
+in a table.  That means before any colgroup elements and before the first tr 
+element. 
+
+  <table border=1 colspan=0 cellspacing=0>
+      <caption>Example Table</caption>
+    <colgroup><col width=50/><col span=2 width=100/><col width=50/></colgroup>        
+    <tr>    <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>        </tr>
+      <tr>    <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>        </tr>
+      <tr>    <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>        </tr>
+      <tr>    <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>        </tr>
+  </table>
+
+                Example Table
+     ------ ---------------------- ------
+    |  A1  |    A2    |    A3    |  A4  |
+    |------ ---------- ---------- ------|
+    |  B1  |    B2    |    B3    |  B4  |
+    |------ ---------- ---------- ------|
+    |  C1  |    C2    |    C3    |  C4  |
+    |------ ---------- ---------- ------|
+    |  D1  |    D2    |    D3    |  D4  |
+    |------ ---------- ---------- ------|
+
+
+caption
+-------
+ - caption { unicode-bidi:isolate; unicode-bidi:bidi-override; display:table-caption; text-align:center; }
+ - caption[align=bottom] { caption-side:bottom; }
+
+Categories
+ - None
+
+Context:
+ - first element child of a table element
+
+Content:
+ - flow        Text
+            a; abbr; address; article; area*; aside; audio; b; bdi; bdo; blockquote; br;
+            button; canvas; cite; code; data; datalist; del; details; dfn; dialog; div;
+            dl; em; embed; fieldset; figure; footer; form; h1; h2; h3; h4; h5; h6; 
+            <s>header;</s> hr; i; iframe; img; input; ins; kbd; label; link^; main; map; mark; 
+            math; menu; meter; nav; noscript; object; ol; output; p; pre; progress; q; 
+            ruby; s; samp; script; section; select; small; span; strong; sub; sup; svg; 
+            table; template; textarea; time; u; ul; var; video; wbr;
+
+            * no descendant table elements
+
+Attributes:
+ - Global attributes
+
+
+
+Row Groups
+==========
+Row groups is our last topic on tables.  As the name suggests web authors can 
+group rows together and give it a type.  The three types of row groups head, 
+body, and foot are represented by the thead, tbody, and tfoot elements.
+
+
+tbody
+-----
+ - tbody { display:table-row-group; border-color:inherit; }
+
+Categories:
+ - None
+
+Context:
+ - child of a table element
+
+   * if there are no tr elements that are children of the table element
+   * after any caption, colgroup, or thead elements
+
+Content:
+ - Zero or more tr, template, or script elements
+
+Attributes:
+ - Global attributes
+
+
+thead
+-----
+ - thead { display:table-header-group; border-color:inherit; }
+
+Categories:
+ - None
+
+Context:
+ - child of a table element
+
+   * if there are no other thead elements that are children of the table element
+   * before any tbody, tfoot, or tr elements
+   * after any caption or colgroup elements
+
+Content:
+ - Zero or more tr, template, or script
+
+Attributes:
+ - Global attributes
+
+
+tfoot
+-----
+ - tfoot { display:table-footer-group; border-color:inherit; }
+
+Categories:
+ - None
+
+Context:
+ - child of a table element
+
+   * if there are no other tfoot elements that are children of the table element
+   * after any caption, colgroup, tbody, tfoot, or tr elements
+
+Content:
+ - Zero or more tr, template, or script
+
+Attributes:
+ - Global attributes
+
+
+
+
+
+
+

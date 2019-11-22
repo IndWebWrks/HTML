@@ -1,0 +1,633 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+
+II. MARKUP FUNDAMENTALS
+
+	A. FORMS OF MARKUP
+		1. Presentation Markup
+		2. Semantic Markup
+
+	B. TAGS
+		1. Tag Syntax
+			i. Open - Close Format
+			ii. Empty Tag Format
+
+	C. NESTING
+		1. Nesting Text
+		2. Nesting Tags
+		3. Nesting Text & Tags
+		4. Proper Nesting
+		5. Summary
+			i. Element Tree
+
+	D. ATTRIBUTES
+		1. Syntax
+		2. Data Types
+		3. Multi-Valued Attributes
+		4. Empty Attributes
+		5. Global Attributes
+
+	E. COMMENTS
+
+
+MARKUP FUNDAMENTALS
+xxxxxxxxxxxxxxxxxxx
+Let's reiterate our discussion of markup from chapter 1.  Markup is applied to 
+a document for purposes outside of the content of the document.  An example of 
+the use of markup is the  noting editing changes made to documents. A line 
+through text generally indicates removing that text in the next version.
+
+Our use of markup is more akin to a newspaper office pre-computer desktop era.
+Journalists typed new articles using typewriters.  Content typed up using 
+typewriters had only one letter size.  Content could not be italicized, bold-
+faced, or underlined.  Truthfully, modern typewriters, even prior to the 
+desktop era, are able to italicize, boldface, and underline, but let's keep
+our analogy simple.
+
+When the article ready for print the journalist would markup the typed docu-
+ment indicating that certain content was headlines or normal article content. 
+Content intended to be italicized, boldfaced, or underlined was also marked up.
+The marked up article would be sent to typesetters to prepare the article for 
+print.
+
+We are not marking up typed content, we are marking up plain text, which is no 
+different as far as we are concerned.
+
+
+FORMS OF MARKUP
+===============
+There are three forms of markup the will consider:
+
+	- Presentation markup
+	- Semantic markup
+	- Procedural markup
+
+We will spend a majority of our effort contrasting the presentation and 
+semantic forms.  Html is designed to be a semantic form of markup, and overall 
+it is.  Fully embracing Html as a semantic markup language is the key to 
+mastering Html.  Lacking a clear understanding of presentation and semantic 
+forms will cause confusion and result in mediocre web pages. Using Html 
+semanticly will allow Html to work for you, a presentational use will make Html 
+work against you.
+ 
+
+PRESENTATION MARKUP
+-------------------
+Presentation markup explains how the cont is to be displayed, its rich text 
+rendition in terms such as  different font choice or content size.  Italicized, 
+boldfaced, or underlined content is declared in general terms, declaring only 
+that the content is to be italicized, boldfaced, or underlined.  As to the 
+reason or the purpose for italicizing, boldfacing, or underlining we can only 
+guess.
+
+Here is an example:
+
+	Article Headline
+
+	First Paragraph...
+
+	Second  Paragraph...
+
+	Subheadline
+
+	Third Paragraph... <cite>Book Title</cite>...
+
+{startDocument}
+{startFont:Helvetica; startSize:32pt; startBold}Article Headline{endSize:32pt; endBold}
+{lineBreak}
+{lineBreak}
+{startSize:12pt;}First Paragraph...
+{lineBreak}
+{lineBreak}
+Second  Paragraph...{endSize:12pt;}
+{lineBreak}
+{lineBreak}
+{startSize:20pt; startBold}Subheadline{endSize:20pt; endBold}
+{lineBreak}
+{lineBreak}
+{startSize:12pt;}Third Paragraph... {startUnderline}Book Title{endUnderline}... {endSize:12pt;}
+{endFont:Helvetica}
+{endDocument}
+
+An apllication would read the example as follows:
+
+1) Start a new document
+2) Start displaying content using the Helvetica font
+3) Set font size to 32pt & start boldfacing
+4) Add content: Article Headline
+5) stop 32pt font size & end boldfacing
+6) Line Break
+7) Line Break
+8) Set font size to 12pt
+9) Add content: First Paragraph ...
+10) Line Break
+11) Line Break
+12) Add content: Second Paragraph ...
+13) stop 12pt font size
+14) Line Break
+15) Line Break
+16) Set font size to 20pt & start boldfacing
+17) Add content: Subheadline
+18) stop 20pt font size & end boldfacing
+19) Line Break
+20) Line Break
+21) Set font size to 12pt
+22) Add content: Third Paragraph ...
+23) Start underlining text
+24) Add content: Book Title
+25) Stop underlining text
+26) Add content: ...
+27) stop 12pt font size 
+28) Stop displaying content using the Helvetica font
+29) End document
+
+The markup fully explains how the document is to be laid out, explaining what 
+the document should look like. The markup does not explain the purpose, the 
+role, of the content.  Presentation markup does not explicitly identify which part 
+of the content is the headline, which parts are paragraphs.  By reading the 
+content and seeing patterns in the markup you should be able to discern the 
+roles the content plays.
+
+
+SEMANTIC MARKUP
+---------------
+Let's strip our example of presentation markup and apply a semantic markup form:
+
+{startDocument}
+{startHeadline}
+Article Headline
+{endHeadline}
+{startParagraph}
+First Paragraph...
+{endParagraph}
+{startParagraph}
+Second  Paragraph ...
+{endParagraph}
+{startSubheadline}
+Subheadline
+{endSubheadline}
+{startParagraph}
+Third Paragraph ... {startTitle}Book Title{endTitle} ...
+{endParagraph}
+{endDocument}
+
+An apllication would read the example as follows:
+
+1) Start a new document
+2) Start headline
+3) Add content: Article Headline
+4) End headline
+5) Start paragraph
+6) Add content: First Paragraph ...
+5) End paragraph
+5) Start paragraph
+6) Add content: Second Paragraph ...
+7) End paragraph
+8) Start subheadline
+9) Add content: Subheadline
+10) End subheadline
+11) Start paragraph
+12) Add content: First Paragraph ...
+13) End paragraph
+14) End document
+
+The semantic form explains the roles of the sections of content.  In our model 
+semantic markup explains what are headlines and what are paragraphs or book 
+titles.   
+ 
+The semantic form does not explain how to display the content; font size, 
+boldfacing, etc.  In fact, by using the semantic form a reader of the document 
+could not discover a single clue as as to how the page is intended to be 
+displayed.  As absurd as it may seem, the removal of all concern of appearance 
+is a good thing.  At some point in our journey we will encounter the term 
+seperation of concern and all confusion will fade.  But isn't that the whole 
+point of html?  Without html we get a blob of unorganized text, we witnessed 
+that ourselves earlier. Html seems to figure out how to display web pages, 
+there are billions of web pages on the web that prove that.  So how does html 
+do it? 
+
+In each and every web browser is a what is referred to as a default stylesheet. 
+The style sheet constains a set of style properties for every html markup 
+element; each style set, a multitude of style properties.  In other words, the 
+default stylesheet has a set style properties for paragraphs, headlines, sub-
+headlines, titles, and more.  Some of those properties in those sets are for 
+font, boldface or normalface, italics, or underlining to name only a few.
+
+                                                            DEFAULT STYLESHEET
+                                        ---------------------------------------------------------.
+1) Start a new document                                                                          |\
+2) Start headline    -------------------- set font size to 32pt; start boldfacing;               | \
+3) Add content: Article Headline                                                                 |  \
+4) End headline      -------------------- stop 32pt font size; end boldfacing;                   |   \
+                                          line break; add additional spacing below line break;   '----
+5) Start paragraph   -------------------- set font size to 12pt;
+6) Add content: First Paragraph ...
+5) End paragraph     -------------------- line break; add additional spacing below line break; 
+5) Start paragraph
+6) Add content: Second Paragraph ...
+7) End paragraph     -------------------- line break; add additional spacing below line break; 
+8) Start subheadline -------------------- set font size to 20pt; start boldfacing;
+9) Add content: Subheadline
+10) End subheadline  -------------------- stop 20pt font size; end boldfacing;
+                                          line break; add additional spacing below line break; 
+11) Start paragraph --------------------- set font size to 12pt;
+12) Add content: First Paragraph ...
+13) End paragraph   --------------------- line break;
+14) End document
+
+
+TAGS
+====
+When a browser receives a web page to display, it relies on the html markup to 
+understand the structure of the content.  The browser needs to be able to 
+discern between content and markup.  For html, any markup appears as tags.  So 
+the text in a html document is either content or html tags.
+
+
+Tag Syntax
+----------  
+The general syntax of an html tag is a tag name inside a less than character, 
+<, and a greater than character, >; we'll refer to these characters as angle 
+brackets.
+
+	< tagName >
+
+The tag names are one word, they can't have spaces in their name.
+
+There are two types of tags.  Most of the tags have an open and close tag 
+formation.  The other tags use the empty tag form.
+
+
+Open - Close Format
+```````````````````
+The open - close format uses two tags, the first tag to appear, the open tag, 
+is followed later by a closing tag.  Open - close tag types must appear as 
+pairs; every open tag in a document must have a close tag. The syntax for open-
+close tags is:
+
+	<tagName>    </tagName>	
+
+The first tag, the open tag, mirrors the general syntax discussed above.  The 
+second tag, the close tag, differs in one way.  A close tag has a forword slash 
+character, /, before the tag name.
+
+For an open - close pair the tag name will be the same.  So as a general 
+example:
+
+	<tag_A>    </tag_A>
+
+
+Empty Tag Format
+````````````````
+Tags using the empty format use only one tag, no required closing tag.  The 
+syntax is:
+
+	<tagName/>
+
+The empty format from the general syntax in one way.  tag has a forword slash 
+character, /, after the tag name.
+
+
+NESTING
+=======
+The purpose of the open - close format and having two tags is to place a 
+segment of text in-between the two tags. Anything in between an open and close 
+pair of tags will be referred to as nesting.  Nesting can appear in many forms, 
+let's start with the its novel form, no additional text in-between the two tags.
+
+		 <tag_A></tag_A>
+
+The open-close format doesn't require that any text in-between the two tags.  
+In fact, it's not uncommon to use an empty open-close tag pair.
+
+
+Nesting Text
+------------
+Here is an example of a block of text nested in-between a <tag_01> pair:
+
+	<tag_01>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacus 
+	elit, ultricies dictum dolor vitae, volutpat feugiat magna. Fusce auctor 
+	massa et ante cursus, sit amet tristique erat vehicula.</tag_01> 
+
+Let us stretch our vocabulary a bit.  Let's call the above an example of an 
+html element, more specifically an example of a tag_01 element.  This makes the 
+<tag_01> tag pair and everything nested in it a singular object, with enough 
+imagination an almost concrete thing.
+
+So in our example our tag_01 element has a single block of text nested in it.  
+We express this relationship, the fact that a block of text is nested in our 
+tag_01 element, by saying the block of text is a child of our tag_01 element, 
+and our tag_01 element is a parent of the the block of text nested in it.
+
+
+Nesting Tags
+------------
+It is possible to nest other tags, either empty or open-close pairs, inside 
+another tag.
+
+	<tag_A>
+		<tag_B> ... </tag_B>
+	
+		<tag_C> ... </tag_C>
+	
+		<tag_D/>
+	</tag_A>
+
+In our new found parlance, we have an example of an element of type tag_A, a 
+tag_A element. The element has three children, a tag_B, a tag_C, and a tag_D 
+element. The tag_B, tag_C, and tag_D are siblings due to the fact they share 
+a parent, tag_A.
+
+In order to keep our example simple we will ignore what's nested in the tag_B 
+and tag_C elements.  Other than to say that it's merely a contination of futher 
+nested elements and blocks of text. 
+
+
+Nesting Text & Tags
+-------------------
+Let's look at one more example, where text and tags are nested:
+
+	<tag_A>Lorem ipsum dolor sit amet, consectetur <tag_B>adipiscing elit. Cras 
+	lacus elit, ultricies dictum dolor</tag_B> vitae, volutpat feugiat magna. 
+	Fusce auctor massa et ante cursus, sit amet tristique erat vehicula.</tag_A>
+
+Here we have an example of a tag_A element with three children, one child 
+element and two text block children. The first child, a text block is:
+
+	Lorem ipsum dolor sit amet, consectetur
+
+Followed by the second child, a tag_B element and ending with the thild child:
+
+ 	 vitae, volutpat feugiat magna. 
+	Fusce auctor massa et ante cursus, sit amet tristique erat vehicula.
+
+The tag_B element and the two text blocks are all siblings.
+
+There are two important points of interest in this example. Firstly, notice how 
+the tag_B element slices the nested text as a whole into two separate text 
+blocks, the text before it being one and the text after it being the other.
+
+Secondly, we do not consider the text block nested in the tag_B element as a
+child of the tag_A element.  That's because the parent of the text block is 
+tag_B.  We call the text block nested in the tag_B element a descendant of the 
+tag_A element, and the tag_A element is an ancestor of the text block nested in 
+the tag_B element.
+
+
+Proper Nesting
+--------------
+Child elements should be properly nested.  The rule to proper nesting is thus:
+If the open tag is nested inside a parent element, the close tag must be nested 
+inside that parent element too in order to properly nest a child element inside 
+a parent element.  Let's see an improper and proper nesting side by side.
+
+improper
+````````
+<tag_A>Lorem ipsum dolor sit amet, consectetur<tag_B>adipiscing</tag_A></tag_B>
+
+proper
+``````
+<tag_A>Lorem ipsum dolor sit amet, consectetur<tag_B>adipiscing</tag_B></tag_A>
+
+
+Summary
+-------
+Let's summarize before moving on; distill out what is important.  Html appears 
+in html documents in the form tags.  Tags are distiguishable from the document 
+text by using the angle brackets, < and >.  Tags can be empty or may appear in 
+open-close pairs.  Open-close tags allow for nesting document text or more html 
+tags.
+
+Html tags form elements, an empty tag is a singular element.  Open-close tags 
+form an element too, any document text or other elements nested inside the 
+open and close pair are part of the element that tag pair form.
+
+
+Element Tree
+````````````
+Nested text and elements form a familial relationship. Let's examine an example 
+and point out the different relationships.
+
+<root>
+	<x>
+		<i>one</i>
+		<ii>two</ii>
+		<iii>three</iii>
+	</x>
+
+	<y>
+		<iv>four</iv>
+		<v>five</v>
+		<vi>six</vi>
+	</y>
+</root>
+
+
+To start, we have one element, <root> and its nested content.  The root element 
+consists of to child elements: <x> & <y>.  And <x> & <y> share one parent,
+<root>.
+
+						root
+          .--------------'---------------.
+		  x                              y
+
+Each element, <x> and <y>, are siblings and have 3 child elements.  For x, 
+its child elements are: <i>, <ii>, & <iii>.  For x, its child elements are: 
+<iv>, <v>, & <vi>.  And the elements <i>, <ii>, & <iii> share a parent, <x>; 
+the elements <iv>, <v>, & <vi> share a parent, <y>. The elements the elements 
+<i>, <ii>, <iii>, <iv>, <v>, & <vi> share an ancestor, <root>.  And some of the 
+descendents of <root> are  <i>, <ii>, <iii>, <iv>, <v>, & <vi>.
+
+						root
+          .--------------'---------------.
+		  x                              y
+.---------.---------.          .---------.---------.		  
+i         ii       iii         iv        v         vi
+
+
+Each of the elements <i>, <ii>, <iii>, <iv>, <v>, & <vi> have a child text 
+block.  For the element <i> its child text is 'one', for <ii> its 'two', <iii> 
+its 'three', <iv> its 'four', <v> its 'five', and <vi> its 'six'.  The elements 
+<i>, <ii>, <iii> are siblings. And The elements <iv>, <v>, <vi> are siblings.
+
+Without overstating likewise relations we'll only focus on two.  Firstly, each 
+text block have three ancestors, <x>, <y>, and <root>.  Secondly, the entire 
+set of descendents of <root> are: <i>, <ii>, <iii>, <iv>, <v>, <vi>, 'one', 
+'two', 'three', 'four', 'five', and 'six'.
+
+                        root
+           .-------------'-------------.
+ 		   x                           y
+  .--------.--------.         .--------.--------.		  
+  i        ii      iii        iv       v        vi
+  .        .        .         .        .        . 
+'one'    'two'    'three'    'four'  'five'   'six' 
+
+Without looking hard it's easy to see an inverted tree of relationships.  This 
+tree is referred to as an element tree.
+
+Seeing the way you write html documents as an inverted tree of relationships 
+between elements and text is fundamental; this can not be stressed enough and 
+should start before you begin writing html documents.
+
+Unfortunately any application of these concepts won't happen until we move 
+beyond html making it seem a pointless expedition.  Be patient, the payoff 
+is immense.
+
+
+ATTRIBUTES
+==========
+Html elements have properties, such as the web addrees if the element is a 
+link, or a holding adding additional semantic information to name a few.  
+Properties should be thought of as a name for a property and a value the 
+property is set; a name and a value, a name-value pair.  An author can express 
+properties and set its value to their choosing using attributes. Attributes are 
+added to empty and open tags, never in close tags.
+
+
+Syntax
+------
+The syntax for attributes allows for three different forms:
+
+	propName =  value
+	propName = 'value'
+	propName = "value"
+
+The difference between the three forms is the use of quotes, single or double, 
+around the value part of the attribute.  In one case quotes must be used, will 
+discuss that later.  The flexability of html allows an author to use all three 
+for forms throughout an html document.  In fact all three can appear in the 
+same tag.
+
+	<tag_A prop_1=val prop_2='val' prop_2="val" />
+
+What is not allowed is switch form between the opening and closing quotes 
+around a value.  So this, for example, is not allowed:
+
+	<tag_A prop_1='val" />    or    <tag_A prop_1="val />
+
+I personally favor the second form and will use it throughout for no other 
+reason than to tickle my fancy.  Here are two general examples:
+
+	<tag_A prop_1='val' prop_2='val' />
+	<tag_B prop_1='val' prop_2='val'>Lorem ipsum dolor sit</tag_B>
+	
+
+Data Types
+----------
+Html defines a data type to each attribute, so values assigned to that 
+attribute must be of that data type.  Numbers are a data type, for example, so 
+is text.  Another example of a data type is called a boolean.  Boolean data 
+types can either be true or false, nothing else.
+
+So an attribute defined with a number data type value requires that any value
+used for this attribute must be a number.  If a number is used for an attribute 
+defined as having a text data type value, the number will be treated as text. 
+
+
+Multi-Valued Attributes
+-----------------------
+Some attributes are defined to allow it to have more than one value, if this is 
+the case quotes are reqired around the values.  values are separated by a 
+space.
+
+	<tag_A prop='val_1 val_2 val_3' />
+
+
+Empty Attributes
+----------------
+Attributes with a boolean data type, a value of true or false, are a bit 
+strange.  Assuming that prop_1 & prop_2 are boolean types, what should be 
+expected is something like:
+
+	<tag_A prop_1='true' prop_2='false' />
+
+An incorrect assumption.  Boolean attributes have a different syntax, its form 
+consists of only a property name, no value.  Here is the correct general 
+syntax of the example above:
+
+
+	<tag_A prop_1 />
+
+Strange, wouldn't you agree? Let's unpack this.  As stated, a boolean type 
+value is true or false. It shouldn't be a leap to think of on as equivalent to 
+true and off equivalent to false; so a boolean type value could be on or off.  
+Now think of the attribute appearing in a tag as being on, and lack of 
+appearing as off.
+
+So, for a boolean type attribute, whose syntax is only a property name, its 
+appearance in a tag, thinking of the attribute as being turned on, indicates 
+the value is set to true.  If the attribute does not appear in a tag, thinking 
+of the attribute as being switched off, indicates the value is set to false.
+
+Let's now set the correct and incorrect syntax side by side.  Now think of the 
+incorrect syntax as to how a browser interprets the attributes.
+
+	<tag_A prop_1 />			<tag_A prop_1='true' prop_2='false' />
+
+Still strange, but demystified at least.  After some time spent writing html 
+perhaps you will come to appreciate having less markup clutering your document 
+and learn to love it, maybe not.
+
+If the lack of a value appearing with a boolean type attribute is unbearable, 
+there is a syntax form for boolean types of attributes that has a value.  This 
+form comes from xhtml, which requires all attributes to have a value.
+
+ 	 <tag_A prop_1='prop_1' />
+
+Very Strange.  The value is set to the attribute name, not true or false.  The 
+attribute behaves the same as the empty from, if the attribute appears its 
+value is true, not appearing the value is false.
+
+
+Global Attributes
+-----------------
+The attributes available for setting on the one hand relies on the element type 
+an are unique properties to the those elements.  On the other hand, are a list 
+of global attributes that all html elements have.  We will only list them now.  
+As we continue our investigation of html we will examine each of them in there 
+due time.
+    
+  - accesskey
+  - aria-* attributes
+  - class
+  - contenteditable
+  - dir
+  - data-* attributes
+  - draggable
+  - hidden
+  - id
+  - is
+  - lang
+  - nonce
+  - role
+  - spellcheck
+  - style
+  - tabindex
+  - title
+  - translate
+  - xmlns
+
+Every element has these properties that can be set with attributes.  Even 
+though all the elements have these properties, in some cases it won't make 
+sense to use them.
+
+
+COMMENTS
+========
+There is one more form of html markup to explore, comments.  The syntax for 
+comments is as follows:
+
+	<!-- comments -->
+
+All content, both text and html tags are ignored.  Comments allow authors to 
+leave notes in the html document that will be ignored and not displayed on the 
+web page.  Comments are also useful for temporarily removing parts in the html 
+document from the displayed content on the web page.

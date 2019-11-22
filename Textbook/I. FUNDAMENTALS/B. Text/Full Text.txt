@@ -1,0 +1,552 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+I. TEXT
+
+	A. TEXT FLOW
+		1. Inline Progression
+		2. Block Progression
+		3. Interrupting Text flow
+			i. line breaks
+			ii. indentation
+
+	B. TEXT IN A BROWSER
+		1. Line breaks
+		2. Tab Spaces
+		3. Consecutive Spaces
+			i. The browser replaces line breaks with a space
+			ii. The browser replaces tab spaces with a space
+			iii. The browser replaces consecutive spaces with a space
+			iv. Browser width determines page width
+		4. Strange Behavior
+
+	C. CHARACTER CODES
+		1. UTF Basic Latin
+		2. Illegal Characters
+		3. apostrophies & quote marks
+
+
+
+TEXT
+xxxxx
+So we know the web is essentially the passing of marked up plain text from host 
+to client.  Before we begin marking up text, let us pause a moment and ask, how 
+does a browser treat text independent of markup?  Can I expect a plain text 
+document, free of markup to look the same in a browser as a file we may create?
+
+We will first focus on the text of a web page.  We will start by exmaining the 
+flow of text regardless of medium or writing system.  From there we will narrow 
+our scope to the Latin-based writing system, more specifically English.  We will 
+then create web page absent of any html markup and examine how a browser 
+displays it.  We will conclude with an examination of character codes, what 
+they are and how and when to use them.
+
+
+TEXT FLOW
+=========
+
+Text is the product of a writing system.  Writing systems have been in use for 
+thousands of years, resulting in close to four thousand different systems.  A 
+writing system consists of a collection of symbols, characters, glyphs, or 
+whatever you choose to call them.  The writing system assigns meaning to these 
+characters.
+
+In the English writing system characters (letters), or combination 
+of charaters are assigned a particular sound made by the mouth when speaking.  
+Putting a sequence of letters together text can mimick a spoken word.  Words 
+are separated by a space allowing a sequence of text to create a spoken phrase. 
+English's collection includes punctuation characters too.
+
+In the Chinese writing system a character is assigned to a common word or 
+simple concept.  These simpler one character words are combined based on their 
+meanings into two, three, and far less common four charater groups to form new
+word representations.  Chinese writing system does not use spaces between words
+nor does it have any punctuation characters.
+
+Along with a collection of characters, a writing system has rules on the proper 
+use it. Such as which corner of a page do you begin reading or writing text.  
+As mentioned, text is a sequence of characters of after another, which 
+direction does this flow of text go?  Left or right?  Up or down?  English goes 
+left to right.  Arabic is written right to left.  Chinese is top to bottom, but 
+is also written left to right.  We will refer the choice of what direction text 
+flows to as the inline progression rule.
+
+As text flows in the system determined direction it will inevitably run into 
+the opposite side of the page.  Writing systems govern how to start a new 
+sequence of characters.  In left to right and right to left systems the next 
+line of text is created below the previous line, but returning to the same side 
+of the page to start and proceed in the same direction as the line above it.  In 
+top to bottom writing systems the next line of text to the left of the previous 
+line, but returning to the top of the page to start and proceeding in the same 
+direction as the line to the right of it.  This particular flow of text is 
+commonly referred to as word wrapping, but we will refer to it as the block 
+progression rule.
+
+As a segway to continue our discussion, let's focus on the page.  A page has a 
+width and a height; consequently, a page has an area (area = height * width).  
+Assume the page is full of text.  Let us view the text as a block.  A block 
+with width, height, and area.
+
+  .-----------------.	
+  |                |_\	
+  |  xxxxxxxxxxxxxx  |	
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |	A block text
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |
+  |  xxxxxxxxxxxxxx  |
+  |                  |
+  '------------------'
+
+
+INLINE PROGRESSION
+------------------
+We discussed inline progression prior, it's the starting point and direction 
+that text flows on a page.  There are three variations: left to right, right to 
+left, and top to bottom.  Consider the inline progression of text is a vector, 
+a line with a direction, the direction that our text flow is progressing.
+
+This text flow vector has length that we can measure by the amount of 
+characters the vector line contains.  If we measure the page the same character 
+scale we can say how many characters fit on a page line, be 
+it horizontal or vertical.
+
+  .-----------------. 						.-----------------.
+  |                |_\                      |               ||_\
+  |~~~~~~~~~~~~~~~~~>|                      |               |  | 
+  |      \     /     |                      |               |  | 
+  |       width      |                      |               |  | 	
+  |                  |	left to right       |             / |  |  top to bottom	 
+  |                  |		 or             |       height	|  |
+  |                  |	right ot left       |             \ |  | 
+  |                  |	 (reversed)         |               |  | 
+  |                  |                      |               |  | 
+  |                  |                      |               |  | 
+  |                  |                      |               |  | 
+  |                  |                      |               ∨  |
+  '------------------'                      '------------------'
+
+In the case of right to left & left to right inline progression determines 
+width, and top to bottom progression determines height.
+  
+  
+BLOCK PROGRESSION
+-----------------
+Block progression is another concept previously discussed, it determines where 
+a new line starts when a line has reched the opposite side of the page, 
+progressively stacking inline progression vectors.  We will this progession to 
+be a vector too.  The direction of this type of vector will be in the direction 
+of block progression.
+
+ .-----------------. 							.----------------.
+ |~~~~~~~~~~~~~~~~|_\----                       || | | | | | | ||_\
+ |~~~~~~~~~~~~~~~~~>|  |                        || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|  |                        || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|  |                        || | | | | | | | || 		
+ |~~~~~~~~~~~~~~~~~>|  |	   left to right    || | | | | | | | || top to bottom
+ |~~~~~~~~~~~~~~~~~>| height		or          || | | | | | | | ||
+ |~~~~~~~~~~~~~~~~~>|  |	   right to left    || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|  |		 (reverse       || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|  |         horizontal     || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|  |          vectors)      || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|  ∨                        || | | | | | | | || 
+ |~~~~~~~~~~~~~~~~~>|----                       |∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨ ∨|
+ '------------------'                           '-----------------'
+                                                |                 |
+                                                |<~~~~~~~~~~~~~~~~|
+                                                '      width      ' 
+  
+This text flow vector has length that we can measure by how inline progression 
+vectors are stacked on the page. Since each inline progression vector is a 
+single character high for left to right & right ot left, or wide for top to 
+bottom.  Measuring the page with the same character scale, we can determine 
+how lines of text fit on a page.
+ 
+So, text flows in a constant inline & block direction.  This flow naturally 
+creates a block of text.  This block has a height and a width, which we choose 
+to measure by how many characters wide and high the block is.
+
+We know that height * width = area.  If we know how many characters wide and 
+characters high we can determine how many characters can fit in a text block,   
+
+	characters wide * characters high = characters in the text block.
+
+It is important to begin to think of text as blocks, especially when are 
+concerned with css.  Inline & block progession are concepts base to 
+understanding html.
+
+
+INTERRUPTING TEXT FLOW
+----------------------
+The English writing system, to choose one, allows for the interruption of text 
+flow.  These interruptions are given purpose and used to convey meaning.
+
+
+LINE BREAKS
+'''''''''''
+One type of interruption is called a line break.  If the inline progress ends 
+before it reaches the opposite side of a page where it naturally ends.
+ 
+  .-----------------. 
+  |~~~~~~~~~~~~~~~~|_\
+  |~~~~~~~~~~~~~~~~~>|
+  |~~~~~~~~~~~~~~~~~>|
+  |~~~~~~~~~~~~~~~~~>|
+  |~~~~~~~~~~~~~~~~~>|
+  |~~~~~~~~~~~~~~~~~>|
+  |~~~~~~~~~~~~~~~~~>|
+  |~~~~~~~~>         | -- line break
+  |~~~~~~~~~~~~~~~~~>|
+  |                  |
+  |                  |
+  |                  |
+  '------------------'
+ 
+This is not the same as the space that may appear at the end of a word
+due to English's word based line breaking, we consider this as space 
+characters until the line's natural end.  One use of line breaking in English 
+is the end of a paragraph.
+ 
+
+INDENTATION
+'''''''''''
+Another form of interrupting natural text flow is indentation.  Indentation is 
+starting a new line of text at a point further into its inling progress.  In 
+English this point is typically four or eight characters into the inline flow.
+
+With plain text indentation is accomplished by starting a new line with a space
+character and adding typically a total of four or eight spaces before the first 
+non-space character.  Another option is a tab character, wich is a space 
+character that is typically four or eight characters wide.  A tab is a way of 
+adding multiple spaces with one character. 
+
+       .-----------------. 
+       |~~~~~~~~~~~~~~~~|_\
+       |~~~~~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+tab -- |    ~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+tab -- |    ~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+       |~~~~~~~~~~~~~~~~~>|
+       '------------------'
+
+Let's focus on what indentation really is, multiple consecutive spaces and 
+ignore how it's used at a new line's starting point.  Multiple consecutive 
+spaces may be conveyed with a tab characters or multiple space characters.
+
+
+
+TEXT IN A BROWSER
+=================
+
+Below is a sample of plain text that we will examine first in a text editor and 
+then in a web browser. What we find of interest is interruptions in the natural 
+text flow.  The line number appears on the left to ease referencing 
+interruptions, do not consider them part of the sample.
+
+Here is a listing of all the interruptions.  Below the the sample we will discuss
+the listing further.
+
+
+	‘	Line breaks 	{single break : every line}
+					  & {double break : 2, 12, 26, 31, 38, 48 & 53}
+
+		TabSpaces		{1 tab : 50, 51, 52, 53}
+					  & {5 tabs : 28, 29, 39, 31}
+
+	Consecutive Spaces	{28 : 10 spaces}
+						{29 : 12 spaces}
+						{30 : 16 spaces}
+					  & {31 : 14 spaces}’
+
+
+	1	DOCUMENT TITLE
+	2	==============
+	3
+	4	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat metus a 
+	5	rhoncus vestibulum. Curabitur eget mi est. Curabitur mollis justo vitae mi 
+	6	consequat, at scelerisque mi viverra. Vivamus euismod placerat odio, ut 
+	7	sollicitudin turpis pellentesque in. Suspendisse tempor volutpat orci a
+	8	pulvinar. Cras vestibulum, ligula sed finibus vestibulum, justo felis porta 
+	9	nunc, sit amet venenatis lorem metus ut est. Duis scelerisque orci felis, vel 
+	10	commodo lectus elementum in. Proin sed ultrices elit. Integer porta elementum 
+	11	risus non porta. Phasellus malesuada lacinia fermentum. Sed tincidunt neque 
+	12	eget augue cursus, non fringilla diam tempor.
+	13
+	14
+	15	SECTION 1
+	16	---------
+	17	Aliquam leo ipsum, pellentesque a semper eu, fringilla non sapien. Donec mattis 
+	18	nulla orci, ac efficitur enim aliquam ac. Nullam metus magna, bibendum id augue 
+	19	id, finibus dapibus odio. Proin efficitur eu augue tincidunt lobortis. Praesent 
+	20	dapibus at enim et feugiat. Vestibulum congue fringilla eros. Integer ultrices 
+	21	arcu ut posuere pulvinar. Aenean tempor finibus arcu, et suscipit sapien 
+	22	vehicula ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla 
+	23	feugiat hendrerit augue, a semper sem lacinia eget. Nullam pulvinar scelerisque 
+	24	nibh ac gravida. Duis non lectus a arcu finibus pulvinar a sit amet nunc. Duis 
+	25	venenatis nibh in mauris dictum, vel mattis turpis iaculis. Duis commodo quis 
+	26	ipsum vel tincidunt. In nec arcu et elit commodo consectetur vel vel sapien.
+	27
+	28						aliquam elit          magna sagittis
+	29						purus eget            dolor sit
+	30						In nec                consectetur
+	31						nit amet              cursus sem ante
+	32
+	33	Donec non purus eget magna sagittis viverra sed sed leo. Phasellus rhoncus 
+	34	vitae diam et gravida. Suspendisse aliquam elit diam, sed volutpat odio 
+	35	imperdiet nec. Ut fermentum nisi eu dui lacinia, vel ultricies ex pellentesque.
+	36	In hac habitasse platea dictumst. Curabitur cursus sem ante, a commodo eros 
+	37	congue id. Aenean sit amet ullamcorper metus. Nullam nec neque in justo 
+	38	blandit placerat.
+	39
+	40
+	41	SECTION 2
+	42	---------
+	43	Cras in orci eget purus viverra eleifend. Nam a justo ullamcorper, aliquam 
+	44	dolor ut, luctus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+	45	Fusce id porttitor ante. Proin maximus mi tortor, facilisis aliquam dolor wasmw,zz.
+	46	feugiat tincidunt. Aliquam aliquam laoreet orci, in consequat ipsum consectetur 
+	47	nec. Nulla ullamcorper sapien quis sapien pellentesque accumsan. Donec non orci 
+	48	id tellus varius volutpat. Etiam tristique quis eros ac malesuada.
+	49
+	50		- item 1
+	51		- item 2
+	52		- item 3
+	53		- item 4
+	54
+	55	Integer rhoncus turpis non metus dictum, vel egestas leo sodales. Sed eleifend 
+	56	leo vitae pulvinar egestas. Suspendisse molestie tempor egestas. Cras 
+	57	ac dignissim lacus. Nullam porta tellus tortor, ac posuere ipsum interdum vel. 
+	58	Sed consectetur arcu sit amet erat laoreet, posuere venenatis leo vestibulum. 
+	59	Fusce tincidunt porta ex vitae commodo. Etiam sed aliquam mauris. Aenean sed 
+	60	dui purus. Sed eget molestie metus. Interdum et malesuada fames ac ante ipsum 
+	61	primis in faucibus. Donec id velit justo. Vestibulum ante ipsum primis in 
+	62	faucibus orci luctus et ultrices posuere cubilia Curae; Aenean euismod blandit 
+	63	sodales.
+
+
+Line breaks
+-----------
+A common practice of plain text documents is to set the inline progressive 
+width to 80 characters,  In the sample a line break happens before reaching the 
+80 characters.
+
+For a bit of panache 2 consecutive line breaks appears after the title 
+(line 1) and its underline (line 2).
+
+The most common way to separate paragraphs in plain text is the use 2 
+consecutive line breaks (lines 12, 26, 31, 38, 48 & 53).
+
+
+Tab Spaces
+----------
+Lines 50 through 53 of the sample is an item list, which are commonly indented.  
+A tab space is the first character on lines 50 through 53, to the left of the 
+dash ( - ) character.
+
+Lines 28 through 31 has another item list.  This list has 2 columns and each 
+line is indented using 5 consecutive tabs.
+
+
+Consecutive Spaces
+------------------
+The item list appearing on lines 28 through 31 uses consecutive spaces to 
+separate the two columns.  Each line uses a different amount of spaces so that 
+each of the right-hand column left aligns.  The number of consecutive spaces 
+for each line is listed below.
+
+	{28 : 10 spaces}
+	{29 : 12 spaces}
+	{30 : 16 spaces}
+  & {31 : 14 spaces}
+
+
+
+Here is how the text appears in a web browser.  Again, do not consider the line 
+numbers on left part of the sample.
+
+	1	DOCUMENT TITLE ============== Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam placerat metus a rhoncus vestibulum. Curabitur eget mi est. 
+	2	Curabitur mollis justo vitae mi consequat, at scelerisque mi viverra. Vivamus euismod placerat odio, ut sollicitudin turpis pellentesque in. 
+	3	Suspendisse tempor volutpat orci a pulvinar. Cras vestibulum, ligula sed finibus vestibulum, justo felis porta nunc, sit amet venenatis lorem metus ut
+	4	est. Duis scelerisque orci felis, vel commodo lectus elementum in. Proin sed ultrices elit. Integer porta elementum risus non porta. Phasellus 
+	5	malesuada lacinia fermentum. Sed tincidunt neque eget augue cursus, non fringilla diam tempor. SECTION 1 --------- Aliquam leo ipsum, pellentesque a 
+	6	semper eu, fringilla non sapien. Donec mattis nulla orci, ac efficitur enim aliquam ac. Nullam metus magna, bibendum id augue id, finibus dapibus 
+	7	odio. Proin efficitur eu augue tincidunt lobortis. Praesent dapibus at enim et feugiat. Vestibulum congue fringilla eros. Integer ultrices arcu ut 
+	8	posuere pulvinar. Aenean tempor finibus arcu, et suscipit sapien vehicula ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla feugiat 
+	9	hendrerit augue, a semper sem lacinia eget. Nullam pulvinar scelerisque nibh ac gravida. Duis non lectus a arcu finibus pulvinar a sit amet nunc. Duis
+	10	venenatis nibh in mauris dictum, vel mattis turpis iaculis. Duis commodo quis ipsum vel tincidunt. In nec arcu et elit commodo consectetur vel vel 
+	11	sapien. aliquam elit magna sagittis purus eget dolor sit In nec consectetur nit amet cursus sem ante Donec non purus eget magna sagittis viverra sed 
+	12	sed leo. Phasellus rhoncus vitae diam et gravida. Suspendisse aliquam elit diam, sed volutpat odio imperdiet nec. Ut fermentum nisi eu dui lacinia, 
+	13	vel ultricies ex pellentesque. In hac habitasse platea dictumst. Curabitur cursus sem ante, a commodo eros congue id. Aenean sit amet ullamcorper 
+	14	metus. Nullam nec neque in justo blandit placerat. SECTION 2 --------- Cras in orci eget purus viverra eleifend. Nam a justo ullamcorper, aliquam 
+	15	dolor ut, luctus leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id porttitor ante. Proin maximus mi tortor, facilisis aliquam 
+	16	dolor feugiat tincidunt. Aliquam aliquam laoreet orci, in consequat ipsum consectetur nec. Nulla ullamcorper sapien quis sapien pellentesque accumsan.
+	17	Donec non orci id tellus varius volutpat. Etiam tristique quis eros ac malesuada. - item 1 - item 2 - item 3 - item 4 Integer rhoncus turpis non 
+	18	metus dictum, vel egestas leo sodales. Sed eleifend leo vitae pulvinar egestas. Suspendisse molestie tempor egestas. Cras ac dignissim lacus. Nullam 
+	19	porta tellus tortor, ac posuere ipsum interdum vel. Sed consectetur arcu sit amet erat laoreet, posuere venenatis leo vestibulum. Fusce tincidunt 
+	20	porta ex vitae commodo. Etiam sed aliquam mauris. Aenean sed dui purus. Sed eget molestie metus. Interdum et malesuada fames ac ante ipsum primis in 
+	21	faucibus. Donec id velit justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean euismod blandit 
+	22	sodales.
+
+
+The browser replaces line breaks with a space
+`````````````````````````````````````````````
+The single line breaks used on every line appear to be ignored, the double 
+spaces fair no better. Line breaks, single or consecutive, are replaced by a 
+single space.
+
+Let's focus on the stating segment of line 1:
+
+	DOCUMENT TITLE ============== Lorem ipsum dolor sit amet, ...
+
+There should be a line break between 'TITLE' and '=============='.  In between 
+'==============' and 'Lorem' there should be 2 line breaks.  In both cases 
+there is now a single space.
+
+
+The browser replaces tab spaces with a space
+````````````````````````````````````````````
+One of our item lists, appearing on lines 50 through 53, is now on line 17. The 
+line breaks have been replaced with spaces so the 4 line list is now part of 1 
+line.
+
+	 - item 1 - item 2 - item 3 - item 4
+
+What we are interested in is the tab space that no longer appear before each 
+list item.  Like line breaks the browser replaces tab spaces with a single 
+space.
+
+Now let's examine the other list, the two column list, appearing on lines 28 
+through 31, is now near the beginning of line 11, line breaks are now spaces.
+
+	aliquam elit magna sagittis purus eget dolor sit In nec consectetur sit amet cursus sem ante
+	
+This list used 5 tab spaces prior to each before item in the left-hand column. 
+There should be 5 tabs to the left of the following words:
+
+	- aliquam 
+	- purus
+	- In
+	- nit
+
+Just as consecutive line breaks, consecutive tab spaces are replaced with a
+single space.
+
+
+The browser replaces consecutive spaces with a space
+````````````````````````````````````````````````````
+The two column list, now on line 11, used consecutive spaces to separate the 
+two columns and align the items of the right-hand column.  The browser displays 
+only 1 space.  There should be spaces to the left of the following:
+
+	- magna (10 spaces)
+	- dolor (12 spaces)
+	- consectetur (16 spaces)
+	- cursus (14 spaces)
+
+
+Browser width determines page width
+```````````````````````````````````
+The browser rendition does have some line breaks, otherwise there would only 
+be one line of text and we would need to scroll the page to see all so it seems 
+to recognize some end to inline progression, mimicking the opposite side of the 
+inline progression starting point of a page (i.e. the right-hand edge of a 
+page).
+
+A the browser window mimicks the width of a page, therefore, the right edge of 
+a browser window the right edge of a page.  If this isn't obvious, revisit our 
+sample in a browser, adjust the width of the browser window and see the text 
+adjust according to the new page width.
+
+
+Strange Behavior
+----------------
+The behavior of text in a browser may seem peculiar, perhaps discouraging, but 
+there are reasons why.  The main reason we will become clear when we discuss 
+markup.
+
+
+CHARACTER CODES
+===============
+
+The current html standard allows for 1,112,064 characters to be part of an html 
+document.  A quick look at a keyboard should convince anyone that it's 
+inadequate for typing all 1,112,064 characters.  Not of of the million plus 
+characters are part of a particular writing system.  Some of the characters are 
+universal across the all writing systems; arrows, or mathematical symbols for 
+instance.
+
+The html standard's million plus character set is established its incorporating 
+the UTF-16 standard.  The UTF-16 standard was created by the Unicode 
+Consortium. The UTF-16 (16-bit Unicode Transformation Format) standard is,
+over simplified,  a collection of 1,112,064 characters each assigned a unique 
+number between 0 and 1,112,063.
+
+Since each character has its own uniquely identifying number a web author has 
+the option of adding a character in 2 ways; by typing the character, if 
+possible, or by typing the unique character identifying number, which we will 
+call a character code.
+
+
+
+There is a third option for referencing a limited set of characters, reference 
+by name.
+
+
+To write
+
+
+UTF Basic Latin
+---------------
+
+
+Illegal Characters
+------------------
+There are 3 characters where it is necessary to the character code instead of 
+typing the character. The 3 characters are:
+
+	< > &
+The ampersand (&) should be obvious.  We use the amperand to escaping character 
+codes.  So when a browser hits an ampersand while reading a page's content it 
+will expect a character code.  In order to render an ampersand for example:
+
+	 peanut butter & jelly
+	 
+	 peanut butter &amp; jelly		peanut butter &#32; jelly		peanut butter &x0026; jelly
+
+The necessity for character codes for other 2 characters, less than (<) and 
+greater than (>), will become obvious very soon.  Less than and greater than 
+are used for markup purposes.
+
+	0 < 1 and 1 > 0
+
+	0 &lt; 1 and 1 &gt; 0		0 &#60; 1 and 1 &#62; 0		0 &#x003C; 1 and 1 &#x003E; 0
+
+Technically the greater than character is not an illeagal characters, so using 
+the character code is optional.
+
+
+apostrophies & quote marks
+--------------------------
+
+{ Hyphen, Endash, & Emdash }
+
+
+
+
+

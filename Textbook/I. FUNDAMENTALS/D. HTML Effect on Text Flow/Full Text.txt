@@ -1,0 +1,349 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+
+C. HTML EFFECT ON TEXT FLOW
+
+	1. Consecutive Spacing
+
+	2. Line Breaks
+		a. The <br/> Element
+			i. <br/> Abuse
+			ii. Tag Profile
+		b. The <wbr/> Element
+			i. Tag Profile
+		c. Block & Inline Types
+			i. The <div> Element
+				1. tag profile
+			ii. The <span> Element
+				1. tag profile
+
+	3. Removing Text
+		a. The hidden attribute
+
+	4. Changing Direction
+		a. The dir Attribute
+		b. The <bdi> Element
+		c. The <bdo> Element
+
+
+HTML EFFECT ON TEXT FLOW
+xxxxxxxxxxxxxxxxxxxxxxxx
+
+Let's review chapter 3, but now we know the syntax for including html markup. 
+We ended the chapter discovering that browsers ignores any changes to the flow 
+of text.  We investigated line breaks, indentation, & consecutive spaces.
+
+We're going to add two more text flow interrupting behaviors, text removal and 
+text flow direction. This chapter explores the way html provides the 
+ability to effect text flow. 
+
+The approach of this chapter is to ignore the fact that html is a semantic 
+markup language.  The elements and attributes showcased in this chapter are the 
+ones that are presentation markup, they represent matters of diplay and not for
+describing the structure of the document.
+
+
+Consecutive Spacing
+===================
+Indentation & consecutive spaces are not able to be adjusted in any proper way 
+are topics for css.  There are hacks you may encounter that were conjured up 
+and widely used prior to css, it was the only way to accomplish consecutive 
+spaces.  The hack was using consecutive the non-breaking space character code:
+
+	&nbsp;
+
+Html markup adds enough clutter to an html document; now that css provides ways 
+of setting margins, padding, and other ways text, so that creating consecutive 
+spacing is considered clutter in a semantic document.
+
+
+Line Breaks
+===========
+Since html is semantic and relies on a default stylesheet for display 
+properties.  So an html document that has proper semantic markup will know when 
+to add line breaks.  Line breaks are not our concern, applying the proper 
+semantic markup is.  Properly applied semantic markup will have line breaks 
+in all the right places.
+
+The default styles of elements as far as line breaks are 
+concerned, comes down to two different display types for all html elements, 
+referred to as block and inline.  Block types have line breaks and inline types 
+have none.
+
+Before we delve into block and inline display types we are going to discuss two 
+of the more out of place html elements, the <br/> and <wbr/> elements.
+
+
+The <br/> Element
+-----------------
+The <br/> element represents an early line break.  We discussed what an early 
+line break is in the chapter on text.  The <br/> element forces a line break 
+where it appears in the content.
+
+	Roses are red<br/>Violets are blue
+
+Will be displayed as:
+
+	Roses are red
+	Violets are blue
+
+
+<br/> Abuse
+````````````
+The <br/> element can be abused.  In the pre-css era authors would use 
+consecutive <br/> elements in order to achieve additional spacing between lines
+of text.  For example, to make text appear as paragraphs, additional spacing 
+between them, would have two <br/> elements between each text block that they 
+wished to appears as a paragraph, such as this:
+
+	<br/>
+	<br/>
+	Cursus eget nunc scelerisque viverra mauris in aliquam sem. Diam quis enim 
+	lobortis scelerisque fermentum dui faucibus. Pulvinar elementum integer 
+	enim neque volutpat ac tincidunt vitae. Ut tortor pretium viverra 
+	suspendisse potenti nullam ac tortor vitae.
+	<br/>
+	<br/>
+	Netus et malesuada fames ac turpis egestas sed tempus. Nunc sed velit 
+	dignissim sodales. Pellentesque elit eget gravida cum sociis natoque. 
+	Feugiat in ante metus dictum at tempor commodo. Cras ornare arcu dui vivamus 
+	arcu felis. Eu scelerisque felis imperdiet proin. Urna condimentum mattis 
+	pellentesque id nibh tortor. Pharetra pharetra massa massa ultricies mi quis 
+	hendrerit dolor. 
+	<br/>
+	<br/>	
+	Cursus euismod quis viverra nibh cras. Vitae purus faucibus ornare suspendisse. 
+	Augue neque gravida in fermentum et sollicitudin ac. Ut sem viverra aliquet 
+	eget sit amet. Sit amet mauris commodo quis imperdiet massa tincidunt. Vitae 
+	justo eget magna fermentum iaculis. Malesuada bibendum arcu vitae elementum. 
+	Dui vivamus arcu felis bibendum ut tristique et.
+	<br/>
+	<br/>
+
+This is not semantic; not one bit.  This is pure presentational markup, the 
+precise type of markup we're trying to avoid.  As we shall soon see html provides better options
+
+
+Tag Profile
+```````````
+The <br/> element is an empty tag and has no attributes beyond the global ones.
+
+
+The <wbr/> Element
+------------------
+We discovered in chapter 3 that web browsers will line break when it reaches 
+the far end of a line of text flow.  Browsers will line break if it cannot fit 
+an entire word at its position on the current line of text flow.  On rare 
+occations, generally in table cells, a word of the text over-fills an entire 
+line.  In these cases the browser will break when it can't fit any more letters 
+on the line of text flow; most of the time that break happens at an awkward 
+spot.  For example, let's say we have a extremely long url as part of an html 
+document; long enough the fill an entire line of available space of text flow 
+plus partialy filling another line.
+
+
+	http://www.classification.com/Animalia/Chordata/Mammalia/Carnivora/
+	Feliformia/Felidae/Felinae/Felis/F_catus.htm
+
+Let's place this text flow in an area that is rather narrow.  Since this text 
+flow is a single word, there are no spaces, a browser will continue the flow 
+until it runs out of space, when it finally line breaks.
+
+	|                                              |
+	| http://www.classification.com/Animalia/Chord |
+	| ata/Mammalia/Carnivora/Feliformia/Felidae/Fe |
+	| linae/Felis/F_catus.htm                      |
+
+One less awkward approach would be line to treat the forward slash character, 
+/, as a space. Then apply normal line break rules, and line breaking after 
+forward slash characters as spaces.  This solution would be applicable no 
+matter the width of the space it apears in.
+
+So apply the approach just dscussed to the example above:
+
+	|                                              |
+	| http://www.classification.com/Animalia/      |
+	| Chordata/Mammalia/Carnivora/Feliformia/      |    
+	| Felidae/Felinae/Felis/F_catus.htm            |
+
+I would hope you agree this form is at least less awkward.
+
+Think of the <wbr/> element as representing a space of 0 width. A space without
+width would be displayed, but not seen in the normal flow of text as the text 
+flows along a line of content.  It would only reveal itself when normal browser 
+line breaking rules would recognize the space and line break before a word, the 
+next space, if that word could not fit on the current line.
+
+So applying the <wbr/> to the example would look like:
+
+	http://www.classification.com/<wbr/>Animalia/<wbr/>Chordata/
+	<wbr/>Mammalia/<wbr/>Carnivora/<wbr/>Feliformia/<wbr/>Felidae/
+	<wbr/>Felinae<wbr/>/Felis<wbr/>/F_catus.htm
+
+Now this url apprearing in a space, regardless of width, will line break as if 
+a space were after every forward slash character.  Place the <wbr/> elements 
+before the forward slash characters if line breaking before that character is 
+more your preference.
+
+
+Tag Profile
+```````````
+The <wbr/> element is an empty tag and has no attributes beyond the global ones.
+ 
+
+Block & Inline Types
+--------------------
+As mentioned earlier as far as line breaks being a concerned, is knowing if an 
+element is a block or inline type.  We also revealed that block types have line 
+breaks and inline types have none.
+
+There are a few rules defined by html that we need to introduce.  Block 
+elements cannot be nested in an inline element.
+
+We will use the <div> and <span> element to examine the two display types.  The 
+<div> and <span> elements are the generic block and inline tpe elements.  They 
+describe nothing about the document content.  For the time being, consider  
+these tags as elements of last resort.  Try to find a better, more decriptive, 
+html element.
+
+
+The <div> Element
+`````````````````
+Let's start by placing an open & close tag randomly in a block of text; the 
+open tag appearing before the close tag of course.
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore <div>et dolore magna aliqua. Lobortis elementum nibh tellus 
+	molestie nunc non. Et tortor consequat id porta nibh venenatis cras sed felis. 
+	Leo urna molestie at elementum eu facilisis</div>sed odio. Eget velit aliquet 
+	sagittis id consectetur purus ut. In iaculis nunc sed augue lacus viverra. At 
+	tempor commodo ullamcorper a lacus vestibulum sed. Tristique nulla aliquet 
+	enim tortor.
+
+Displays is a browser as such:
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore
+	et dolore magna aliqua. Lobortis elementum nibh tellus molestie nunc non. Et 
+	tortor consequat id porta nibh venenatis cras sed felis. Leo urna molestie at 
+	elementum eu facilisis
+	sed odio. Eget velit aliquet sagittis id consectetur purus ut. In iaculis nunc 
+	sed augue lacus viverra. At tempor commodo ullamcorper a lacus vestibulum sed. 
+	Tristique nulla aliquet enim tortor.
+
+A <div> element causes a line break before and after its nested text.  This 
+types are referred to as block elements.  This is due to the fact that having a 
+line before & after block element naturally forms a block of text.
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore
+   .------------------------------------------------------------------------------.
+   |et dolore magna aliqua. Lobortis elementum nibh tellus molestie nunc non. Et  | 
+   |tortor consequat id porta nibh venenatis cras sed felis. Leo urna molestie at | 
+   |elementum eu facilisis                                                        |
+   '------------------------------------------------------------------------------'
+	sed odio. Eget velit aliquet sagittis id consectetur purus ut. In iaculis nunc 
+	sed augue lacus viverra. At tempor commodo ullamcorper a lacus vestibulum sed. 
+	Tristique nulla aliquet enim tortor.
+
+
+TAG PROFILE
+-----------
+The <div> element is an open-close tag pair, and has no attributes beyond the 
+global ones.
+
+
+The <span> Element
+``````````````````
+Let's examine the example above again, this time replacing the <div> tags with 
+<span> tags.
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore <span>et dolore magna aliqua. Lobortis elementum nibh tellus 
+	molestie nunc non. Et tortor consequat id porta nibh venenatis cras sed felis. 
+	Leo urna molestie at elementum eu facilisis</span>sed odio. Eget velit aliquet 
+	sagittis id consectetur purus ut. In iaculis nunc sed augue lacus viverra. At 
+	tempor commodo ullamcorper a lacus vestibulum sed. Tristique nulla aliquet 
+	enim tortor.
+	
+Displays is a browser as such:
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore et dolore magna aliqua. Lobortis elementum nibh tellus 
+	molestie nunc non. Et tortor consequat id porta nibh venenatis cras sed felis. 
+	Leo urna molestie at elementum eu facilisissed odio. Eget velit aliquet 
+	sagittis id consectetur purus ut. In iaculis nunc sed augue lacus viverra. At 
+	tempor commodo ullamcorper a lacus vestibulum sed. Tristique nulla aliquet 
+	enim tortor.
+
+The <span> element makes no interruptions to the text flow.  The <span> element 
+is the generic representation of the second type referred to as inline 
+elements because they are inline with the normal flow of text.
+
+
+TAG PROFILE
+~~~~~~~~~~~
+The <span> element is an open-close tag pair, and has no attributes beyond the 
+global ones.
+
+
+Removing Text
+=============
+Removing text from the content displayed on the page is another method of 
+altering text flow. 
+
+The hidden attribute
+--------------------
+Another way that the text flow can be altered is by the removal of a section of 
+text.  One of the gloabal attributes that all elements have is the hidden 
+attribute.  Let's return to the last example; we'll add the hidden attribute to 
+the span element.
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore <span hidden>et dolore magna aliqua. Lobortis elementum nibh tellus 
+	molestie nunc non. Et tortor consequat id porta nibh venenatis cras sed felis. 
+	Leo urna molestie at elementum eu facilisis</span>sed odio. Eget velit aliquet 
+	sagittis id consectetur purus ut. In iaculis nunc sed augue lacus viverra. At 
+	tempor commodo ullamcorper a lacus vestibulum sed. Tristique nulla aliquet 
+	enim tortor.
+
+Displays is a browser as such:
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore sed odio. Eget velit aliquet sagittis id consectetur purus 
+	ut. In iaculis nunc sed augue lacus viverra. At tempor commodo ullamcorper a 
+	lacus vestibulum sed. Tristique nulla aliquet enim tortor.
+
+
+Changing Direction
+==================
+In chapter 3 we discussed that written languages flow in nearly every 
+direction.  Html only provides two directions, left to right and right to left.
+Css provides a fuller platform for changing the direction of text flow and is
+continuously growing better.
+
+Because css is more feature rich, the html options are not used much.  So we 
+will put off a thorough examination for css.  We will treat this exploration 
+with a "how to" attitude.
+
+
+The dir Attribute
+-----------------
+
+
+The <bdi> Element
+-----------------
+
+
+The <bdo> Element
+-----------------
+
+
+

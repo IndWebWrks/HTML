@@ -1,0 +1,570 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+
+B. LISTS
+	1. List Item
+		a. Default Style
+		b. Tag Profiles
+	2. Item Lists
+		a. Default Style
+		b. <ol> Signature Attributes
+			i. The reversed Attribute
+			ii. The start Attribute
+			iii. The type Attribute
+		c. The <li> value Attribute
+		d. Tag Profiles
+	3. Outlines
+	4. Definition Lists
+		a. Definition Items
+			i. The <dt> Element
+				a. DEFAULT STYLE 
+				b. TAG PROFILE
+			ii. The <dd> Element
+				a. DEFAULT STYLE 
+				b. TAG PROFILE
+		b. The <dl> Element
+			i. Nested <div> elements
+			ii. Default Style 
+			iii. Tag Profile
+	5. The <menu> Element
+	6. Run-In, and Vertical Lists
+
+
+LISTS
+xxxxxx
+There are two general types for all lists in html, item lists and definition 
+lists.
+
+Item lists are used to display a set of related items. Typically, list items 
+are preceded by a marker, typically a number, either roman or hindu–arabic, 
+or a letter, upper case or lower, or a bullet type decoration.
+
+A defintion is more complex than an item list.  A definition list is modeled on 
+a dictionary, such as 'Webster's Dictionary', being a list of terms each with 
+one or more detailed definition.
+
+
+List Item
+==========
+Let's begin our examination with the individual item that would appear in an 
+item list.  In our previous example the were three items; rock, paper, and 
+scissors.  List items are represented by the <li> block type element, so 
+continuing the previous example the above list items are nested in <li> 
+elements.
+
+	<li>rock</li> 
+	<li>paper</li> 
+	<li>scissors</li>
+
+The main point to raise is the list item marker is not present.  We will 
+discuss how item markers are generated at a later time.  The <li> element can 
+have text, any inline type element, or any block type element nested inside; we 
+examine nesting additional item lists in the outline section.  For now let's 
+examine a common occurrence seen informal documents.  Sometimes list items have 
+a large amount of text, sometimes an item list contains more than one 
+paragraph.  Here is how you you would go about that:
+
+
+	<li>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+		incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor 
+		condimentum. Adipiscing at in tellus integer feugiat scelerisque varius. 
+		Venenatis urna cursus eget nunc scelerisque.</p>
+
+		<p>Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna 
+		fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc 
+		faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa 
+		ultricies mi. Duis ultricies lacus sed turpis tincidunt id.</p>
+	</li>
+	
+	<li>In egestas erat imperdiet sed euismod nisi. Id velit ut tortor pretium viverra 
+	suspendisse potenti nullam ac. Nulla porttitor massa id neque aliquam 
+	vestibulum morbi blandit cursus. Quis vel eros donec ac.</li>
+
+
+Default Style
+-------------
+A <li> element is a block element with no additional margin before of after the 
+element. A character, or pseudo-element, is generated before its nested 
+content.  If the nested content extends across more than one line, it will be 
+indented and vertically inline where the first line begins after the marker.
+
+	  
+	  * Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+		incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor 
+		condimentum. Adipiscing at in tellus integer feugiat scelerisque varius. 
+		Venenatis urna cursus eget nunc scelerisque.
+
+	 1. Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna 
+		fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc 
+		faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa 
+		ultricies mi. Duis ultricies lacus sed turpis tincidunt id.
+
+
+Tag Profiles
+------------
+block; ol|ul; text-inline-block; [global] + [value]{ol}
+
+
+Item Lists
+===========
+There are two types of item lists.  On one hand, there are list that the order 
+of the list items is important; a list of directions to a destination, baking 
+instructions, ranked lists, etc.  On the other hand, there are list where order 
+is of no consequence; a list of required paperwork, baking ingredients, 
+contents of a box.
+
+There two item lists, ordered and unordered.  The items in an ordered list will 
+have, by default, incremented hindu–arabic numbers for markers.  Unordered 
+lists have dot bullets for markers.  
+
+As we discussed some lists are unordered, the items in the list is unimportant.
+The <ul> block type element represents unordered lists.  There is only one type 
+of element that can be nested in a <ul> element is the block type <li> list 
+item element.  Here is an example:
+
+	<p>Shoe colors:</p>
+	
+	<ul>
+	 	<li>Black</li>
+	 	<li>White</li>
+	 	<li>Blue</li>
+	 	<li>Yellow</li>
+	<ul>
+
+This will appear in a browser as:
+
+	Shoe colors:
+
+	   * Black
+	   * White
+	   * Blue
+	   * Yellow
+
+Ordered item lists are represented by the <ol> block type element and are 
+used exactly like the <ul> element.
+
+	<p>Shoe colors:</p>
+	
+	<ol>
+	 	<li>Black</li>
+	 	<li>White</li>
+	 	<li>Blue</li>
+	 	<li>Yellow</li>
+	<ol>
+
+This will appear in a browser as:
+
+	Shoe colors:
+
+	   1. Black
+	   2. White
+	   3. Blue
+	   4. Yellow
+
+
+Default Style
+-------------
+The <ul> and <ol> elements are block type elements 1em margin before and after 
+element.  The <ul> and <ol> elements add 40 px padding before the list items; 
+on the left for left to right text flow, and on the right for right to left 
+languages.
+
+	'-----------------'
+	        1em
+	.-----------------.
+	|     * ----------|
+	|     * ----------|
+	|40px * ----------|
+	|     * ----------|
+	|     * ----------|
+	'-----------------'
+	        1em
+	.-----------------.
+
+
+<ol> Signature Attributes
+-------------------------
+The <ul> element only has the global attributes, while the <ol> element has the 
+global attributes and three more additional attributes.  The three additional 
+attributes give the ability to change how elements are ordered.  The three 
+additional attributes are:
+
+  - reversed
+  - start
+  - type
+
+These additional properties are duplicated in css.  In some cases using the 
+attributes may be a simplier in scripts, sometimes not.  Don't be afraid to use
+them if it simplifies your code.
+
+
+The reversed Attribute
+``````````````````````
+The reversed attribute is a boolean empty type, is it's present the property is
+set to true, if it's absent it's set to false.
+
+When the attribute is set to true, the order that the list items are listed in 
+the html document will appear in reverse order on the web page. Here again is 
+our example from earlier. 
+
+	<ol reversed>
+	 	<li>Black</li>
+	 	<li>White</li>
+	 	<li>Blue</li>
+	 	<li>Yellow</li>
+	<ol>
+
+This will be diplayed as such:
+
+ 	  4. Yellow
+ 	  3. Blue
+ 	  2. White
+ 	  1. Black
+
+Notice that the list item keeps the order number it had prior to being 
+reordered.
+
+
+The start Attribute
+```````````````````
+The data type of the start attribute is a positive integer.  The value of the 
+start attribute will set the order number of the first list item with the rest
+of the list items continuing to increment starting from the start attribute 
+value.  Here again our previous example:
+
+	<ol start='5'>
+	 	<li>Black</li>
+	 	<li>White</li>
+	 	<li>Blue</li>
+	 	<li>Yellow</li>
+	<ol>
+
+This will be diplayed as such:
+
+ 	  5. Black
+ 	  6. White
+ 	  7. Blue
+ 	  8. Yellow
+
+
+The type Attribute
+``````````````````
+The type attribute is limited to a discrete of values.  The values are:
+
+	decimal | lower-alpha | upper-alpha | lower-roman | upper-roman
+
+The type attribute sets the type of ordering marker type, such as letters or 
+numbers.  The value should be self-explanitory, but we'll list some details.
+
+decimal			hindu-arabic numbers		1. 2. 3.
+lower-alpha		lower case letters			a. b. c.
+upper-alpha		upper case letters			A. B. C.
+lower-roman		lower case roman numbers	i. ii. iii.
+upper-roman		upper case roman numbers	I. II. III.
+
+
+The <li> value Attribute
+------------------------
+When an <li> element is nested in an <ol> element it gains an additional 
+attribute, the value attribute.  The value attribute allows an author to set 
+the order of each list item.
+
+
+Tag Profiles
+------------
+block; block; li; ul:global -- ol:global, reversed, start, type
+
+
+Outlines
+========
+Outlines are a system of lists of general topics that allow for finer details 
+to be listed beneath general topic items.  Outlines provide a wonderful model 
+for an exercise with nested lists, using the type attribute, and 
+familiarization with outlines.
+
+Let's use an outline of chapter three:
+
+	I. Markup Fundamentals
+		A. Forms of Markup
+			1. Presentation Markup
+			2. Semantic Markup
+		B. Tags
+			1. Tag Syntax
+				a. Open - Close Format
+				b. Empty Tag Format
+		C. Nesting
+			1. Nesting Text
+			2. Nesting Tags
+			3. Nesting Text & Tags
+			4. Proper Nesting
+			5. Summary
+				a. Element Tree
+		D. Attributes
+			1. Syntax
+			2. Data Types
+			3. Multi-Valued Attributes
+			4. Empty Attributes
+			5. Global Attributes
+		E. Comments
+
+We will use ordered lists to represent this outline.  In order to accomplish 
+this task we'll need to recursively nest our ordered lists.  When a list is 
+nested it is nested inside <li> element.  Here is a general example:
+
+	<ol>
+		... </li>
+		
+		<li>
+			<ol>
+				<li></li>
+				...
+			</ol>
+		</li>
+		
+		<li> ...
+	</ol>
+
+Let's first create a list for the top most general level, in our case it has 
+one item:
+
+	 <ol>
+	 	<li>Markup Fundamentals</li>
+	 </ol>
+
+The next level of items that are more detailed:
+
+	 <ol>
+	 	<li>Markup Fundamentals
+			<ol>
+				<li>Forms of Markup</li>
+				<li>Tags</li>
+				<li>Nesting</li>
+				<li>Attributes</li>
+				<li>Comments</li>
+			</ol>
+		</li>	
+	 </ol>
+
+Here is the entire outline. We also set the type attribute to display the 
+proper marker type:
+
+	 <ol type='upper-roman'>
+	 	<li>Markup Fundamentals
+			<ol type='upper-alpha'>
+				<li>Forms of Markup
+					<ol type='decimal'>
+						<li>Presentation Markup</li>
+						<li>Semantic Markup</li>
+					</ol>
+				</li>
+				<li>Tags
+					<ol type='decimal'>
+						<li>Tag Syntax</li>
+							<ol type='lower-alpha'>
+								<li>Open - Close Format
+								<li>Empty Tag Format
+							</ol>
+						</li>
+					</ol>
+				</li>
+				<li>Nesting
+					<ol type='decimal'>
+						<li>Nesting Text</li>
+						<li>Nesting Tags</li>
+						<li>Nesting Text &amp; Tags</li>
+						<li>Proper Nesting</li>
+						<li>Summary</li>
+							<ol type='lower-alpha'>
+								<li>Element Tree</li>
+							</ol>
+						</li>
+					</ol>
+				</li>
+				<li>Attributes</li>
+				<li>Comments</li>
+			</ol>
+		</li>	
+	 </ol>
+
+Notice that the nested list lose that 1em margin before and after the element.
+
+
+
+Definition Lists
+================
+Now for the last list type in html.  As we mentioned earlier, definition lists 
+are different from item lists in that definition lists have two types of items.
+Recall a time you referenced a dictionary; remember how the content was 
+formatted.
+
+The general format of a definition in a dictionary starts with the 
+term that is being searched for.  The term is stressed in some way, italicized,
+bolded, or some other way, making it distinct from the rest of the text so 
+scanning a list of definitions by term is easier.
+
+Underneath the term is one or more desciptions for what the terms means and 
+how it is used in a sentence.  A term that has more than one meaning will have 
+a description for each meaning the term has.  Here is an general illustrations.
+
+	DEFINITION TERM
+
+		Definition description describing term
+
+		Definition description describing term
+
+	DEFINITION TERM
+
+		Definition description describing term
+
+
+Definition Items
+----------------
+So we know there are two definition item types, the definition term, and the 
+definition detail.  In html the <dt> block type element represents a definition 
+term and the <dd> block type element represents a definition detail.  Let's 
+investigate each element.
+
+
+The <dt> Element
+````````````````
+The <dt> element represents a definition term.  Modeling the dictionary format,
+definition terms need to be easily scannable for searching by term. With the 
+addition of css and proper semantic markup an author use any specific definition 
+format, the strategy for stressing terms are limitless. Until we study css are 
+left with the default html style.
+
+
+DEFAULT STYLE 
+Recall that the item list elements <ol> and <ul> added 40px padding before 
+each item, their way of indenting its nested items. The <dt> element is not 
+indented.
+
+
+TAG PROFILE
+block; text-inline-block; text-inline-block:{~<header>; ~<footer>, ~sectioning content, ~heading content}; global
+
+
+The <dd> Element
+````````````````
+The <dd> element represents a definition detail. In a dictionary model, a term 
+will have one or more definition detail.  When combined with the <dt> element 
+should form a general pattern.  A <dt> element should appear first, followed by 
+one or more <dd> elements, and then possibly followed by another <dt>, and then 
+followed by one or more <dd> elements.  The general patteren can be repeated 
+within a definition as many times as there are terms. Here is a generalized 
+illustration.
+
+	<dt>TERM</dt>
+	<dd>detail</dd>
+	
+	<dt>TERM</dt>
+	<dd>detail</dd>
+	<dd>detail</dd>
+	
+	<dt>TERM</dt>
+	<dd>detail</dd>
+
+
+DEFAULT STYLE 
+Like list items <dd> elements are indented 40px, in contrast to its counterpart 
+the <dt> element which isn't indented.  This is how terms and details are 
+differentiated, the details are indented, the terms are not.  The terms are 
+scannable with with the <dd> elements indented, pushed out of the way.
+
+	---td---          
+	     ------dd------
+
+	---td---          
+	     ------dd------
+	     ------dd------
+
+	---td---          
+	     ------dd------
+
+
+TAG PROFILE
+block; text-inline-block; After <dt> | <dd> inside <dl> || After <dt> | <dd> inside <div> inside <dl> ; global
+
+
+The <dl> Element
+----------------
+Now let's tie the definition list up.  Like the list item elements have a 
+parent element, <ul> or <ol>, the definition items have a parnet element that 
+holds the items as a single list.  We'll nest the previous illustration in a 
+<dl> element to illustrate a complete html representation of a definition list.
+
+	<dl>
+		<dt>TERM</dt>
+		<dd>detail</dd>
+	
+		<dt>TERM</dt>
+		<dd>detail</dd>
+		<dd>detail</dd>
+	
+		<dt>TERM</dt>
+		<dd>detail</dd>
+	</dl>
+
+
+Nested <div> elements
+`````````````````````
+
+
+Default Style 
+`````````````
+The <dl> element has a 1em space bfore and after the element like the other 
+lists.
+
+	'-----------------'
+	        1em
+	.-----------------.
+	|------           |
+	|   --------------|
+	|------           |
+	|   --------------|
+	|   --------------|
+	|   --------------|
+	'-----------------'
+	        1em
+	.-----------------.
+
+
+Tag Profile
+```````````
+block; text-inline-block; <dt> | <dd> | <div> if <dt> & <dd> are nested
+
+
+The <menu> Element
+==================
+For completeness we will mention that there is one more item list type, the 
+<menu> element.  The <menu> element incororates the <li> element, just like the
+other item lists.  We will examine the <menu> element at a later time.
+
+
+Run-In, and Vertical Lists
+==========================
+In closing let's briefly mention that there are two list styles, run-in, and 
+vertical.  Run-in lists remain inline, they do not alter normal text flow.  
+Each list item is preceded by a marker.  The marker is generally enclosed in 
+parentheses.
+
+	The three branches of democracy are: (1) rock (2) paper, and (3) scissors.
+
+The same list in vertical style would be displayed as such:
+
+	The three branches of democracy are: 
+	
+		(1) rock 
+		(2) paper
+		(3) scissors
+
+There is no run-in style type list element in html.  For html, Run-in style 
+type lists is a considered a style matter so it is achievable using css.

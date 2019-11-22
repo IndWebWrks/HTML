@@ -1,0 +1,424 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+
+II. COMPOSITION
+////////////////
+
+We know html uses tags to mark up text; markup describing the type of elements 
+that compose a document.  We know tag syntax and how tags form elements that 
+familial relations based on how tags are nested in an html document.  We also 
+know what markup is required in every proper html document we refer to as an 
+empty html document.
+
+We are now fully prepared to turn our focus to the composition of documents.  
+We are now beginning a discussion composition, a review of various elements of
+formally written documents, such as lists and tables, and what compositional 
+elements are available in html.
+
+////////////////
+
+
+
+
+A. Basic Composition
+	1. Paragraphs
+	2. Headings
+	3. Horizontal Rules
+	4. Contact Information
+
+
+BASIC COMPOSITION
+xxxxxxxxxxxxxxxxxx
+We begin with the building blocks of a formal document, paragraphs, headings.  
+We also explore horizontal lines for segmenting paragraphs into groups.  We 
+finish the chapter with a common compositional element, author contact 
+information.  Authors often append an email address, facebook page, etc. to 
+their document to allow readers to follow up.
+
+
+Paragraphs
+==========
+Paragraphs are represented by the <p> open-close pair block type element.  The 
+open <p> tag is placed at the beginning of a paragraph and the closing </p> tag 
+is placed at the end of the paragraph.  Here are three paragraphs:
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor 
+	condimentum. Adipiscing at in tellus integer feugiat scelerisque varius. 
+	Venenatis urna cursus eget nunc scelerisque.</p>
+
+	<p>Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna 
+	fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc 
+	faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa 
+	ultricies mi. Duis ultricies lacus sed turpis tincidunt id.</p>
+
+	<p>In egestas erat imperdiet sed euismod nisi. Id velit ut tortor pretium viverra 
+	suspendisse potenti nullam ac. Nulla porttitor massa id neque aliquam 
+	vestibulum morbi blandit cursus. Quis vel eros donec ac.</p>
+
+A browser will dsplay the above as:
+
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor 
+	condimentum. Adipiscing at in tellus integer feugiat scelerisque varius. 
+	Venenatis urna cursus eget nunc scelerisque.
+
+	Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna 
+	fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc 
+	faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa 
+	ultricies mi. Duis ultricies lacus sed turpis tincidunt id.
+
+	In egestas erat imperdiet sed euismod nisi. Id velit ut tortor pretium viverra 
+	suspendisse potenti nullam ac. Nulla porttitor massa id neque aliquam 
+	vestibulum morbi blandit cursus. Quis vel eros donec ac.
+
+Recall the <div> element, the generic block element.  Like the <div> element 
+the <p>, another block element, commits a line break before its open tag and 
+after its close tag.  The difference between <div> and <p> is the additional 
+spacing before and after the paragraphs. The <div> element does not additional 
+spacing.  In order to achieve paragraph behavior using <div> elements we had to 
+incorporate the <br/> element; a presentational markup approach.  By employing 
+the <p> element we are only discribing the text for what type of composition 
+element it happens to be.  Browsers add spacing between paragraphs, a reward 
+for proper semantic use; admittedly, until css a reward is not always 
+forthcoming.
+
+Let's add borders around the paragraphs and see what happens:
+
+	.-------------------------------------------------------------------------------.
+	|Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor |
+	|incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor           |
+	|condimentum. Adipiscing at in tellus integer feugiat scelerisque varius.       | 
+	|Venenatis urna cursus eget nunc scelerisque.                                   |
+	'-------------------------------------------------------------------------------'
+	.-------------------------------------------------------------------------------.
+	|Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna         | 
+	|fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc       | 
+	|faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa| 
+	|ultricies mi. Duis ultricies lacus sed turpis tincidunt id.                    |
+	'-------------------------------------------------------------------------------'
+	.-------------------------------------------------------------------------------.
+	|In egestas erat imperdiet sed euismod nisi. Id velit ut tortor pretium viverra | 
+	|suspendisse potenti nullam ac. Nulla porttitor massa id neque aliquam          | 
+	|vestibulum morbi blandit cursus. Quis vel eros donec ac.                       |
+	'-------------------------------------------------------------------------------'
+
+Notice that the additional spacing is between the paragraphs and the spacing 
+isn't around the paragraph.  In other words, paragraphs do not have additional 
+height added above and below it.
+
+
+Margin Collapse
+---------------
+Let's change the example above slightly.  Let's make the middle paragraph a 
+<div> element instead:
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor 
+	condimentum. Adipiscing at in tellus integer feugiat scelerisque varius. 
+	Venenatis urna cursus eget nunc scelerisque.</p>
+
+	<div>Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna 
+	fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc 
+	faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa 
+	ultricies mi. Duis ultricies lacus sed turpis tincidunt id.</div>
+
+	<p>In egestas erat imperdiet sed euismod nisi. Id velit ut tortor pretium viverra 
+	suspendisse potenti nullam ac. Nulla porttitor massa id neque aliquam 
+	vestibulum morbi blandit cursus. Quis vel eros donec ac.</p>
+
+Notice that there is no difference in appearance from when our example applied 
+only <p> elements.  If <p> elements add spacing above and below, we should 
+expect at least a reduction in the spacing before and after the <div> element.
+
+This exposes a veiled question that we need to consider. We stated that 
+additional spacing is added before and after the natural block the text forms. 
+If that is the case, shouldn't there be double the space between paragraphs?  
+
+			 space added before pagraph below 
+	 p -----------------------------------------------------------------------------.
+	|                                                                               |
+	'---------------------------------------------------------------------------- /p 
+	  space added after pagraph above 
+	~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+	  space added before pagraph below
+	 p -----------------------------------------------------------------------------.
+	|                                                                               | 
+	'---------------------------------------------------------------------------- /p 
+	space added after pagraph above 
+
+Substituting a <div> element, one would expect, would not add additional 
+spacing before or after and would reduce the spacing in between the <div> 
+element and ts siblings.
+
+	    space added before pagraph below 
+	 p -----------------------------------------------------------------------------.
+	|                                                                               |
+	'---------------------------------------------------------------------------- /p 
+	    space added after pagraph above 
+	 div ---------------------------------------------------------------------------.
+	|                                                                               | 
+	'-------------------------------------------------------------------------- /div 
+
+The spacing in between elements is referred to as a margin.  Since a margin is 
+the spacing between two elements both should be considered when determining 
+what value to set the margin.  Let's say that somehow one paragraph has twice 
+the margin as its next sibling paragraph.  You may expect that each of the 
+sibling margins would be added together, or stacked:
+
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+What actually happens is that the two margins are laid on top of each other, or 
+the margins are collapsed on each other:
+
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+So that the margin is set to the larger of the two values. In our case the 
+first paragraph willset the margin between it and the next sibling.  The margin 
+value will be twice that of the second paragraph's margin value. 
+
+Let's move from the hypothetical to our example.  In the case of two 
+consecutive <p> elements. Both have the same margin height:
+
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+When you collapse the margins, both margins being the same height, lay 
+perfectly on top of each other.  The greater height of the two isn't considered 
+because they are equal, appearing as if only one margin value is being used.
+
+Now for a <p> and <div> element, the margin between the two elements:
+
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	.-------------------------------------------------------------------------------.
+	|                                      p                                        |
+	'-------------------------------------------------------------------------------' 
+	 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	.-------------------------------------------------------------------------------.
+	|                                     div                                       |
+	'-------------------------------------------------------------------------------' 
+
+When the margins are collapsed, <div> elements has no margin space to consider.
+So the <p> element is obviously the greater value, setting the margin height 
+between the two sibling elements.
+
+
+Tag Profile
+-----------
+
+
+HEADINGS
+========
+We started with paragraphs as our initial compositional building block. Moving 
+progressively would lead us to grouping paragraphs into sections.  The topic of
+document sections is one we will cover in depth later, for now our primary 
+focus will be the heading elements; html provides six.
+
+
+Semantic Heading Model
+----------------------
+In most cases a document has a title.  The first heading in our heading 
+heirarchy, the <h1> element, is often used to represent a document's title 
+displayed in a web page.
+
+It's not uncommon to organize a document into sections by grouping related 
+paragraphs together. Headings are used to inform a reader where sections 
+start, and effectually where the previous section ends.  So documents rely on 
+subheadings to visual indicators of the beginning and ending of paragraph 
+groupings, while providing a title for the section it precedes. While <h1> 
+elements generally represents the document as a whole, the next heading element 
+in the heading heirarchy, the <h2> element, generally represents the beginning 
+of a new section, and as a result the end of a previous one.
+
+So a simple illustration of three sections would look something like:
+
+	<h1>document title<h1>
+
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+	<h2>Section 1</h2>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+	<h2>Section 2</h2>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+	<h2>Section 3</h2>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+
+We can refine our paragraph grouping within a section to create groups within 
+a group, or a subgrouping, forming subsections within a section. Just like 
+sections use headings to signal new sections, subheadings are used to inform a 
+user of the start of a subsection. Next element in our heirarchal set of html 
+headings is the <h3> element.  The <h3> element represents the beginning of a 
+subsection within a section.
+
+A simple illustration of the concept:
+
+	<h2>Section 1</h2>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+	<h2>Section 2</h2>
+	<p>------------------------------------</p>
+	
+	<h3>Subsection 1</h3>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+	<h3>Subsection 2</h3>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+	<p>------------------------------------</p>
+
+	<h2>Section 3</h2>
+	<p>------------------------------------</p>
+
+Let's pause for a moment to reason.  If a subsection, its beginning signaled by 
+an <h3> element appears within a section, its beginning signaled by an <h2> 
+element, it stands to reason that in reading an html document one should 
+see an <h2> element before seeing an <h3> element.  Also, one should see an 
+<h1> element before seeing any <h2> and consequently <h3> elements.
+
+This is an important and often overlooked concept of html documents.  We devote 
+a whole chapter to document sections later on and will complete our study of 
+the semantic heading model.  Until then it will suffice to follow the semantic 
+heading model as:
+
+Use the headings in order.  Do not use an <h2> element before an <h1> element, 
+do not use an <h3> element before an <h2> element, and so on.
+
+We still have three more heading elements, <h4>, <h5>, and <h6>.  It should 
+take little imagination to see where this goes, <h4>, <h5>, and <h6> headings 
+are just a continuation of the heirarchy we have with the <h1>, <h2>, and <h3> 
+headings.  If we have subsections in a subsection initiated by an <h3>, those 
+sub-subsections will be initiated with <h4> elements. The elements <h5> and 
+<h6> are a continuation of subsectioning.
+
+
+Font Sizes
+----------
+Readers need to know the differences between the headings of levels of 
+subsectioning.  Typically haedings vary in font size, so the heading for the 
+whole document is the largest of all the headings, sections are smaller, and 
+incrementally get smaller as subsections appear subsections.  So that <h1> 
+elements have the largest font and <h6> elements have the smallest font.
+
+
+Tag Profiles
+------------
+
+
+Horizontal Rules
+================
+Another less common way of dividing a document is a horizontal line inserted 
+in between two paragraphs. The <hr/> element represents a horizontal line, 
+official referred to as a horizontal rule.  The <hr/> element is an empty type.  
+
+The <hr/> element is simple to use, here is an example of two paragraphs 
+separated by a horizontal rule:
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+	incididunt ut labore et dolore magna aliqua. Amet massa vitae tortor 
+	condimentum. Adipiscing at in tellus integer feugiat scelerisque varius. 
+	Venenatis urna cursus eget nunc scelerisque.</p>
+	
+	<hr/>
+
+	<p>Interdum varius sit amet mattis vulputate enim. Venenatis lectus magna 
+	fringilla urna porttitor rhoncus dolor purus non. Varius morbi enim nunc 
+	faucibus a. Pharetra sit amet aliquam id. Urna et pharetra pharetra massa massa 
+	ultricies mi. Duis ultricies lacus sed turpis tincidunt id.</p>
+
+
+<hr/> Abuse
+-----------
+Horizontal rules in documents are intended to represent section boundaries, so 
+semantically speaking, using the <hr/> for anything other than segmenting would 
+be incorrect.  Css gives us the ability to have borders around content and 
+would be the proper way to add any horizontal lines.
+
+
+Tag Profile
+-----------
+
+
+
+Contact Information
+===================
+In formal documents authors often add conact information give readers a means 
+for follow up questions or additional information.  A wide variety ways to 
+communicate with any person; phone, email, social web sites, postal services, 
+fax, the list seems to grow longer every day.  The <address> block type element 
+represents a section of content that instructs readers the how establish 
+communication.  The <address> element is not limited to communication with the 
+author, although its most common usage.  A biographical article may include 
+ways of contacting the subject of the article.
+
+There really is no template to follow for using the <address> element. Consider 
+the <address> element as a sectioning element, so having nested block type 
+elements is common.  If the contact information is more of a list of multiple 
+ways of communication should all be nested in one <address> element instead of 
+an <address> element for each way listed.  Here are a few examples.
+
+
+<address>
+	<p>Way to contact your senator:</p>	
+	<div>(555) 555-5555</div>
+	<div>mysenator@senate.gov</div>
+</address>
+
+
+<address>
+	<p>Send your order form to:</p>	
+	<div>123 Main St.</div>
+	<div>Big City, TX 12345</div>
+</address>
+
+Tag Profile
+-----------
+connot nest another <address>

@@ -1,0 +1,241 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+
+D. An Empty HTML Document
+
+	1. The Root
+		a. The <html> Element
+			i. tag profile
+		b. The lang Attribute
+
+	2. Document Parts
+		a. The <head> Element
+			i. tag profile
+		b. The <body> Element
+			i. tag profile
+
+	3. The Document Title
+		a. tag profile
+
+	4. Document Type
+
+
+AN EMPTY HTML DOCUMENT
+xxxxxxxxxxxxxxxxxxxxxxx
+Up to this we have not been using the required elements needed to have a proper 
+html document.  We have been our attempts at creating web pages has succeeded 
+only under the graces of the the lax enforcement of syntax rules that html has.
+But we are striving for a certain level professionalism, right?  There is a 
+template of html markup that is expected for highly complex web applications, 
+relying on html's good graces will bite you in strange, hard to troubleshoot 
+ways.  It's best to learn the proper way to markup every document from the 
+start and never stop doing it, even if it may seem a bit excessive and 
+pointless at first when our documents are simple.
+
+We start by clearing away all the cluter that comes with an html document by 
+starting with the trivial empty html document, a blank file and spend this 
+chapter incrementally building until we have an empty document.
+
+
+The Root
+========
+In a proper html document there should be a single element in which all the other 
+elements and text blocks are nest in.  This ancestor of all element is call the 
+document element.  A document element is required in order to create a proper element 
+tree as we discussed in chapter 3.  Since comments are ignored by the browser, 
+they can appear outside of a root element.  The <html> element represents the 
+document element for html documents. 
+
+
+The <html> Element
+------------------
+Every proper html document consists of one element, the root, the <html> 
+element.  Nested inside the <html> element, divergence immediately takes hold 
+to be every web page on the world wide web.
+
+	<html>
+
+		... nested content ...
+
+	</html>
+
+TAG PROFILE
+```````````
+The <html> element is an open-close tag pair, and has no attributes beyond the 
+global ones.
+
+
+The lang Attribute
+------------------
+Now is a good time to introduce the lang attribute.  The lang attribute is a 
+global, meaning all elements have this attibute, and is highly recommended to 
+be set in the <html> element.  Typically an html document is written in one 
+language so setting it right away seems practical.  
+
+The reason for setting the lang attribute at all is that it's value can help 
+the browser make decision concerning text flow.  Since the <html> element is 
+the root, the only element in an html document which all all other content 
+descends from, setting the lang attribute value here sets it for the entire 
+document.
+
+The data type for the lang attribute is a limited set of string options.  The
+list of options
+
+<!-- ~~~~~~~~~~~~~~~~~~~ -->
+
+So now our empty html document has expanded to include the lang attribute.
+
+	<html lang='en-US'>
+
+		... nested content ...
+
+	</html>
+
+
+Two Document Halves
+===================
+The <html> element is restricted by allowing only two elements to be direct 
+children; both elements must appear nested in an <html> element. The first 
+element, <head>, must be the first child of an <html> element.  The second 
+element, <body>, must be the second child of an <html> element.  No other 
+element can be directly nested in an <html> element; all other elements are 
+nested in the <head> and <body> elements.
+
+Another important point is that an <html> element must have one and only one 
+<head> and <body> element.  So having more than one <head> or <body> element 
+is not allowed.
+
+So our empty html document has expanded to include the <head> and <body> 
+elements.
+
+	<html lang='en-US'>
+		<head></head>
+		
+		<body></body>
+	</html>
+
+
+The <head> Element
+------------------
+The <head> element represents an area to nest content that is not intended to 
+be displayed.  The content nested in the head element is information about the 
+document often referred to as metadata.  The metadata is typically the document 
+title, http settings, links to supporting resources, and css style properties.
+
+There are only a handful of elements that can be nested in the <head> element.  
+They are:
+
+  - <title>
+  - <meta/>
+  - <link/>
+  - <style>
+  - <base/>
+
+We left the <script> element out of the list even though <script> elements are 
+allowed nested in a <head> element; this is a matter of some controversy which 
+we will discuss in due time.  Other that the <title> element, this will be the 
+last we discuss the <head> element and it's child elements until the end of the 
+course.
+
+TAG PROFILE
+```````````
+The <head> element is an open-close tag pair, and has no attributes beyond the 
+global ones.
+
+
+The <body> Element
+------------------
+The <body> element is the root element of all the content intended to be 
+displayed; this is the web page you see. The <body> element is what holds the 
+text, the images, the checkboxes, the tables, everything you've seen on the web 
+were nested in a <body> element.
+
+TAG PROFILE
+```````````
+The <body> element is an open-close tag pair, and has no attributes beyond the 
+global ones.
+
+
+The Document Title
+==================
+A proper html document has a title.  The html language has a title element and 
+it is required for proper html documents.  As listed above, the <title> element 
+is a child of the <head> element.  Since it's nested in the <head> element, the 
+the <title> element will not display on a web page.
+
+The <title> element is an open-close pair, that can only have text nested.  So 
+we have again expanded our empty html document to include the <title> element:
+
+	<html lang='en-US'>
+		<head>
+			<title>The Document Title</title>
+		</head>
+		
+		<body></body>
+	</html>
+
+The <title> element does physically appear in two different locations outside 
+of the web page having the title.
+
+TAG PROFILE
+```````````
+The <body> element is an open-close tag pair, and has no attributes beyond the 
+global ones.
+
+
+Document Type
+=============
+There is one bit of markup we need to add, the document type declaration, or 
+for brevity doctype declaration.  Doctype declarations have been an html 
+requirement from the very beginning, it inherited them from sgml.  But html5 
+made the need for doctype declarations obsolete.  Unfortunately we still need 
+to have a doctype declaration, although far simplier than before.
+
+The primary purpose for a doctype declaration is to provide a url to a document 
+type definition, or dtd. A document type definition is a resource available on 
+the web that defines all the tags and attributes for html.  Every html version 
+has its own dtd file, therefore it's own url.  Prior to html5 the xhtml1.1 
+was a more common version of html used by web developers.  The doctype 
+declaration for xhtml1.1 is:
+
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+Quite verbose.  One of the missions of html5 was doing away with doctype 
+declarations.  Moving forward with html has been organized since html5 so that 
+knowing the html version isn't needed, new experimental features can be added 
+along side language defined features.
+
+The syntax for doctype declarations in html5, the one we will use, is this:
+
+	<!DOCTYPE html>
+
+The doctype declaration must be the first item in an html document, before the 
+document element, the <html> element.  The doctype declaration should be 
+considered independent of the document element, it's not part of the element 
+tree that the <html> element is the root of.  This is our final exapansion, the 
+addition of the doctype declaration, of the proper empty html document.
+
+We have finally arrived, a proper empty html document is thus:
+
+	<!DOCTYPE html>
+	<html lang='en-US'>
+		<head>
+			<title></title>
+		</head>
+		
+		<body></body>
+	</html>
+
+From here on out all our html documents will begin with the markup above, an 
+empty html document.
+
+
+
+

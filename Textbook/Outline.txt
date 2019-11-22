@@ -1,0 +1,499 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+
+HTML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  I. FUNDAMENTALS		
+ II. COMPOSITION
+III. HYPERLINKS
+ IV. INTERACTION
+  V. METADATA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I. Part I: FUNDAMENTALS	
+	A. INTRODUCTION
+	B. TEXT
+	C. MARKUP FUNDAMENTALS
+	D. HTML EFFECT ON TEXT FLOW
+	E. AN EMPTY HTML DOCUMENT
+
+II. Part II: COMPOSITION
+	A. Basic Composition
+	B. Lists
+	C. Tables
+	D. Semantic Compositional Elements
+	E. Document Segmentation
+
+III.Part III: HYPERLINKS
+	A. Universal Resource Locations
+	B. Linking Elements
+	C. Illustrations
+	D. Media
+	E. Web Page
+	F. General Use
+
+IV. Part V: INTERACTION
+	A. User Interfaces Described
+	B. Linking Actions
+	C. Interactive Media
+	D. Collapsing & Expanding
+	E. Drag & Drop
+	F. Document Editing
+	G. Dialog
+	H. Forms
+
+VII. Part VI: METADATA
+	A. The head Element
+	B. Style
+	C. Generated Content
+	D. Scripts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I. Part I: FUNDAMENTALS
+	
+	A. INTRODUCTION
+		1. The World Wide Web
+		2. html: Term by Term
+	B. TEXT
+		1. Text Flow
+		2. Text In a Browser
+		3. Character Codes
+	C. MARKUP FUNDAMENTALS
+		1. Forms of Markup
+		2. Tags
+		3. Nesting
+		4. Attributes
+		5. Comments
+	D. HTML EFFECT ON TEXT FLOW
+		1. Consecutive Spacing
+		2. Line Breaks
+		3. Removing Text
+		4. Changing Direction	
+	E. AN EMPTY HTML DOCUMENT
+		1. The Root
+		2. Document Parts
+		3. The document Title
+		4. Document Type
+
+II. COMPOSITION
+
+	A. BASIC COMPOSITION
+		1. Paragraphs
+		2. Headings
+		3. Horizontal Rules
+		4. Contact Information -- <address>
+	B. LISTS
+		1. List Item
+		2. Item Lists
+		3. Outlines
+		4. Definition Lists
+		5. The <menu> Element
+		6. Run-In, and Vertical Lists
+	C. TABLES
+	D. SEMANTIC COMPOSITIONAL ELEMENTS
+	E. DOCUMENT SEGMENTATION
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I. Part I: FUNDAMENTALS	
+	A. INTRODUCTION
+		1. THE WORLD WIDE WEB
+			a. Application on top of the Interent 
+			b. Parts: http, url & html		
+		2. HTML: TERM BY TERM
+			a. HypterText
+			b. Markup
+			c. Language
+			d. Brief History & Purpose
+			e. intro: Document Model - {terms: document, web page }
+
+	B. TEXT
+		1. TEXT FLOW
+			a. Inline Progression
+			b. Block Progression
+			c. Interrupting Text flow
+				i. line breaks
+				ii. indentation
+		2. TEXT IN A BROWSER
+			a. Line breaks
+			b. Tab Spaces
+			c. Consecutive Spaces
+				i. The browser replaces line breaks with a space
+				ii. The browser replaces tab spaces with a space
+				iii. The browser replaces consecutive spaces with a space
+				iv. Browser width determines page width
+			d. Strange Behavior
+		3. CHARACTER CODES
+			a. UTF Basic Latin
+			b. Illegal Characters
+			c. apostrophies & quote marks
+
+	C. MARKUP FUNDAMENTALS
+		1. FORMS OF MARKUP
+			a. Presentation Markup
+			b. Semantic Markup
+		2. TAGS
+			a. Tag Syntax
+				i. Open - Close Format
+				ii. Empty Tag Format
+		3. NESTING
+			a. Nesting Text
+			b. Nesting Tags
+			c. Nesting Text & Tags
+			d. Proper Nesting
+			e. Summary
+				i. Element Tree
+		4. ATTRIBUTES
+			a. Syntax
+			b. Data Types
+			c. Multi-Valued Attributes
+			d. Empty Attributes
+			e. Global Attributes
+		5. COMMENTS
+
+	D. HTML EFFECT ON TEXT FLOW
+		1. Consecutive Spacing
+		2. Line Breaks
+			a. The <br/> Element
+				i. <br/> Abuse
+				ii. Tag Profile
+			b. The <wbr/> Element
+				i. Tag Profile
+			c. Block & Inline Types
+				i. The <div> Element
+					1. tag profile
+				ii. The <span> Element
+					1. tag profile
+		3. Removing Text
+			a. The hidden attribute
+		4. Changing Direction
+			a. The dir Attribute
+			b. The <bdi> Element
+			c. The <bdo> Element
+	
+	E. AN EMPTY HTML DOCUMENT
+		1. The Root
+			a. The <html> Element
+				i. tag profile
+			b. The lang Attribute
+		2. Document Parts
+			a. The <head> Element
+				i. tag profile
+			b. The <body> Element
+				i. tag profile
+		3. The Document Title
+			a. tag profile
+		4. Document Type
+
+II. Part II: COMPOSITION
+	A. BASIC COMPOSITION
+		1. Paragraphs
+			a. Margin Collapse
+			b. Tag Profile
+		2. Headings
+			a. Semantic Heading Model -- <h1>, <h2>, <h3>, <h4>, <h5>, <h6>
+			b. Font Sizes
+			c. Tag Profiles
+		3. Horizontal Rules
+			a. <hr/> Abuse
+			b. Tag Profile
+		4. Contact Information -- <address>
+			a. Tag Profile
+
+	B. LISTS
+		1. List Item
+			a. Default Style
+			b. Tag Profiles
+		2. Item Lists
+			a. Default Style
+			b. <ol> Signature Attributes
+				i. The reversed Attribute
+				ii. The start Attribute
+				iii. The type Attribute
+			c. The <li> value Attribute
+			d. Tag Profiles
+		3. Outlines
+		4. Definition Lists
+			a. Definition Items
+				i. The <dt> Element
+					a. DEFAULT STYLE 
+					b. TAG PROFILE
+				ii. The <dd> Element
+					a. DEFAULT STYLE 
+					b. TAG PROFILE
+			b. The <dl> Element
+				i. Nested <div> elements
+				ii. Default Style 
+				iii. Tag Profile
+		5. The <menu> Element
+		6. Run-In, and Vertical Lists
+
+	C. Table
+		i. Intro.
+		ii. Grid elements
+			a. The table element
+			b. The tr element
+			c. The td element
+			d. borders
+		iii. obsolete styling attributes
+			a. cellpadding
+			b. cellspacing
+		iv. Table Headers
+			a. the th element
+			b. column headings
+			c. stub headings
+				1. column heading
+		v. Empty Cells
+			a. default behavior
+			b. common fillers: em dash, ellipsis dots, n/a
+		vi. The caption element
+		vii. Rowspan and colspan
+			a. spanner heads
+			b. cut-in heads	
+		viii. Header lists
+		ix. Columns
+			a. The colgroup element
+			b. The col element
+		x. Row Groups
+			a. The tbody element
+			b. The thead element
+			c. The tfoot element
+		xi. Pre-CSS era and tables
+	
+	D. Semantic Compositional Elements
+		1. Stress
+			a. Emphasis -- <em>
+			b. strong -- <strong>
+			c. highlight -- <mark>
+			d. Japanese -- <ruby>
+				<rb>
+				<rp>
+				<rt>
+				<rtc>
+		2. References
+			a. Titles -- <cite>
+			b. definitions		
+				i. <abbr>
+				ii. <dfn>
+				iii. title attribute
+			c. Quotes
+				i. inline quotes -- <q>
+				ii. block quotes -- <blockquote>
+				iii. the cite attribute
+		3. Technical
+			a. input -- <kbd>
+			b. inline code -- <code>
+			c. block code -- <pre>
+			d. output -- <samp>
+		4. math/science
+			a. variables -- <var>
+			b. Superscripts -- <sup>
+			c. Subscripts -- <sub>
+			d. mathml -- <math>
+		5. Fine Print -- <small>
+		6. generic
+			a. bold -- <b>
+			b. italic -- <i>
+			c. underline -- <u>
+			d. strike through -- <s>	
+
+	E. Document Segmentation
+		i. Implicit Segmentation
+		ii. Explicit Segmentation
+			a. books: section
+			b. journals: article
+		iii. Related segments
+			a. aside & nav
+			b. sectioning roots
+			c. figure & figcaption
+		iv. Page Sections -- main, header, footer, nav, aside
+
+
+III. Part III: ADDRESSES
+	A. Universal Resource Locations
+		i. The Anatomy of a URL
+		ii. Absolute URLs
+		iii. Realtive URLs
+
+	B. Linking Elements -- a, area, link
+		i. Linking  Attributes
+			a. href Attribute
+			b. Resource Relationships
+				1. Relationship Types
+				2. Reverse Relationships -- area excluded
+			c. Link Type List
+			d. Different Languages
+			d. Referrer Policies
+		ii. HyperText Links
+			a. Hyperlinks
+				1. Downloading Resources
+				2. Targets
+				3. Pinging Resources
+			b. Hyperlink Anchors
+				1. Imgage Anchors
+			c. Hyperlink Areas
+				1. map Element
+				2. coords & shape Attributes
+		ii. Linking Resources
+			a. Link Relation Types
+				1. 'body-ok' Type
+				2. External Resource Link Types
+				3. Hyperlink Types
+				
+		iii. The base Element
+
+	C. Illustrations
+		i. Images
+			a. Captions
+			b. The picture Element
+		ii. Vector Graphics -- svc
+		iii. Canvas
+
+	D. Media
+		i. Audio
+			a. src, preload & crossorigin Attributes
+			b. source & track Elements
+			c. autoplay, loop & muted Attributes
+			d. mediagroup Attribute
+		ii. Video
+		iii. Canvas
+
+	E. Web Page
+		i. Iframe
+
+	F. General Use
+		i. Object
+		ii. Generic Embed -- embed
+			a. src - mime type - hieght/width
+		iii. Scripts
+			
+		iv. Stylesheets
+		v. math href Attribute
+
+
+VI. Part V: INTERACTION
+	A. User Interfaces Described
+		i. Interaction Facets
+			a. Label
+			b. Access Key
+			c. Hidden State
+			d. Disabled State
+			e. Action - Event
+		ii. Focus
+			a. Keyboard shortcuts
+			b. The tabindex Attribute
+		iii. Mouse Events
+			a. clicks
+			b. cursor coordinates
+		iv. Keyboard Events
+			a. keyup, keydown
+			b. keycodes
+
+	B. Linking Actions
+		i. Label
+		ii. Access Key
+		iii. Hidden State
+		iv. Disabled State
+		v. Action
+		
+	C. Interactive Media
+		i. audio & video controls Attribute
+		ii. img ismap Attribute
+	
+	D. Collapsing & Expanding
+		i. details & summary Elements
+	
+	E. Drag & Drop
+		i. draggable Attribute
+		
+	F. Document Editing
+		i. The contenteditable Attribute
+		ii. ins & del
+		iii. the cite attribute
+
+	G. Dialog
+		i. Dialog Boxes
+		ii. Context Menus
+
+	H. Controls
+		i. Label & Control
+			a. name Attribute
+			b. label Element & for Attribute
+		ii. Controls
+			a. Hidden	
+				1. Hidden
+				2. Hidden Attribute
+			b. Text Box
+				1. Text
+				2. Search
+				3. URL
+				4. Telephone
+				5. E-mail
+				6. Password
+				7. TextArea
+			c. Number Box
+				-  {Local Date & Time - Date - Month - Week - Time}
+				1. Number
+				2. Range
+			d. Lists
+				1. Checkbox
+				2. Radio Button
+				3. Select - Option - OptGroup
+				4. Datalist
+			e. Buttons
+				1. Color
+				2. File Upload
+				3. Submit Button
+				4. Image Button
+				5. Reset Button 
+				6. Button
+			f. Output
+				- output Control
+				- progress Control
+				- meter Control	
+	
+	I. Forms
+		- The Form Element
+		i. The Form Submition Process
+			a. Form Attributes
+			b. Form Data -- name attribute
+			c. Validation
+		ii. Control Subgroups
+			a. fieldset
+			b. legend
+
+
+VII. Part VI: METADATA
+	A. The head Element
+		i. The title Element
+		ii. The meta Element
+		iii. The link Element
+		iv. The base Element
+
+	B. Style
+		i. The style Element</h4>
+		ii. The style Attribute</h4>
+
+	C Scripts
+		i. The script Element
+		ii. The noscript Element
+		
+	D. Metadata Markup
+		i. data Element
+		ii. time Element
+		iii. Microdata
+			a. Items: itemscope Element - itemtype Attribute - itemid Attribute
+			b. Properties: itemprop and itemref Attribute	
+		iv. data-* Attributes
+		v. Ruby annotations
+	
+	E. Generated Content
+		i. Canvas Element
+		ii. The template Element
+		iii. The slot Element
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
