@@ -1262,7 +1262,11 @@ determined and how we can set column width values.
 
 Let's now introduce tables.  Tables our grids in which rows or columns are 
 designated as headings.  Table headings define the contents of the column or 
-row for which it is a heading for.
+row for which it is a heading for.  So headings add a layer of complexity to a 
+grid.  There additionally exists a relation between a column heading  a column 
+or set columns.  A second type of headings, called stubs, are row headings.  
+Consequently a second type of relation between a row stub and a row or set 
+of rows.
 
 
 Column Heads
@@ -1415,7 +1419,16 @@ to two.
 The headers Attribute
 `````````````````````
 Let us not forget html is a semantic language, describing elements of content
-and their relationships.         
+and their relationships. When a column heading has a one to one relartion with 
+a column.  With heading spanners the heading to column relationship becomes 
+less obvious.  In most cases the ambiguity of spanner heading is of no concern.  
+In those rarer cases, both the <td> and the <th> can use an attribute named 
+headers.
+
+ {{ *** add id and class to chapter 3 ** }}
+{{ *** add attr data types : int; string; space delimited; em; px; to chapter 3 ** }}
+
+The header attribute is a space delimited set of strings
 
 
 The scope Attribute
@@ -1424,7 +1437,7 @@ The scope Attribute
 
 Cut-In Heads
 ````````````
-Another style of column heads are cut-in heads.
++9+++++++Another style of column heads are cut-in heads.
 
     +++++++++++++++++++++++++++++
     +  H1  +  H2  +  H3  +  H4  +
