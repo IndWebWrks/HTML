@@ -15,12 +15,12 @@ C. TABLES
 
 	2. Table Elements
 		a. The <table> Element
-			i. Default Style
-			ii. Tag Profile
+			i. Default Style 
+			ii. Tag Profile 
 		b. The <tr> Element
 			i. Default Style
 			ii. Tag Profile
-		c. Table Data
+		c. Table Data 
 			i. Default Style
 			ii. Tag Profile
 		d. The border Attribute
@@ -28,19 +28,28 @@ C. TABLES
 		f. The cellpadding Attribute
 		g. The Complete Grid
 
-	3. Empty CellS
+	3. Empty Cells
 
 	4. Grid Size Determination
 		a. Cell Width
 		b. Cell Height
 		c. Column Width
-		d. Column Height
+		d. Column Height 
 		e. Row Width
 		f. Row Height
 		g. Grid Width
 		h. Grid Height
 
-	5. Columns
+	5. Irregular Grids
+		a. The colspan Attribute
+		b. The rowspan Attribute
+
+	6. Row Groups
+		a. tbody
+			i. Default Style
+			ii. Tag Profile
+
+	7. Columns
 		a. The <colgroup> Element
 			i. Default Style
 			ii. Tag Profile
@@ -51,29 +60,27 @@ C. TABLES
 		d. The hidden Attribute
 		e. The span Attribute
 
-	6. Table Headings
+	8. Tables
+
+	9. Table Captions -- <caption>
+		a. Default Style
+		b. Tag Profile
+
+	10. Table Headings
 		a. Column Heads
 			i. The abbr Attribute
 			ii. Default Style
 			iii. Tag Profile
 		b. Spanner Heads
-			i. The colspan Attribute
-			ii. The headers Attribute
-			iii. The scope Attribute
-			iv. Cut-In Heads
+			i. The headers Attribute
+			ii. The scope Attribute
 
-	7. Stub Headings
-		a. Adding a Stub Column
-		b. Spanner Stubs
-			i. The rowspan Attribute
-		c. Table With Headers & Stubs
+	11. Stub Headings
+		a. Spanner Stubs
 
-	7. Table Captions
-
-	8. Row Groups
-		a. tbody
-		b. thead
-		c. tfoot
+	12. Additional Row Groups
+		a. The thead Element
+		b. The tfoot Element
 
 
 
@@ -923,6 +930,96 @@ that row height is determined by the tallest cell nested in that row.
     '-----------------------'
 
 
+Irregular Grids
+---------------
+
+
+The colspan Attribute
+`````````````````````
+The th & td elements both have a colspan attribute.  The colspan attribute 
+value is an integer data type, where the value must be one or greater.  The 
+value of the colspan determines how msny columns the cell will span.
+
+By default all td & th element's colspan attribute is set to 1, meaning the 
+cell will only span across one column, the column it's in. If colspan was 
+set to 2, then the cell would stretch across 2 columns, the column it's in 
+and the next coresponding column.
+
+    <tr>                                      <tr>                                  
+        <th colspan='2'>I</th> <th>II</th>        <th colspan='3'>I</th> <th>II</th>
+    </tr>                                     </tr>                                 
+        ...                                          ...                            
+
+    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
+    +       I     +  II  + \\\\\+              +           I        +  II  +        
+    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
+    +  H1  +  H2  +  H3  +  H4  +              +  H1  +  H2  +  H3  +  H4  +        
+    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
+    |  A1  |  A2  +  A3  |  A4  |              |  A1  |  A2  +  A3  |  A4  |        
+
+To get the table layout we want we would set the colspan value for both cells 
+to two.
+
+    <tr>
+        <th colspan='2'>I</th> <th colspan='2'>II</th>
+    </tr>
+       ...
+
+   +++++++++++++++++++++++++++++
+   +       I     +     II      +
+   +++++++++++++++++++++++++++++
+   +  H1  +  H2  +  H3  +  H4  +
+   +++++++++++++++++++++++++++++
+   |  A1  |  A2  +  A3  |  A4  |
+
+
+The rowspan Attribute
+`````````````````````    
+  <table>        
+    <tr>    <th rowspan=2>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
+
+      <tr>                         <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
+
+      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
+
+      <tr>                         <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
+   </table>
+
+    +++++++++++++++----------------------------
+    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
+    +   I  ++++++++------ ------ ------ ------|
+    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
+    ++++++++++++++++++++++++++++++++++++++++++|
+    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
+    +  II  ++++++++------ ------ ------ ------|
+    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
+    +++++++++++++++----------------------------
+
+
+Row Groups
+==========
+
+
+tbody
+-----
+ - tbody { display:table-row-group; border-color:inherit; }
+
+Categories:
+ - None
+
+Context:
+ - child of a table element
+
+   * if there are no tr elements that are children of the table element
+   * after any caption, colgroup, or thead elements
+
+Content:
+ - Zero or more tr, template, or script elements
+
+Attributes:
+ - Global attributes
+
+
 Columns
 =======
 At the start of this chapter we began our discussion of viewing a table as 
@@ -1253,8 +1350,86 @@ elements.
     <colgroup width='300' span='3'></colgroup>
 
 
+TABLES
+xxxxxx
+
+Table Captions
+==============
+Tables typically have a title displayed above that describes what the table is 
+showing.  For a table this title is call a table caption.  Captions can be part 
+of html tables using the caption element. The caption element, like all the 
+other talbe elements, can only appear nested in table elements.  Like the 
+colgroup element, the caption element is restrict to where it appears nested in 
+a table element. The caption element MUST be the first element to appear nest 
+in a table.  That means before any colgroup elements and before the first tr 
+element. 
+
+  <table border=1 colspan=0 cellspacing=0>
+      <caption>Example Table</caption>
+    <colgroup><col width=50/><col span=2 width=100/><col width=50/></colgroup>        
+    <tr>    <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>        </tr>
+      <tr>    <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>        </tr>
+      <tr>    <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>        </tr>
+      <tr>    <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>        </tr>
+  </table>
+
+                Example Table
+     ------ ---------------------- ------
+    |  A1  |    A2    |    A3    |  A4  |
+    |------ ---------- ---------- ------|
+    |  B1  |    B2    |    B3    |  B4  |
+    |------ ---------- ---------- ------|
+    |  C1  |    C2    |    C3    |  C4  |
+    |------ ---------- ---------- ------|
+    |  D1  |    D2    |    D3    |  D4  |
+    |------ ---------- ---------- ------|
+
+
+caption
+-------
+ - caption { unicode-bidi:isolate; unicode-bidi:bidi-override; display:table-caption; text-align:center; }
+ - caption[align=bottom] { caption-side:bottom; }
+
+Categories
+ - None
+
+Context:
+ - first element child of a table element
+
+Content:
+ - flow        Text
+            a; abbr; address; article; area*; aside; audio; b; bdi; bdo; blockquote; br;
+            button; canvas; cite; code; data; datalist; del; details; dfn; dialog; div;
+            dl; em; embed; fieldset; figure; footer; form; h1; h2; h3; h4; h5; h6; 
+            <s>header;</s> hr; i; iframe; img; input; ins; kbd; label; link^; main; map; mark; 
+            math; menu; meter; nav; noscript; object; ol; output; p; pre; progress; q; 
+            ruby; s; samp; script; section; select; small; span; strong; sub; sup; svg; 
+            table; template; textarea; time; u; ul; var; video; wbr;
+
+            * no descendant table elements
+
+Attributes:
+ - Global attributes
+
+
 Table Headings
 ==============
+*****
+ 1) Place row and column headers in the first row and first column.
+ 
+ 2) Use the table header element, th, for all header cells that do not contain data. 
+    Use td together with scope or headers attributes for cells containing data together with heading information. 
+    You must use the scope on any heading cell if the purpose of the cell is ambiguous. 
+    For example, a th in the top-left corner could be either a row or column header, and the scope attribute is needed to resolve the ambiguity.
+
+ 3) Use ids on the header cells and the headers attribute on the data cells to explicitly associate header information with data cells. 
+    This is essential if the table is irregular, meaning there are data cells whose header information is not in the same row 
+	and the same column as that cell.
+
+ 4) Do not use any of the accessible data table markup (th, scope, headers, or summary) on a table used for layout. 
+ 	In particular, avoid gratuitous announcements resulting from summary="This table used for layout".
+*****
+
 Up to this point we have been building grids a simple set of rows and columns.  
 With grids we examined table rows and table data cells and the space around the 
 content and the space between the cells.  We examined how height and width is 
@@ -1376,46 +1551,6 @@ create the proper table we need to be able to convey that the nwe heading cells
 span more than one column.
 
 
-The colspan Attribute
-`````````````````````
-The th & td elements both have a colspan attribute.  The colspan attribute 
-value is an integer data type, where the value must be one or greater.  The 
-value of the colspan determines how msny columns the cell will span.
-
-By default all td & th element's colspan attribute is set to 1, meaning the 
-cell will only span across one column, the column it's in. If colspan was 
-set to 2, then the cell would stretch across 2 columns, the column it's in 
-and the next coresponding column.
-
-    <tr>                                      <tr>                                  
-        <th colspan='2'>I</th> <th>II</th>        <th colspan='3'>I</th> <th>II</th>
-    </tr>                                     </tr>                                 
-        ...                                          ...                            
-
-    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
-    +       I     +  II  + \\\\\+              +           I        +  II  +        
-    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
-    +  H1  +  H2  +  H3  +  H4  +              +  H1  +  H2  +  H3  +  H4  +        
-    +++++++++++++++++++++++++++++              +++++++++++++++++++++++++++++        
-    |  A1  |  A2  +  A3  |  A4  |              |  A1  |  A2  +  A3  |  A4  |        
-
-To get the table layout we want we would set the colspan value for both cells 
-to two.
-
-    <tr>
-        <th colspan='2'>I</th> <th colspan='2'>II</th>
-    </tr>
-       ...
-
-   +++++++++++++++++++++++++++++
-   +       I     +     II      +
-   +++++++++++++++++++++++++++++
-   +  H1  +  H2  +  H3  +  H4  +
-   +++++++++++++++++++++++++++++
-   |  A1  |  A2  +  A3  |  A4  |
-
-
-
 The headers Attribute
 `````````````````````
 Let us not forget html is a semantic language, describing elements of content
@@ -1426,43 +1561,161 @@ In those rarer cases, both the <td> and the <th> can use an attribute named
 headers.
 
  {{ *** add id and class to chapter 3 ** }}
-{{ *** add attr data types : int; string; space delimited; em; px; to chapter 3 ** }}
+ {{ *** add attr data types : int; string; space delimited; em; px; to chapter 3 ** }}
 
-The header attribute is a space delimited set of strings
+The header attribute is a space delimited set of strings.  The proper use 
+of the header attribute requires that any headings we are establishing a 
+relationship for, have an id attribute with a value.  Let's add id attributes 
+to all the <th> elements in the first row.
+
+    <table>
+        <tr> <th id='t1'>I</th> <th id='t2'>II</th> </tr>
+        <tr> <th id=h1'>H1</th> <th id=h2'>H2</th> <th id=h3'>H3</th> <th id=h4'>H4</th> </tr>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+Now every heading cell is uniquely identifiable.  The next step is to add the 
+header attribute to all the <td> elements, it's values declaring it's own 
+headings by heading id values.
+
+    +++++++++++++++++++++++++++++
+    +       I     +     II      +
+    +++++++++++++++++++++++++++++
+    +  H1  +  H2  +  H3  +  H4  +
+    +++++++++++++++++++++++++++++
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |  B1  |  B2  |  B3  |  B4  |
+	             ... 
+
+Let's first concern ourselves with the more general top heading row, the two 
+heading cells I, and II.  Each of these cells are headings for two columns 
+each; cell I is a heading for column 1 and 2 and cell II. So we will add 't1' 
+to each <td> element in the first two columns and 't2' to each <td> element in 
+the third and fourth columns.
+
+    <table>
+        <tr> <th id='t1'>I</th> <th id='t2'>II</th> </tr>
+        <tr> <th id=h1'>H1</th> <th id=h2'>H2</th> <th id=h3'>H3</th> <th id=h4'>H4</th> </tr>
+
+        <tr> <td headers='t1'>A1</td> <td headers='t1'>A2</td> <td headers='t2'>A3</td> <tdheaders='t2'>A4</td> </tr>
+        <tr> <td headers='t1'>B1</td> <td headers='t1'>B2</td> <td headers='t2'>B3</td> <tdheaders='t2'>B4</td> </tr>
+        <tr> <td headers='t1'>C1</td> <td headers='t1'>C2</td> <td headers='t2'>C3</td> <tdheaders='t2'>C4</td> </tr>
+        <tr> <td headers='t1'>D1</td> <td headers='t1'>D2</td> <td headers='t2'>D3</td> <tdheaders='t2'>D4</td> </tr>
+    </table>
+
+We still have the more specified heading row where each heading represents the 
+one column which the heading cell is a member of; H1 the first, H2 the second, 
+H3 the third and H4 the fourth. To represent that column header relation we 
+need to add the 'h1' to each <td> element in the first column, 'h2' in the 
+second column and so on:
+
+    <table>
+        <tr> <th id='t1'>I</th> <th id='t2'>II</th> </tr>
+        <tr> <th id='h1'>H1</th> <th id='h2'>H2</th> <th id='h3'>H3</th> <th id='h4'>H4</th> </tr>
+
+        <tr> <td headers='t1 h1'>A1</td> <td headers='t1 h2'>A2</td> <td headers='t2 h3'>A3</td> <td headers='t2 h4'>A4</td> </tr>
+        <tr> <td headers='t1 h1'>B1</td> <td headers='t1 h2'>B2</td> <td headers='t2 h3'>B3</td> <td headers='t2 h4'>B4</td> </tr>
+        <tr> <td headers='t1 h1'>C1</td> <td headers='t1 h2'>C2</td> <td headers='t2 h3'>C3</td> <td headers='t2 h4'>C4</td> </tr>
+        <tr> <td headers='t1 h1'>D1</td> <td headers='t1 h2'>D2</td> <td headers='t2 h3'>D3</td> <td headers='t2 h4'>D4</td> </tr>
+    </table>
+
+Notice that now each <td> element has two header cell relations.  These 
+relations are set the values of the header attributes of each <td> element. 
+Each header attribute value has two values, separated by a space, their order 
+means nothing.  The values are the id values of the headers that are the 
+heading cells for that particular data cell.  The relation is from the data 
+cell's point of view.
+
+So I believe we can all agree that the required markup for an html table is 
+rather verbose.  Utilizing the headers attribute in addition makes it near 
+overwelming.  The headers attribute, due to its verbosity, requires more work 
+maintaing, more prone for error, and makes a complex markup model even more 
+messy.
+
+As was mentioned, the column header relationships are from the point of view of 
+each data cell.  There is no way of realizing the header cell relations by 
+looking at the heading cells, the <th> elements, alone.  The relationship is 
+expressed in the data cells, the <td> elements.  Let's flip our point of view 
+from the data cell to the heading cell and express column heading relationships 
+using the scope attribute.
 
 
 The scope Attribute
 ```````````````````
+The <th> element has a scope attribute, but not the <td> element.  The 
+attribute data type for the scope attribute is a string.  The string 
+values are limited to the following options:
 
+  - row
+  - col
+  - rowgroup
+  - colgroup
+  - auto
 
-Cut-In Heads
-````````````
-+9+++++++Another style of column heads are cut-in heads.
+The values express what type of relationship each heading cell expresses.  In 
+our example the top heading row of cells, I and II have a heading relation with 
+a group of columns.  Therefore the scope value for the I and II cells should be 
+'colgroup'.  The secound row of heading cells, H1, H2, H3, and H4, each have a 
+relation to only one row, so the scope values for those heading celss should be 
+'col'.
 
+    +++++++++++++++++++++++++++++
+    +       I     +     II      +
     +++++++++++++++++++++++++++++
     +  H1  +  H2  +  H3  +  H4  +
     +++++++++++++++++++++++++++++
-    +          GROUP 1          + 
-    +++++++++++++++++++++++++++++
-    |  A1  |  A2  +  A3  |  A4  |
-    |------ ------+------ ------|
-    |  B1  |  B2  +  B3  |  B4  |
-    +++++++++++++++++++++++++++++
-    +          GROUP 2          +
-    +++++++++++++++++++++++++++++
-    |  C1  |  C2  +  C3  |  C4  |
-    |------ ------+------ ------|
-    |  D1  |  D2  +  D3  |  D4  |
-    |------ ------+------ ------|
+    |  A1  |  A2  |  A3  |  A4  |
+    |------+------+------+------|
+    |  B1  |  B2  |  B3  |  B4  |
+	             ... 
+
+So let's start by adding scope attributes with 'col' for values to the second 
+heading row:
 
     <table>
-        <tr> <th>H1</th> <th>H2</th> <th>H3</th> <th>H4</th> </tr>
+        <tr> <th>I</th> <th>II</th> </tr>
+        <tr> <th scope='col'>H1</th> <th scope='col'>H2</th> <th scope='col'>H3</th> <th scope='col'>H4</th> </tr>
 
-        <tr> <th colspan='4'>GROUP 1</th> </tr>
         <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
         <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
 
-        <tr> <th colspan='4'>GROUP 2</th> </tr>
+Before we apply the scope attribute to the first heading row we need to epress 
+the column groups that the I and II cells are headings for.  We have the 
+<colgroup> whose purpose is to express column groups, this element, along with 
+it's span attribute will work just fine.
+
+    <table>
+        <colgroup span='2'></colgroup> <colgroup span='2'></colgroup>
+		
+        <tr> <th>I</th> <th>II</th> </tr>
+        <tr> <th scope='col'>H1</th> <th scope='col'>H2</th> <th scope='col'>H3</th> <th scope='col'>H4</th> </tr>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
+
+Now that we have column groups being represented we can apply the scope 
+attribute to the top row of column headings set to 'colgroup'.
+
+
+    <table>
+        <colgroup span='2'></colgroup> <colgroup span='2'></colgroup>
+
+        <tr> <th scope='colgroup'>I</th> <th scope='colgroup'>II</th> </tr>
+        <tr> <th scope='col'>H1</th> <th scope='col'>H2</th> <th scope='col'>H3</th> <th scope='col'>H4</th> </tr>
+
+        <tr> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
         <tr> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
         <tr> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
     </table>
@@ -1470,243 +1723,106 @@ Cut-In Heads
 
 Stub Headings
 =============
-The left most column of a table is called a stub.  So heading in the left most 
-column are called stub headings. Stud headings allow an author to have headings 
+Another type of heading is a row heading, typically left most column of a table 
+is refered to as a stub.  Stub headings allow an author to have headings 
 for each row.  Here is an example:
 
     ++++++++ ----------------------------
-    +  AH  +   A1  |  A2  |  A3  |  A4  |
+    +  H1  +   A1  |  A2  |  A3  |  A4  |
     ++++++++ ------ ------ ------ ------|
-    +  BH  +   B1  |  B2  |  B3  |  B4  |
+    +  H2  +   B1  |  B2  |  B3  |  B4  |
     ++++++++ ------ ------ ------ ------|
-    +  CH  +   C1  |  C2  |  C3  |  C4  |
+    +  H3  +   C1  |  C2  |  C3  |  C4  |
     ++++++++ ------ ------ ------ ------|
-    +  DH  +   D1  |  D2  |  D3  |  D4  |
+    +  H4  +   D1  |  D2  |  D3  |  D4  |
     ++++++++ ----------------------------
 
-
-Adding a Stub Column
---------------------
-In order to construct stub headings, a th element is added to the front of each row:
+When inserting column headings we we inserted a row of <th> elements.  To 
+insert stubs we insert a <th> element to be the first cell nested in the row.
 
     <table>
-        <tr> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
-        <tr> <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
-        <tr> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
-        <tr> <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+        <tr> <th>H1</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <th>H2</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <th>H3</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <th>H4</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
     </table>
 
 
 Spanner Stubs
 -------------
-Spanner stubs are the equivalent to spanner heads.
+Like spanner heads there are cases that require more than one column of stubs, 
+generally the first stub column is more general, becoming more specific as the 
+columns progress.
+
 
     +++++++++++++++----------------------------
-    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
+    +      +  H1  +  A1  |  A2  |  A3  |  A4  |
     +   I  ++++++++------ ------ ------ ------|
-    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
+    +      +  H2  +  B1  |  B2  |  B3  |  B4  |
     ++++++++++++++++++++++++++++++++++++++++++|
-    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
+    +      +  H3  +  C1  |  C2  |  C3  |  C4  |
     +  II  ++++++++------ ------ ------ ------|
-    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
+    +      +  H4  +  D1  |  D2  |  D3  |  D4  |
     +++++++++++++++----------------------------
  
  Let's add two th elements:
  
     <table>
-        <tr> <th>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
-        <tr><th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
-        <tr><th>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <th>I</th>  <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <th>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
         <tr> <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
     </table>
 
-   +++++++++++++++----------------------------
-   +   I  +  AH  +  A1  |  A2  |  A3  |  A4  |
-   +++++++++++++++------ ------ ------ ------|
-   +  II  +  BH  +  B1  |  B2  |  B3  |  B4  |
-   ++++++++++++++++++++++++++++++++++++++++++|
-   +  CH  +  C1  |  C2  |  C3  |  C4  |\\\\\\|
-   ++++++++------ ------ ------ ------|\\\\\\|
-   +  DH  +  D1  |  D2  |  D3  |  D4  |\\\\\\|
-   ++++++++----------------------------------|
+    +++++++++++++++---------------------------.
+    +   I  +  H1  +  A1  |  A2  |  A3  |  A4  |
+    +++++++++++++++------+------+------+------|
+    +  H2  +  B1  |  B2  |  B3  |  B4  |\\\\\\|
+    +++++++++++++++------+------+------+------|
+    +  II  +  H3  +  C1  |  C2  |  C3  |  C4  |
+    +++++++++++++++------+------+------+------|
+    +  H4  +  D1  |  D2  |  D3  |  D4  |\\\\\\|
+    ++++++++------'------'------'------'------'
 
-    
-The rowspan Attribute
-`````````````````````    
-  <table>        
-    <tr>    <th rowspan=2>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
+The spanner stubs create an irregular grid, we can use the rowspan attribute to 
+create the table we desire:
 
-      <tr>                         <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
+    <table>
+        <tr> <th rowspan='2'>I</th>  <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+        <tr> <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        <tr> <th rowspan='2'>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+        <tr> <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+    </table>
 
-      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
+Like spanner heads, spanner stubs eliminates the simple one stub one row 
+relationships so semantically speaking stubs and their relations to rows 
+becomes harder to discern.  Like spanner heads, we can express stub row 
+relations with either the headers or the scope attributes.  Since we have 
+already gone into depth in our exploration of heading cell and data cell 
+relationships, simply showing the our illustration utilizing the headers and 
+scope attributes should suffice:
 
-      <tr>                         <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
-   </table>
+    <table>
+        <tr> <th id='t1' rowspan='2'>I</th>  <th id='h1'>H1</th> <td headers='t1 h1'>A1</td> <td headers='t1 h1'>A2</td> <td headers='t1 h1'>A3</td> <td headers='t1 h1'>A4</td> </tr>
+        <tr>                                 <th id='h2'>H2</th> <td headers='t1 h2'>A1</td> <td headers='t1 h2'>A2</td> <td headers='t1 h2'>A3</td> <td headers='t1 h2'>A4</td> </tr>
+        <tr> <th id='t2' rowspan='2'>II</th> <th id='h3'>H3</th> <td headers='t2 h3'>A1</td> <td headers='t2 h3'>A2</td> <td headers='t2 h3'>A3</td> <td headers='t2 h3'>A4</td> </tr>
+        <tr>                                 <th id='h4'>H3</th> <td headers='t2 h4'>A1</td> <td headers='t2 h4'>A2</td> <td headers='t2 h4'>A3</td> <td headers='t2 h4'>A4</td> </tr>
+    </table>
 
-    +++++++++++++++----------------------------
-    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
-    +   I  ++++++++------ ------ ------ ------|
-    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
-    ++++++++++++++++++++++++++++++++++++++++++|
-    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
-    +  II  ++++++++------ ------ ------ ------|
-    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
-    +++++++++++++++----------------------------
-
-
-
-Table With Headers & Stubs
---------------------------
-More likely than not tables will have both headers and stubs.  It should be no 
-suprise from our previous work that html can produce tables that have deaders 
-and stubs.
-
-    +++++++++++++++++++++++++++++++++++++++++++
-    +   A  +   B  +  H1  +  H2  +  H3  +  H4  +
-    +++++++++++++++++++++++++++++++++++++++++++
-    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
-    +   I  ++++++++------ ------ ------ ------|
-    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
-    ++++++++++++++++++++++++++++++++++++++++++|
-    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
-    +  II  ++++++++------ ------ ------ ------|
-    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
-    +++++++++++++++----------------------------
+    <table>
+        <tbody>
+            <tr> <th scope='rowgroup' rowspan='2'>I</th> <th scope='row'>H1</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td> </tr>
+            <tr>                                         <th scope='row'>H2</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td> </tr>
+        </tbody>
+        <tbody>
+            <tr> <th scope='rowgroup' rowspan='2'>II</th> <th scope='row'>H3</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td> </tr>
+            <tr>                                          <th scope='row'>H4</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td> </tr>
+        <tbody>
+    </table>
 
 
-  <table>
-    <tr>    <th>I</th>                <th>II</th> <th>H1</th> <th>H2</th> <th>H3</th> <th>H3</th>    </tr>
-    
-    <tr>    <th rowspan=2>I</th> <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
-
-      <tr>                          <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
-
-      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
-
-      <tr>                          <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
-   </table>
-  
-  
-Often times stubs don't have headers in tables with headers and stubs; use 
-empty cells to achieve that.  Our previous example requires a slightly more 
-complex:
-
-    +++++++++++++++++++++++++++++++++++++++++++
-    +             +  H1  +  H2  +  H3  +  H4  +
-    +++++++++++++++++++++++++++++++++++++++++++
-    +      +  AH  +  A1  |  A2  |  A3  |  A4  |
-    +   I  ++++++++------ ------ ------ ------|
-    +      +  BH  +  B1  |  B2  |  B3  |  B4  |
-    ++++++++++++++++++++++++++++++++++++++++++|
-    +      +  CH  +  C1  |  C2  |  C3  |  C4  |
-    +  II  ++++++++------ ------ ------ ------|
-    +      +  DH  +  D1  |  D2  |  D3  |  D4  |
-    +++++++++++++++----------------------------
-
-
-  <table>
-    <tr>    <th colspan=2></th>                <th>H1</th> <th>H2</th> <th>H3</th> <th>H3</th>    </tr>
-    
-    <tr>    <th rowspan=2>I</th>  <th>AH</th> <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>    </tr>
-
-      <tr>                          <th>BH</th> <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>    </tr>
-
-      <tr>    <th rowspan=2>II</th> <th>CH</th> <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>    </tr>
-
-      <tr>                          <th>DH</th> <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>    </tr>
-   </table>
-
-
-
-Table Captions
-==============
-Tables typically have a title displayed above that describes what the table is 
-showing.  For a table this title is call a table caption.  Captions can be part 
-of html tables using the caption element. The caption element, like all the 
-other talbe elements, can only appear nested in table elements.  Like the 
-colgroup element, the caption element is restrict to where it appears nested in 
-a table element. The caption element MUST be the first element to appear nest 
-in a table.  That means before any colgroup elements and before the first tr 
-element. 
-
-  <table border=1 colspan=0 cellspacing=0>
-      <caption>Example Table</caption>
-    <colgroup><col width=50/><col span=2 width=100/><col width=50/></colgroup>        
-    <tr>    <td>A1</td> <td>A2</td> <td>A3</td> <td>A4</td>        </tr>
-      <tr>    <td>B1</td> <td>B2</td> <td>B3</td> <td>B4</td>        </tr>
-      <tr>    <td>C1</td> <td>C2</td> <td>C3</td> <td>C4</td>        </tr>
-      <tr>    <td>D1</td> <td>D2</td> <td>D3</td> <td>D4</td>        </tr>
-  </table>
-
-                Example Table
-     ------ ---------------------- ------
-    |  A1  |    A2    |    A3    |  A4  |
-    |------ ---------- ---------- ------|
-    |  B1  |    B2    |    B3    |  B4  |
-    |------ ---------- ---------- ------|
-    |  C1  |    C2    |    C3    |  C4  |
-    |------ ---------- ---------- ------|
-    |  D1  |    D2    |    D3    |  D4  |
-    |------ ---------- ---------- ------|
-
-
-caption
--------
- - caption { unicode-bidi:isolate; unicode-bidi:bidi-override; display:table-caption; text-align:center; }
- - caption[align=bottom] { caption-side:bottom; }
-
-Categories
- - None
-
-Context:
- - first element child of a table element
-
-Content:
- - flow        Text
-            a; abbr; address; article; area*; aside; audio; b; bdi; bdo; blockquote; br;
-            button; canvas; cite; code; data; datalist; del; details; dfn; dialog; div;
-            dl; em; embed; fieldset; figure; footer; form; h1; h2; h3; h4; h5; h6; 
-            <s>header;</s> hr; i; iframe; img; input; ins; kbd; label; link^; main; map; mark; 
-            math; menu; meter; nav; noscript; object; ol; output; p; pre; progress; q; 
-            ruby; s; samp; script; section; select; small; span; strong; sub; sup; svg; 
-            table; template; textarea; time; u; ul; var; video; wbr;
-
-            * no descendant table elements
-
-Attributes:
- - Global attributes
-
-
-
-Row Groups
-==========
-Row groups is our last topic on tables.  As the name suggests web authors can 
-group rows together and give it a type.  The three types of row groups head, 
-body, and foot are represented by the thead, tbody, and tfoot elements.
-
-
-tbody
------
- - tbody { display:table-row-group; border-color:inherit; }
-
-Categories:
- - None
-
-Context:
- - child of a table element
-
-   * if there are no tr elements that are children of the table element
-   * after any caption, colgroup, or thead elements
-
-Content:
- - Zero or more tr, template, or script elements
-
-Attributes:
- - Global attributes
-
-
-thead
------
+The thead Element
+=================
  - thead { display:table-header-group; border-color:inherit; }
 
 Categories:
@@ -1726,8 +1842,8 @@ Attributes:
  - Global attributes
 
 
-tfoot
------
+The tfoot Element
+=================
  - tfoot { display:table-footer-group; border-color:inherit; }
 
 Categories:

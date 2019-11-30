@@ -54,51 +54,6 @@ VII. Part VI: METADATA
 	C. Generated Content
 	D. Scripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I. Part I: FUNDAMENTALS
-	
-	A. INTRODUCTION
-		1. The World Wide Web
-		2. html: Term by Term
-	B. TEXT
-		1. Text Flow
-		2. Text In a Browser
-		3. Character Codes
-	C. MARKUP FUNDAMENTALS
-		1. Forms of Markup
-		2. Tags
-		3. Nesting
-		4. Attributes
-		5. Comments
-	D. HTML EFFECT ON TEXT FLOW
-		1. Consecutive Spacing
-		2. Line Breaks
-		3. Removing Text
-		4. Changing Direction	
-	E. AN EMPTY HTML DOCUMENT
-		1. The Root
-		2. Document Parts
-		3. The document Title
-		4. Document Type
-
-II. COMPOSITION
-
-	A. BASIC COMPOSITION
-		1. Paragraphs
-		2. Headings
-		3. Horizontal Rules
-		4. Contact Information -- <address>
-	B. LISTS
-		1. List Item
-		2. Item Lists
-		3. Outlines
-		4. Definition Lists
-		5. The <menu> Element
-		6. Run-In, and Vertical Lists
-	C. TABLES
-	D. SEMANTIC COMPOSITIONAL ELEMENTS
-	E. DOCUMENT SEGMENTATION
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 I. Part I: FUNDAMENTALS	
 	A. INTRODUCTION
 		1. THE WORLD WIDE WEB
@@ -232,75 +187,108 @@ II. Part II: COMPOSITION
 		5. The <menu> Element
 		6. Run-In, and Vertical Lists
 
-	C. Table
-		i. Intro.
-		ii. Grid elements
-			a. The table element
-			b. The tr element
-			c. The td element
-			d. borders
-		iii. obsolete styling attributes
-			a. cellpadding
-			b. cellspacing
-		iv. Table Headers
-			a. the th element
-			b. column headings
-			c. stub headings
-				1. column heading
-		v. Empty Cells
-			a. default behavior
-			b. common fillers: em dash, ellipsis dots, n/a
-		vi. The caption element
-		vii. Rowspan and colspan
-			a. spanner heads
-			b. cut-in heads	
-		viii. Header lists
-		ix. Columns
-			a. The colgroup element
-			b. The col element
-		x. Row Groups
-			a. The tbody element
-			b. The thead element
-			c. The tfoot element
-		xi. Pre-CSS era and tables
+	C. TABLES
+		1. The Grid
+			a. Rows
+			b. Columns
+		2. Table Elements
+			a. The <table> Element
+				i. Default Style 
+				ii. Tag Profile 
+			b. The <tr> Element
+				i. Default Style
+				ii. Tag Profile
+			c. Table Data 
+				i. Default Style
+				ii. Tag Profile
+			d. The border Attribute
+			e. The cellspacing Attribute
+			f. The cellpadding Attribute
+			g. The Complete Grid
+		3. Empty Cells
+		4. Grid Size Determination
+			a. Cell Width
+			b. Cell Height
+			c. Column Width
+			d. Column Height 
+			e. Row Width
+			f. Row Height
+			g. Grid Width
+			h. Grid Height
+		5. Irregular Grids
+			a. The colspan Attribute
+			b. The rowspan Attribute
+		6. Row Groups
+			a. tbody
+				i. Default Style
+				ii. Tag Profile
+		7. Columns
+			a. The <colgroup> Element
+				i. Default Style
+				ii. Tag Profile
+			b. The col Element
+				i. Default Style
+				ii. Tag Profile
+			c. The width Attribute
+			d. The hidden Attribute
+			e. The span Attribute
+		8. Tables
+		9. Table Captions -- <caption>
+			a. Default Style
+			b. Tag Profile
+		10. Table Headings
+			a. Column Heads
+				i. The abbr Attribute
+				ii. Default Style
+				iii. Tag Profile
+			b. Spanner Heads
+				i. The headers Attribute
+				ii. The scope Attribute
+		11. Stub Headings
+			a. Spanner Stubs
+		12. Additional Row Groups
+			a. The thead Element
+			b. The tfoot Element
 	
 	D. Semantic Compositional Elements
 		1. Stress
 			a. Emphasis -- <em>
 			b. strong -- <strong>
-			c. highlight -- <mark>
-			d. Japanese -- <ruby>
-				<rb>
-				<rp>
-				<rt>
-				<rtc>
-		2. References
-			a. Titles -- <cite>
-			b. definitions		
-				i. <abbr>
-				ii. <dfn>
-				iii. title attribute
-			c. Quotes
-				i. inline quotes -- <q>
-				ii. block quotes -- <blockquote>
-				iii. the cite attribute
-		3. Technical
+		2. Highlighting -- <mark>
+		3. Citations -- <cite>
+		4. Terms		
+			a. Abbreviation -- <abbr>
+			b. Term definition -- <dfn>
+			c. title attribute
+		5. Quotes
+			a. inline quotes -- <q>
+			b. block quotes -- <blockquote>
+			c. the cite attribute
+		6. Technical
 			a. input -- <kbd>
 			b. inline code -- <code>
 			c. block code -- <pre>
 			d. output -- <samp>
-		4. math/science
+		7. math/science
 			a. variables -- <var>
 			b. Superscripts -- <sup>
 			c. Subscripts -- <sub>
 			d. mathml -- <math>
-		5. Fine Print -- <small>
-		6. generic
+		8. Fine Print -- <small>
+		9. Dates & Time -- <time>			
+		10. Generic Elements
 			a. bold -- <b>
 			b. italic -- <i>
 			c. underline -- <u>
-			d. strike through -- <s>	
-
+			d. strike through -- <s>
+		11. Ruby annotation
+			a. <ruby>
+			b. <rb>
+			c. <rp>
+			d. <rt>
+			e. <rtc>
+		(12. data Element)
+		
 	E. Document Segmentation
 		i. Implicit Segmentation
 		ii. Explicit Segmentation
