@@ -1,30 +1,64 @@
+This work is licensed under the 
+Creative Commons 
+Attribution-NonCommercial-ShareAlike 4.0 
+International License. 
+
+To view a copy of this license, visit 
+http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+
+D. Semantic Compositional Elements
+		1. Stress
+			a. Emphasis -- <em>
+			b. strong -- <strong>
+		2. Highlighting -- <mark>
+		3. Citations -- <cite>
+		4. Terms		
+			a. Abbreviation -- <abbr>
+			b. Term definition -- <dfn>
+			c. title attribute
+		5. Quotes
+			a. inline quotes -- <q>
+			b. block quotes -- <blockquote>
+			c. the cite attribute
+		6. Technical
+			a. input -- <kbd>
+			b. inline code -- <code>
+			c. block code -- <pre>
+			d. output -- <samp>
+		7. math/science
+			a. variables -- <var>
+			b. Superscripts -- <sup>
+			c. Subscripts -- <sub>
+			d. mathml -- <math>
+		8. Fine Print -- <small>
+		9. Dates & Time -- <time>			
+		10. Generic Elements
+			a. bold -- <b>
+			b. italic -- <i>
+			c. underline -- <u>
+			d. strike through -- <s>
+
+
+
 Semantic Compositional Elements
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-Words and Letters Referred to as Words and Letters
-Italicize words and letters that are referred to as words and letters. 
+	{{  Move <address> to this chapter }}
 
-Shaw spelled Shakespeare without the final e.
-The word _albatross_ probably derives from the Spanish and Portuguese word _alcatraz_.
+Up to this point in our study of html we have investigated the html elements 
+that are the more general structural elements of composition; paragraphs, 
+headings, list, and tables for example.  We've seen html primarily used to 
+express the blocks that, put together, become a document, the structure of a 
+particular web page.
+
+We are now going investigate the html elements that are more situational.  
+Instead of building the blocks of a document the html elements we are about to 
+study are attempting to semantically represent situations where content is to 
+be emphised, or is a quote, or an abbreviation.  These situational html 
+elements are seeking to describe more nuanced than say a paragraph element.
 
 
-Emphasis
-Italics for emphasis ("Booth does concede, however ...") is a device that rapidly becomes 
-ineffective. It is rarely appropriate in research writing.
+Stress
+======
 
-Content Notes
-In your notes, avoid lengthy discussions that divert the reader's atten- tion from the primary 
-text. In general, comments that you cannot fit into the text should be omitted unless they 
-provide essential justifica- tion or clarification of what you have written. You may use a 
-note, for example, to give full publication facts for an original source for which you cite an 
-indirect source and perhaps to explain why you worked from secondary material.
-
-Brooks's "The Ballad of Chocolate Mabbie" is a poem about a series of proposed metonymic 
-relations (Mabbie next to the grammar school gate, Mabbie next to Willie Boone) that 
-concludes with the speaker's hopeful recognition that if Mabbie aligns herself with like 
-figures (her "chocolate companions") she will achieve a positive sense of self-reliance 
-("Mabbie on Mabbie to be").l
-
-Note
-1. In this paper, I follow the definition of _metonymy_ as a figure of
-contiguity. For a good definition of the term, see Martin.
