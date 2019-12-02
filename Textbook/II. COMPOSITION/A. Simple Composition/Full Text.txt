@@ -31,7 +31,6 @@ A. Basic Composition
 	1. Paragraphs
 	2. Headings
 	3. Horizontal Rules
-	4. Contact Information
 
 
 BASIC COMPOSITION
@@ -385,40 +384,3 @@ would be the proper way to add any horizontal lines.
 
 Tag Profile
 -----------
-
-
-
-Contact Information
-===================
-In formal documents authors often add conact information give readers a means 
-for follow up questions or additional information.  A wide variety ways to 
-communicate with any person; phone, email, social web sites, postal services, 
-fax, the list seems to grow longer every day.  The <address> block type element 
-represents a section of content that instructs readers the how establish 
-communication.  The <address> element is not limited to communication with the 
-author, although its most common usage.  A biographical article may include 
-ways of contacting the subject of the article.
-
-There really is no template to follow for using the <address> element. Consider 
-the <address> element as a sectioning element, so having nested block type 
-elements is common.  If the contact information is more of a list of multiple 
-ways of communication should all be nested in one <address> element instead of 
-an <address> element for each way listed.  Here are a few examples.
-
-
-<address>
-	<p>Way to contact your senator:</p>	
-	<div>(555) 555-5555</div>
-	<div>mysenator@senate.gov</div>
-</address>
-
-
-<address>
-	<p>Send your order form to:</p>	
-	<div>123 Main St.</div>
-	<div>Big City, TX 12345</div>
-</address>
-
-Tag Profile
------------
-connot nest another <address>
