@@ -255,50 +255,40 @@ II. Part II: COMPOSITION
 			a. Emphasis -- <em>
 			b. strong -- <strong>
 		2. Highlighting -- <mark>
-		3. Citations -- <cite>
-		4. Terms		
-			a. Abbreviation -- <abbr>
-			b. Term definition -- <dfn>
-			c. title attribute
-		5. Quotes
-			a. inline quotes -- <q>
-			b. block quotes -- <blockquote>
-			c. the cite attribute
-		6. Technical
+		3. Technical
 			a. input -- <kbd>
 			b. inline code -- <code>
 			c. block code -- <pre>
 			d. output -- <samp>
-		7. math/science
+		4. math/science
 			a. variables -- <var>
 			b. Superscripts -- <sup>
 			c. Subscripts -- <sub>
 			d. mathml -- <math>
-		8. Fine Print -- <small>
-		9. Dates & Time -- <time>			
-		10. Generic Elements
+		5. Fine Print -- <small>
+		6. Generic Elements
 			a. bold -- <b>
 			b. italic -- <i>
 			c. underline -- <u>
 			d. strike through -- <s>
-		11. Ruby annotation
-			a. <ruby>
-			b. <rb>
-			c. <rp>
-			d. <rt>
-			e. <rtc>
-		(12. data Element)
+
+	E. Ruby annotation
+		1. <ruby>
+		2. <rb>
+		3. <rp>
+		4. <rt>
+		5. <rtc>
 		
-	E. Document Segmentation
-		i. Implicit Segmentation
-		ii. Explicit Segmentation
+	F. Document Segmentation
+		1. Implicit Segmentation
+		2. Explicit Segmentation
 			a. books: section
 			b. journals: article
-		iii. Related segments
+		3. Related segments
 			a. aside & nav
 			b. sectioning roots
 			c. figure & figcaption
-		iv. Page Sections -- main, header, footer, nav, aside
+		4. Page Sections -- main, header, footer, nav, aside
 
 
 III. Part III: ADDRESSES
@@ -326,7 +316,17 @@ III. Part III: ADDRESSES
 			c. Hyperlink Areas
 				1. map Element
 				2. coords & shape Attributes
-		ii. Linking Resources
+			d. The <cite> Element ( <cite> -- <a> pair )
+			e. Internal links 
+				1. Terms		
+					i. Abbreviation -- <abbr>
+					ii. Term definition -- <dfn>
+					iii. title attribute
+			f. Quotes
+				1. inline quotes -- <q>
+				2. block quotes -- <blockquote>
+				3. the cite attribute		
+		iii. Linking Resources
 			a. Link Relation Types
 				1. 'body-ok' Type
 				2. External Resource Link Types
@@ -477,7 +477,8 @@ VII. Part VI: METADATA
 			a. Items: itemscope Element - itemtype Attribute - itemid Attribute
 			b. Properties: itemprop and itemref Attribute	
 		iv. data-* Attributes
-		v. Ruby annotations
+		v. The <data> Element
+		vi. Dates & Time -- <time>			
 	
 	E. Generated Content
 		i. Canvas Element

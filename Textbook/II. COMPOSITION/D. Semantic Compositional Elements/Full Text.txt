@@ -7,40 +7,29 @@ To view a copy of this license, visit
 http://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 
+
 D. Semantic Compositional Elements
-		1. Stress
+		1. Contact Information -- <address>
+		2. Stress
 			a. Emphasis -- <em>
 			b. strong -- <strong>
 			c. Highlighting -- <mark>
-		2. Citations
-			a. The <cite> Element
-		3. Terms		
-   			a. Abbreviation -- <abbr>
-			b. Term definition -- <dfn>
-			c. title attribute
-		4. Quotes
-			a. inline quotes -- <q>
-			b. block quotes -- <blockquote>
-			c. the cite attribute
-		5. Technical
+		3. Technical
 			a. input -- <kbd>
 			b. inline code -- <code>
 			c. block code -- <pre>
 			d. output -- <samp>
-		6. math/science
+		4. math/science
 			a. variables -- <var>
 			b. Superscripts -- <sup>
 			c. Subscripts -- <sub>
 			d. mathml -- <math>
-		7. Fine Print -- <small>
-		8. Dates & Time -- <time>
-		9. Contact Information			
-		10. Generic Elements
+		5. Fine Print -- <small>
+		6. Generic Elements
 			a. bold -- <b>
 			b. italic -- <i>
 			c. underline -- <u>
 			d. strike through -- <s>
-
 
 
 Semantic Compositional Elements
@@ -56,6 +45,48 @@ Instead of building the blocks of a document the html elements we are about to
 study are attempting to semantically represent situations where content is to 
 be emphised, or is a quote, or an abbreviation.  These situational html 
 elements are seeking to describe more nuanced than say a paragraph element.
+
+
+Contact Information
+===================
+In formal documents authors often add conact information give readers a means 
+for follow up questions or additional information.  A wide variety ways to 
+communicate with any person; phone, email, social web sites, postal services, 
+fax, the list seems to grow longer every day.  The <address> block type element 
+represents a section of content that instructs readers the how establish 
+communication.  The <address> element is not limited to communication with the 
+author, although its most common usage.  A biographical article may include 
+ways of contacting the subject of the article.
+
+There really is no template to follow for using the <address> element. Consider 
+the <address> element as a sectioning element, so having nested block type 
+elements is common.  If the contact information is more of a list of multiple 
+ways of communication should all be nested in one <address> element instead of 
+an <address> element for each way listed.  Here are a few examples.
+
+
+<address>
+	<p>Way to contact your senator:</p>	
+	<div>(555) 555-5555</div>
+	<div>mysenator@senate.gov</div>
+</address>
+
+
+<address>
+	<p>Send your order form to:</p>	
+	<div>123 Main St.</div>
+	<div>Big City, TX 12345</div>
+</address>
+
+
+Default Style
+-------------
+font-style:italic;
+
+
+Tag Profile
+-----------
+block; text-inline-block:{connot nest another <address>}; global;
 
 
 Stress
@@ -169,62 +200,23 @@ Tag Profile
 inline; text-inline; globals;
 
 
-Citations
+Technical
 =========
-When writing documents it is common to refer to titles of outside resources 
-such as books, journals, web sites, etc.  A common practice is to, in some 
-manner, set titles of outside resources distinct from the rest of the text.
-Marking titles are called citations.
 
 
-The <cite> Element
-------------------
+input -- <kbd>
+-----
 
-
-Default Style
-`````````````
-font-style:italic;
-
-
-Tag Profile
-```````````
-inline; text-inline; globals;
-
-
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Contact Information
-===================
-In formal documents authors often add conact information give readers a means 
-for follow up questions or additional information.  A wide variety ways to 
-communicate with any person; phone, email, social web sites, postal services, 
-fax, the list seems to grow longer every day.  The <address> block type element 
-represents a section of content that instructs readers the how establish 
-communication.  The <address> element is not limited to communication with the 
-author, although its most common usage.  A biographical article may include 
-ways of contacting the subject of the article.
-
-There really is no template to follow for using the <address> element. Consider 
-the <address> element as a sectioning element, so having nested block type 
-elements is common.  If the contact information is more of a list of multiple 
-ways of communication should all be nested in one <address> element instead of 
-an <address> element for each way listed.  Here are a few examples.
-
-
-<address>
-	<p>Way to contact your senator:</p>	
-	<div>(555) 555-5555</div>
-	<div>mysenator@senate.gov</div>
-</address>
-
-
-<address>
-	<p>Send your order form to:</p>	
-	<div>123 Main St.</div>
-	<div>Big City, TX 12345</div>
-</address>
-
-Tag Profile
+inline code -- <code>
 -----------
-connot nest another <address>
+
+block code -- <pre>
+----------
+
+output -- <samp>
+------
+
+
+
+
+
