@@ -202,19 +202,119 @@ inline; text-inline; globals;
 
 Technical
 =========
+It should come to no suprise, due to the fact that html is a computer related, 
+topic, that html provides the semantic means for expressing computer related 
+content.  Computer related content tends to fall into one of three categories:  
+the input from user interaction, the computer processes of an application 
+typically expressed as computer code, and the output from an application to a
+user.
 
 
-input -- <kbd>
+Input
 -----
+The some of the ways a user interacts with an application are a keyboard, mouse, 
+game control, touchscreen; the list grows as time advances.  In the early 
+1990's there was really only one device, the keyboard; the mouse was becoming 
+popular but no means the universal desktop device it has become.  The html 
+element for expressing user input is the <kbd> element, an abbreviation for 
+keyboard.  On the surface this may seem to limit the use of the <kbd> element 
+only keyboard concerning content.  The <kbd> element was added to html very 
+early on, as mentioned, when keyboards were really the only universal way for 
+user input.  
 
-inline code -- <code>
------------
+Instead of adding new elements, such as <mouse>, for new types of user input, 
+the html standand expanded the meaning of the <kbd> element to include any type 
+of user input; be it mouse, touchscreen, etc.  That means use the <kbd> element 
+to represent any type of user input, regardless that the element name is an 
+abbreviation of keyboard.
 
-block code -- <pre>
-----------
+
+Default Style
+`````````````
+font-family: monospace; 
+
+ 
+Tag Profile
+```````````
+inline; text-inline; global;
+
+
+Computer  Code -- <code>
+--------------
+A helpful way of explaining how an application processes user input and 
+application output is to display the code that handles the processing; we've 
+seen illustrations of code through out this text as html examples.  The 
+<code> inline type element represents computer code. 
+
+Default Style
+`````````````
+font-family:monospace;
+
+
+Tag Profile
+```````````
+inline; text-inline; global;
+
+
+The <pre> Element
+-----------------
+It becomes immediately obvious there is a major barrier to overcome when 
+attempting to put code into a web page.  As a block of code grows from a single 
+line to more, indentation and consecutive line breaks are commonly used for 
+formatting code.  As we know, browsers treat indentation and consecutive line 
+breaks as spaces.  Let's look at the following random segment of JavaScript:
+
+    emptyNode(nodeType) {
+        let objRef = {contentID:1, name:'blank document', tagName:nodeType};
+        return this.toNode(objRef);
+    },
+
+    emptyNodeList(typeName) {
+        let dd = document.createElement('dd');
+        dd.dataset.type = typeName;
+        return dd;
+    },
+
+We could, and remain semantically correct, utilize html the following way:
+
+    <div><code>
+	emptyNode(nodeType) {<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;let objRef = {contentID:1, name:'blank document', tagName:nodeType};<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;return this.toNode(objRef);<br/>
+    },</code><br/>
+	</div>
+
+    <div><code>
+	emptyNodeList(typeName) {<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;let dd = document.createElement('dd');<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;dd.dataset.type = typeName;<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;return dd;<br/>
+    },</code><br/>
+    </div>
+
+This would not be pleasant to maintain.  This barrier created by how browser 
+ignore indentation or consecutive spaces can be overcome with the <pre> 
+element. 
+
+
+Default Style
+`````````````
+display:block; margin-top:1em; margin-bottom:1em; font-family:monospace; white-space:pre; }
+
+
+
+Tag Profile
+```````````
+block; text-inline; global;
 
 output -- <samp>
 ------
+
+Default Style
+`````````````
+
+Tag Profile
+```````````
 
 
 
