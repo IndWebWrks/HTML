@@ -46,6 +46,8 @@ study are attempting to semantically represent situations where content is to
 be emphised, or is a quote, or an abbreviation.  These situational html 
 elements are seeking to describe more nuanced than say a paragraph element.
 
+{{  intro rich text  }}
+
 
 Contact Information
 ===================
@@ -200,8 +202,8 @@ Tag Profile
 inline; text-inline; globals;
 
 
-Technical
-=========
+Technical Content
+=================
 It should come to no suprise, due to the fact that html is a computer related, 
 topic, that html provides the semantic means for expressing computer related 
 content.  Computer related content tends to fall into one of three categories:  
@@ -210,9 +212,9 @@ typically expressed as computer code, and the output from an application to a
 user.
 
 
-Input
------
-The some of the ways a user interacts with an application are a keyboard, mouse, 
+Computer Input
+--------------
+Some of the ways a user interacts with an application are a keyboard, mouse, 
 game control, touchscreen; the list grows as time advances.  In the early 
 1990's there was really only one device, the keyboard; the mouse was becoming 
 popular but no means the universal desktop device it has become.  The html 
@@ -239,12 +241,40 @@ Tag Profile
 inline; text-inline; global;
 
 
-Computer  Code -- <code>
---------------
+Computer Code
+-------------
 A helpful way of explaining how an application processes user input and 
 application output is to display the code that handles the processing; we've 
 seen illustrations of code through out this text as html examples.  The 
-<code> inline type element represents computer code. 
+<code> inline type element represents computer code.
+
+<p>The <code>code</code> element represents a fragment of computer code.</p>
+
+<p>When you call the <code>activate()</code> method on the <code>robotSnowman</code> 
+object, the eyes glow.</p>
+
+
+Code Block
+``````````
+    <pre>
+    <code>emptyNode(nodeType) {
+        let objRef = {contentID:1, name:'blank document', tagName:nodeType};
+        return this.toNode(objRef);
+    },
+
+    emptyNodeList(typeName) {
+        let dd = document.createElement('dd');
+        dd.dataset.type = typeName;
+        return dd;
+    },</code>
+    </pre>
+
+The <pre> element is a block type, so the element itself will cause a line 
+break before and after it's nested content.  The <pre> element also adds a 1em 
+space before and after the line breaks.  By default nested text has a monospace 
+font type. Remember, a line break imediately following the <pre> open tag will 
+be ignored.
+
 
 Default Style
 `````````````
@@ -256,67 +286,211 @@ Tag Profile
 inline; text-inline; global;
 
 
-The <pre> Element
------------------
-It becomes immediately obvious there is a major barrier to overcome when 
-attempting to put code into a web page.  As a block of code grows from a single 
-line to more, indentation and consecutive line breaks are commonly used for 
-formatting code.  As we know, browsers treat indentation and consecutive line 
-breaks as spaces.  Let's look at the following random segment of JavaScript:
+Computer Output -- <samp>
+---------------
+All that's left is is computational output; the reply to user input and 
+determined by the application code.  Here are a few examples:
 
-    emptyNode(nodeType) {
-        let objRef = {contentID:1, name:'blank document', tagName:nodeType};
-        return this.toNode(objRef);
-    },
 
-    emptyNodeList(typeName) {
-        let dd = document.createElement('dd');
-        dd.dataset.type = typeName;
-        return dd;
-    },
-
-We could, and remain semantically correct, utilize html the following way:
-
-    <div><code>
-	emptyNode(nodeType) {<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;let objRef = {contentID:1, name:'blank document', tagName:nodeType};<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;return this.toNode(objRef);<br/>
-    },</code><br/>
-	</div>
-
-    <div><code>
-	emptyNodeList(typeName) {<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;let dd = document.createElement('dd');<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;dd.dataset.type = typeName;<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;return dd;<br/>
-    },</code><br/>
-    </div>
-
-This would not be pleasant to maintain.  This barrier created by how browser 
-ignore indentation or consecutive spaces can be overcome with the <pre> 
-element. 
+Sample Block
+````````````
 
 
 Default Style
 `````````````
-display:block; margin-top:1em; margin-bottom:1em; font-family:monospace; white-space:pre; }
-
+font-family:monospace;
 
 
 Tag Profile
 ```````````
-block; text-inline; global;
+inline; text-inline; global;
 
-output -- <samp>
+
+Comprehensive Examples
+----------------------
+
+<kbd> in <samp>:	input echoed by the system.
+<samp> in <kbd>:	input based on system output.
+<kbd> in <kbd>:		actual key or other single unit of input as appropriate for the input mechanism.
+
+
+	<pre><samp><span class="prompt">jdoe@mowmow:~$</span> <kbd>ssh demo.example.com</kbd>
+	Last login: Tue Apr 12 09:10:17 2005 from mowmow.example.com on pts/1
+	Linux demo 2.6.10-grsec+gg3+e+fhs6b+nfs+gr0501+++p3+c4a+gr2b-reslog-v6.189 #1 SMP Tue 
+	Feb 1 11:22:36 PST 2005 i686 unknown
+
+	<span class="prompt">jdoe@demo:~$</span> <span class="cursor">_</span></samp></pre>
+
+In this second example, the user is told to pick a particular menu item. The outer kbd element 
+marks up a block of input, with the inner kbd elements representing each individual step of the 
+input, and the samp elements inside them indicating that the steps are input based on something 
+being displayed by the system, in this case menu labels:
+
+	<p>To make George eat an apple, select
+	    <kbd>
+			<kbd><samp>File</samp></kbd>|<kbd><samp>Eat Apple...</samp></kbd>
+		</kbd>
+	</p>
+
+Such precision isn’t necessary; the following is equally fine:
+
+	<p>To make George eat an apple, select <kbd>File | Eat Apple...</kbd></p>
+
+
+Here the kbd element is used to indicate keys to press:
+
+	<p>To make George eat an apple, press <kbd><kbd>Shift</kbd>+<kbd>F3</kbd></kbd></p>
+
+
+Math and Science Content
+========================
+Math and science content uses unique formating expressions.  For instance four  
+squared is expressed by the digit 4 and a 2 digit which is smaller and appears 
+the right and higher than the 4 digit. Squared numbers is a simple expression 
+compared to how expressive mathematical equations can get. Because mathematical 
+expression is complicated, using html quickly falls flat; there are only three 
+elements to use.  
+
+The W3C has strategically kept mathematical representation out of html.  An 
+effective mathematical representation in html would overtake the document 
+nature html was intended to be.  Instead of adding mathematical representation 
+to html, W3C created a mathematical representation language, separate from html 
+but share the tag syntax; meaning since you already know the html syntax rules, 
+you already know how to use the mathematical representational language.  The 
+name this language is mathml.  
+
+We must overcome the powerful tempation to divert attention away from html and 
+to mathml.  We will limit our investigation to the three elements provided by 
+html that are conducive math and science content.  We will also see how to 
+embed mathml into an html document.
+
+
+Variables
+---------
+Terms are often used to express a variable.  The <var> element represents 
+variable terms.  Any nested content will be italicized.
+
+Default Style
+`````````````
+font-style:italic;
+
+Tag Profile
+```````````
+inline; text-inline; globals;
+
+
+Superscripts
+------------
+Earlier we described how four squared is expressed in mathematics: by the digit 
+4 and a 2 digit which is smaller and appears the right and higher than the 4 
+digit. The term for the format of the 2 is superscript.  Superscripts can be 
+represented with the <sup> inline type element. So four squared can be 
+expressed utilizing the <sup> element:
+
+    4<sup>2</sup>
+
+Here we display Pythagorean theorem as another, more complex, example:
+
+  <div>
+      <var>a</var><sup>2</sup> + <var>b</var><sup>2</sup> = <var>c</var><sup>2</sup>
+  </div>
+
+The variables in the equation are a, b, and c.  The squared values, 
+<sup>2</sup>, are constants.
+
+
+Default Style
+`````````````
+vertical-align:super; line-height:normal; font-size:smaller;
+
+Tag Profile
+```````````
+inline; text-inline; globals;
+
+
+Subscripts -- <sub>
+----------
+Subscripts are similar to superscripts, they are smaller font characters that 
+appear lower than the character to the left to which it shares a relation.  For 
+example, water being two hydrogen atoms and an oxygen atom, are expressed in 
+chemistry as H2O.  The 2 in H2O is a supscript, expressing that there are two 
+hydrogen atoms.
+
+Subscripts are represented by the <sub> inline type element. So water can be 
+represented utilizing the <sub> element as such:
+
+    H<sub>2</sub>O
+
+Default Style
+`````````````
+vertical-align:sub; line-height:normal; font-size:smaller;
+
+Tag Profile
+```````````
+inline; text-inline; globals;
+
+
+mathml -- <math>
 ------
-
-Default Style
-`````````````
-
-Tag Profile
-```````````
+Earlier we explained that mathml, as sibling of html can be used inside an html 
+document. 
 
 
+    <html>
+    <head>...</head>
+    
+    <body>
+    <p>Planck's Law</p>
+    
+    <math display='block' xmlns='http://www.w3.org/1998/Math/MathML'>
+       <mrow>
+          <mi>E</mi><mo>=</mo>
+
+          <mfrac>
+             <mrow>
+                <mn>2</mn><mi>&pi;</mi><mi>h</mi><msup><mi>c</mi><mn>2</mn></msup>
+             </mrow>
+    
+             <mrow>
+                <msup><mi>&lambda;</mi><mn>5</mn></msup>
+    
+                <mrow>
+                   <mo>(</mo>
+
+                   <mrow>
+                      <msup>
+                         <mi>e</mi>
+						 
+                         <mrow>
+                            <mi>h</mi><mi>c</mi><mo>&ndash;</mo><mi>&lambda;</mi><msub>
+                            <mi>k</mi><mi>b</mi></msub><mi>T</mi>
+                          </mrow>
+                       </msup>
+					   
+                       <mo>&ndash;</mo><mn>1</mn>
+                    </mrow>
+					
+                    <mo>)</mo>
+                 </mrow>
+              </mrow>
+           </mfrac>
+        </mrow>
+    </math>
+    
+    </body>
+    </html>
 
 
+Fine Print -- <small>
+==========
+
+Generic Elements
+
+bold -- <b>
+
+italic -- <i>
+
+underline -- <u>
+
+strike through -- <s>
 

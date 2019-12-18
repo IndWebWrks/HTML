@@ -111,7 +111,7 @@ I. Part I: FUNDAMENTALS
 		5. COMMENTS
 
 	D. HTML EFFECT ON TEXT FLOW
-		1. Consecutive Spacing
+		1. Consecutive Spacing0
 		2. Line Breaks
 			a. The <br/> Element
 				i. <br/> Abuse
